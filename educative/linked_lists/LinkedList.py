@@ -7,12 +7,11 @@ class LinkedList:
 
     def __eq__(self, other):
 
-        self_head = self.get_head()
-        other_head = other.get_head()
+        self_head = self.get_head() if self else None
+        other_head = other.get_head() if other else None
 
         while self_head or other_head:
             if not self_head or not other_head:
-                print("1")
                 return False
             if self_head.data != other_head.data:
                 return False
@@ -253,3 +252,65 @@ def find_happy_number(num):
         num = c
 
     return True
+
+
+# Reverse every K-element Sub-list (medium)
+
+
+# Using Linked List empty instance
+def __reverse_every_k_elements_using_linked_list(head, k):
+    out = None
+    current_node = head
+    last_node = None
+    i = 1
+    inner_linked_list = LinkedList()
+    while current_node:
+        inner_linked_list.insert_at_head(current_node.data)
+        last_node = inner_linked_list.get_head() if last_node is None else last_node
+        if i == k or not current_node.next_element:
+            if not out:
+                out = inner_linked_list
+            else:
+                while last_node.next_element:
+                    last_node = last_node.next_element
+                last_node.next_element = inner_linked_list.get_head()
+            inner_linked_list = LinkedList()
+            i = 0
+        i += 1
+        current_node = current_node.next_element
+
+    return out if head else None
+
+
+# Without Linked List empty instance
+def reverse_every_k_elements(head, k):
+    if k <= 1 or not head or not head.next_element:
+        return head
+
+    previous, current, following = None, head, head.next_element
+    previous_sublist_last, current_sublist_last = None, None
+    i = 1
+
+    while True:
+        if i == 1:
+            current_sublist_last = current
+        if i == k:
+            if previous_sublist_last:
+                previous_sublist_last.next_element = current
+            else:
+                head = current
+            previous_sublist_last = current_sublist_last
+            current_sublist_last.next_element = None
+            i = 0
+        if not following.next_element:
+            current.next_element = previous
+            following.next_element = None if i == k else current
+            previous_sublist_last.next_element = current if i == k else following
+            current_sublist_last.next_element = following if i == k else None
+            return head
+
+        current.next_element = previous
+        previous = current
+        current = following
+        following = following.next_element
+        i += 1

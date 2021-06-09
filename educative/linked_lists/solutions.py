@@ -1,5 +1,6 @@
 from LinkedList import *
 from Node import Node
+import random
 
 import unittest
 
@@ -113,3 +114,18 @@ class TestSolution(unittest.TestCase):
     def test_find_happy_number(self):
         self.assertTrue(find_happy_number(23))
         self.assertFalse(find_happy_number(12))
+
+    def test_reverse_every_k_elements(self):
+        #lst_1 = [a for a in range(1, 9)]
+        #linked_lst_1 = LinkedList().from_list(lst_1)
+        #head_linked_lst_1 = linked_lst_1.get_head()
+        #out = reverse_every_k_elements(head_linked_lst_1, 3)
+        #out.print_list()
+
+        lst_2 = [a for a in range(1, 14)]
+        linked_lst_2 = LinkedList().from_list(lst_2)
+        head_linked_lst_2 = linked_lst_2.get_head()
+        out = reverse_every_k_elements(head_linked_lst_2, 4)
+
+        print(lst_2)
+        out.print_list()
