@@ -9,3 +9,11 @@ class Node:
             print(temp.data, end=" ")
             temp = temp.next_element
         print()
+
+    def to_list(self):
+        lst = []
+        while self:
+            lst.append(self.data)
+            self = self.next_element
+
+        return lst

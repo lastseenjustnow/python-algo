@@ -302,11 +302,11 @@ def reverse_every_k_elements(head, k):
             previous_sublist_last = current_sublist_last
             current_sublist_last.next_element = None
             i = 0
-        if not following.next_element:
+        if not following:
             current.next_element = previous
-            following.next_element = None if i == k else current
-            previous_sublist_last.next_element = current if i == k else following
-            current_sublist_last.next_element = following if i == k else None
+            if previous_sublist_last:
+                previous_sublist_last.next_element = current
+            current_sublist_last.next_element = None
             return head
 
         current.next_element = previous

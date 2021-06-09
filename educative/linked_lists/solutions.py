@@ -116,16 +116,19 @@ class TestSolution(unittest.TestCase):
         self.assertFalse(find_happy_number(12))
 
     def test_reverse_every_k_elements(self):
-        #lst_1 = [a for a in range(1, 9)]
-        #linked_lst_1 = LinkedList().from_list(lst_1)
-        #head_linked_lst_1 = linked_lst_1.get_head()
-        #out = reverse_every_k_elements(head_linked_lst_1, 3)
-        #out.print_list()
 
-        lst_2 = [a for a in range(1, 14)]
-        linked_lst_2 = LinkedList().from_list(lst_2)
-        head_linked_lst_2 = linked_lst_2.get_head()
-        out = reverse_every_k_elements(head_linked_lst_2, 4)
+        def reverse_every_k_elements_list(lst, k):
+            return [el for lst in [lst[i:i + k][::-1] for i in range(0, len(lst), k)] for el in lst]
 
-        print(lst_2)
-        out.print_list()
+        def reverse_every_k_range_test(list_length, k):
+            lst = [a for a in range(1, list_length)]
+            linked_lst = LinkedList().from_list(lst)
+            head_linked_lst_1 = linked_lst.get_head()
+            function_output = reverse_every_k_elements(head_linked_lst_1, k)
+            expected_result = reverse_every_k_elements_list(lst, k)
+            return function_output.to_list() == expected_result
+
+        for _ in range(0, 100):
+            length = random.randint(3, 100)
+            k = random.randint(1, length - 1)
+            self.assertTrue(reverse_every_k_range_test(length, k))
