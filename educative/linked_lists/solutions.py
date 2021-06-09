@@ -152,3 +152,20 @@ class TestSolution(unittest.TestCase):
             length = random.randint(2, 100)
             rand_k = random.randint(1, length - 1)
             self.assertTrue(rotate_list_test(length, rand_k))
+
+    def test_add_integers(self):
+        def reverse_int(x):
+            return list(map(int, str(x)[::-1]))
+
+        def add_integers_test(int1, int2):
+            integer1 = LinkedList().from_list(reverse_int(int1))
+            integer2 = LinkedList().from_list(reverse_int(int2))
+            function_output = add_integers(integer1, integer2)
+            function_result = function_output.to_list()
+            expected_result = reverse_int(int1 + int2)
+            return function_result == expected_result
+
+        for _ in range(0, 10000):
+            length = random.randint(0, 1000000)
+            rand_k = random.randint(0, 1000000)
+            self.assertTrue(add_integers_test(length, rand_k))

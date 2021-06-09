@@ -348,3 +348,28 @@ def rotate_list(head, n):
     current.next_element = old_head
 
     return result
+
+
+# Add Two Integers Represented by Linked Lists
+def add_integers(integer1: LinkedList, integer2: LinkedList) -> LinkedList:
+    head1 = integer1.get_head()
+    head2 = integer2.get_head()
+    is_residual = 0
+
+    head1_previous, head1_current = None, head1
+
+    while head1_current or head2 or is_residual > 0:
+        head_value1 = head1_current.data if head1_current else 0
+        head_value2 = head2.data if head2 else 0
+        nodes_sum = head_value1 + head_value2 + is_residual
+        is_residual = int(nodes_sum > 9)
+        if head1_current:
+            head1_current.data = nodes_sum % 10
+        else:
+            head1_previous.next_element = Node(nodes_sum % 10)
+            head1_current = head1_previous.next_element
+        head1_previous = head1_current
+        head1_current = head1_current.next_element if head1_current else None
+        head2 = head2.next_element if head2 else None
+
+    return head1
