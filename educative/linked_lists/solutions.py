@@ -129,6 +129,26 @@ class TestSolution(unittest.TestCase):
             return function_output.to_list() == expected_result
 
         for _ in range(0, 100):
-            length = random.randint(3, 100)
-            k = random.randint(1, length - 1)
-            self.assertTrue(reverse_every_k_range_test(length, k))
+            length = random.randint(2, 100)
+            rand_k = random.randint(1, length - 1)
+            self.assertTrue(reverse_every_k_range_test(length, rand_k))
+
+    def test_rotate_list(self):
+
+        def rotate_unlinked_list(lst, n):
+            leng = len(lst)
+            rot_k = n - int(n / leng) * leng + (leng if n < 0 else 0)
+            return lst[-rot_k:] + lst[:-rot_k]
+
+        def rotate_list_test(list_length, k):
+            lst = [a for a in range(1, list_length + 1)]
+            linked_lst = LinkedList().from_list(lst)
+            head_linked_lst = linked_lst.get_head()
+            function_output = rotate_list(head_linked_lst, k)
+            expected_result = rotate_unlinked_list(lst, k)
+            return function_output.to_list() == expected_result
+
+        for _ in range(0, 100):
+            length = random.randint(2, 100)
+            rand_k = random.randint(1, length - 1)
+            self.assertTrue(rotate_list_test(length, rand_k))

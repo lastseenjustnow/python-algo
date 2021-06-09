@@ -314,3 +314,37 @@ def reverse_every_k_elements(head, k):
         current = following
         following = following.next_element
         i += 1
+
+
+# Rotate a Linked list
+def rotate_list(head, n):
+    i = 0
+    if head:
+        old_head = head
+    else:
+        return head
+
+    length = 0
+    while head:
+        head = head.next_element
+        length += 1
+
+    head = old_head
+    previous, current = None, head
+    nth = length - n + int(n / length) * length - (length if n < 0 else 0)
+
+    while i != nth:
+        previous = current
+        current = current.next_element
+        i += 1
+
+    result = current
+    previous.next_element = None
+
+    if current.next_element:
+        while current.next_element:
+            current = current.next_element
+
+    current.next_element = old_head
+
+    return result
