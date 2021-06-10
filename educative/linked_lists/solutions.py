@@ -5,7 +5,7 @@ import random
 import unittest
 
 
-class TestSolution(unittest.TestCase):
+class TestLinkedListSolution(unittest.TestCase):
 
     def test_challenge_1(self):
         n = Node(0)
