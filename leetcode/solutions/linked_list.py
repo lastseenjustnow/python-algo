@@ -15,7 +15,7 @@ class ListNode:
         return lst
 
 
-class Solution:
+class LinkedListSolution:
     # 2. Add Two Numbers
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         def addTwoNumbersRec(l1: ListNode, l2: ListNode, is_incr: int = 0):
@@ -33,18 +33,3 @@ class Solution:
             return out
 
         return addTwoNumbersRec(l1, l2)
-
-    # 3. Longest Substring Without Repeating Characters
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        substring = ''
-        length, max_length = 0, 0
-        for char in s:
-            if char in substring:
-                max_length = length if length > max_length else max_length
-                substring = substring[substring.index(char)+1:] + char
-                length = len(substring)
-            else:
-                substring += char
-                length += 1
-
-        return length if length > max_length else max_length
