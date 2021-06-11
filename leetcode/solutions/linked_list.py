@@ -33,3 +33,31 @@ class LinkedListSolution:
             return out
 
         return addTwoNumbersRec(l1, l2)
+
+    # 1041. Robot Bounded In Circle
+    def isRobotBounded(self, instructions: str) -> bool:
+        """
+        On an infinite plane, a robot initially stands at (0, 0) and faces north. The robot can receive one of three instructions:
+
+        "G": go straight 1 unit;
+        "L": turn 90 degrees to the left;
+        "R": turn 90 degrees to the right.
+        The robot performs the instructions given in order, and repeats them forever.
+
+        Return true if and only if there exists a circle in the plane such that the robot never leaves the circle.
+        :param instructions:
+        :return:
+        """
+        k = 0
+        current_position = (0, 0)
+        x_incr, y_incr = (0, 1)
+        for i in instructions * 4:
+            if i == 'G':
+                current_position = (current_position[0] + x_incr, current_position[1] + y_incr)
+
+            else:
+                k = k + 1 if i == 'R' else k - 1
+                x_incr = (1 - abs(x_incr)) * (-1) ** int(abs((k + 3)/2))
+                y_incr = (1 - abs(y_incr)) * (-1) ** int(abs((k + 4)/2))
+
+        return current_position == (0, 0)

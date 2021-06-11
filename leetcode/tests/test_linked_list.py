@@ -27,3 +27,9 @@ class TestLinkedListSolution(unittest.TestCase):
             int1 = random.randint(0, 1000000)
             int2 = random.randint(0, 1000000)
             self.assertTrue(addTwoNumbers_test(int1, int2))
+
+    # 1041. Robot Bounded In Circle
+    def test_isRobotBounded(self):
+        self.assertTrue(s.isRobotBounded("GGLLGG"))
+        self.assertFalse(s.isRobotBounded("GG"))
+        self.assertTrue(s.isRobotBounded("GL"))
