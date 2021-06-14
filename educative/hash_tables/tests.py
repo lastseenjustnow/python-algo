@@ -35,3 +35,13 @@ class TestHashTableSolution(unittest.TestCase):
                            ['NewYork', 'Chicago']]
         self.assertTrue(expected_result, function_output)
 
+    def test_challenge_5(self):
+        lst = [3, 4, 7, 1, 12, 9]
+        expected_result = [[4, 12], [7, 9]]
+        function_output = find_pair(lst)
+        self.assertTrue(expected_result, function_output)
+
+    def test_challenge_6(self):
+        my_list = [6, 4, -7, 3, 12, 9]
+        self.assertTrue(find_sub_zero(my_list))
+

@@ -43,3 +43,32 @@ def trace_path(my_dict: dict):
 
     return out
 
+
+# Challenge 5: Find Two Pairs in List such that a+b = c+d
+def find_pair(my_list):
+    dct = {}
+    for index1, elem1 in enumerate(my_list, 0):
+        for elem2 in my_list[index1+1:]:
+            if dct.get(elem1 + elem2) is None:
+                dct[elem1 + elem2] = [elem1, elem2]
+            else:
+                pair = dct.get(elem1 + elem2)
+                if elem1 in pair or elem2 in pair:
+                    continue
+                else:
+                    return [pair, [elem1, elem2]]
+    return None
+
+
+# Challenge 6: A Sublist with a Sum of 0
+def find_sub_zero(my_list):
+    st = set()
+    s = 0
+    for elem in my_list:
+        s += elem
+        if elem == 0 or s == 0 or s in st:
+            return True
+        else:
+            st.add(elem)
+    return False
+
