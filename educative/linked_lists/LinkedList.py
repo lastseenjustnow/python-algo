@@ -1,5 +1,5 @@
 from educative.linked_lists.Node import Node
-
+from typing import List
 
 class LinkedList:
     def __init__(self):
@@ -373,3 +373,24 @@ def add_integers(integer1: LinkedList, integer2: LinkedList) -> LinkedList:
         head2 = head2.next_element if head2 else None
 
     return head1
+
+
+# Merge K Sorted Lists (medium)
+# Solution with list, no heap
+def merge_lists(lists: List[Node]):
+    resultHead = None
+    heads = [x for x in lists]
+    while heads:
+        values = list(map(lambda x: x.data, heads))
+        min_value = min(values)
+        min_value_index = values.index(min_value)
+        if resultHead is None:
+            resultHead = Node(min_value)
+            current_node = resultHead
+        else:
+            current_node.next_element = Node(min_value)
+            current_node = current_node.next_element
+        heads[min_value_index] = heads[min_value_index].next_element
+        heads = [x for x in heads if x]
+
+    return resultHead

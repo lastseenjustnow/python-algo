@@ -169,3 +169,17 @@ class TestLinkedListSolution(unittest.TestCase):
             length = random.randint(0, 1000000)
             rand_k = random.randint(0, 1000000)
             self.assertTrue(add_integers_test(length, rand_k))
+
+    def test_merge_lists(self):
+        lists = [LinkedList().from_list(x) for x in [[2, 6, 8], [3, 6, 7], [1, 3, 4]]]
+        heads = [l.get_head() for l in lists]
+        function_output = merge_lists(heads).to_list()
+        expected_result = [1, 2, 3, 3, 4, 6, 6, 7, 8]
+        self.assertEqual(expected_result, function_output)
+
+        lists_2 = [LinkedList().from_list(x) for x in [[5, 8, 9], [1, 7]]]
+        heads_2 = [l.get_head() for l in lists_2]
+        function_output_2 = merge_lists(heads_2).to_list()
+        expected_result_2 = [1, 5, 7, 8, 9]
+        self.assertEqual(expected_result_2, function_output_2)
+
