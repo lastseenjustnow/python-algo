@@ -45,3 +45,25 @@ class TestHashTableSolution(unittest.TestCase):
         my_list = [6, 4, -7, 3, 12, 9]
         self.assertTrue(find_sub_zero(my_list))
 
+    def test_challenge_7(self):
+        lst = ["the", "hello", "there", "answer", "any",
+               "by", "world", "their", "abc"]
+
+        word = "helloworld"
+        self.assertTrue(is_formation_possible(lst, word))
+
+    def test_challenge_8(self):
+        lst = [1, 21, 3, 14, 5, 60, 7, 6]
+        k = 81
+        function_output = findSum(lst, k)
+        expected_result = [60, 21]
+        self.assertEqual(expected_result, function_output)
+
+    def test_challenge_9(self):
+        lst = [9, 2, 3, 2, 6, 6]
+        function_output = findFirstUnique(lst)
+        self.assertEqual(9, function_output)
+
+        lst = [4, 5, 1, 2, 0, 4]
+        function_output = findFirstUnique(lst)
+        self.assertEqual(5, function_output)

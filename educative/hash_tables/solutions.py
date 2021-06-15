@@ -1,3 +1,5 @@
+from HashTable import HashTable
+
 # Challenge 1. A List as a Subset of Another List
 def is_subset(list1, list2):
     # Write your code here
@@ -72,3 +74,62 @@ def find_sub_zero(my_list):
             st.add(elem)
     return False
 
+
+# Challenge 7: Word Formation Using a Hash Table
+def is_formation_possible(lst, word):
+    ht = HashTable()
+    for elem in lst:
+        ht.insert(elem, elem)
+
+    for index1, elem1 in enumerate(word, 0):
+        v1, v2 = tuple([ht.search(x) for x in [word[:index1], word[index1:]]])
+        if v1 and v2:
+            return True
+
+    return False
+
+
+# Challenge 8: Find Two Numbers that Add up to "k"
+
+# HashTable solution
+def findSum_HashTable(lst, k):
+    ht = HashTable()
+    for elem in lst:
+        ht.insert(elem, elem)
+
+    for elem in lst:
+        v = ht.search(k - elem)
+        if v is not None:
+            return [elem, v]
+
+    return None
+
+
+# Set solution
+def findSum(lst, k):
+    st = set()
+
+    for elem in lst:
+        v = k - elem
+        if v in st:
+            return [elem, v]
+        else:
+            st.add(elem)
+
+    return None
+
+
+# Challenge 9: First Non-Repeating Integer in a List
+def findFirstUnique(lst):
+    dct = dict()
+    for elem in lst:
+        if dct.get(elem) is None:
+            dct[elem] = 1
+        else:
+            dct[elem] += 1
+
+    for elem in lst:
+        if dct.get(elem) == 1:
+            return elem
+
+    return None

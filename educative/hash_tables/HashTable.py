@@ -10,6 +10,8 @@ class HashTable:
         self.size = 0
         # List of HashEntry objects (by default all None)
         self.bucket = [None] * self.slots
+        # Used for resize
+        self.threshold = 0.6
 
     # Helper Functions
 
@@ -18,6 +20,9 @@ class HashTable:
 
     def is_empty(self):
         return self.get_size() == 0
+
+    def print_list(self):
+        print(list(map(lambda x: x.value if x is not None else None, self.bucket)))
 
     # Hash Function
     def get_index(self, key):
