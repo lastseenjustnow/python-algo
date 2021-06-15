@@ -67,3 +67,44 @@ class TestHashTableSolution(unittest.TestCase):
         lst = [4, 5, 1, 2, 0, 4]
         function_output = findFirstUnique(lst)
         self.assertEqual(5, function_output)
+
+    def test_challenge_10(self):
+        lst = LinkedList()
+
+        lst.insert_at_head(21)
+        lst.insert_at_head(14)
+        lst.insert_at_head(7)
+
+        # Adding a loop
+        head = lst.get_head()
+        node = lst.get_head()
+
+        for i in range(4):
+            if node.next_element is None:
+                node.next_element = head.next_element
+                break
+            node = node.next_element
+        self.assertTrue(detect_loop(lst))
+
+        lst = LinkedList().from_list([4, 2, 1, 4, 0])
+        self.assertFalse(lst.detect_loop())
+
+    def test_challenge_11(self):
+        lst = LinkedList().from_list([7, 7, 7, 22, 14, 21, 14, 7])
+        remove_duplicates(lst)
+        lst.print_list()
+        self.assertEqual(4, lst.length())
+
+    def test_challenge_12(self):
+        lst1 = LinkedList().from_list([10, 20, 80, 60])
+        lst2 = LinkedList().from_list([15, 20, 30, 60, 45])
+
+        lst_union = union(lst1, lst2)
+        lst_expected_1 = LinkedList().from_list([10, 20, 80, 60, 15, 30, 45])
+        self.assertEqual(lst_union, lst_expected_1)
+
+        lst1 = LinkedList().from_list([10, 20, 80, 60])
+        lst2 = LinkedList().from_list([15, 20, 30, 60, 45])
+        lst_intersect = intersection(lst1, lst2)
+        lst_expected_2 = LinkedList().from_list([20, 60])
+        self.assertEqual(lst_intersect, lst_expected_2)

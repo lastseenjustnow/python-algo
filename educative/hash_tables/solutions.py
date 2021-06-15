@@ -1,4 +1,7 @@
 from HashTable import HashTable
+from educative.linked_lists.LinkedList import LinkedList
+from educative.linked_lists.Node import Node
+
 
 # Challenge 1. A List as a Subset of Another List
 def is_subset(list1, list2):
@@ -133,3 +136,71 @@ def findFirstUnique(lst):
             return elem
 
     return None
+
+
+# Challenge 10: Detect Loop in a Linked List
+def detect_loop(lst: LinkedList):
+    st = set()
+
+    head = lst.get_head()
+    while head:
+        if head.data in st:
+            return True
+        st.add(head.data)
+        head = head.next_element
+
+    return False
+
+
+# Challenge 11: Remove Duplicates from Linked List
+def remove_duplicates(lst: LinkedList):
+
+    if not lst.get_head().next_element:
+        return
+
+    previous = lst.get_head()
+    head = lst.get_head().next_element
+    st = {previous.data}
+
+    while head:
+        if head.data in st:
+            previous.next_element = head.next_element
+            head = head.next_element
+            continue
+        st.add(head.data)
+        previous, head = tuple([x.next_element for x in [previous, head]])
+
+
+# Challenge 12: Union & Intersection of Linked Lists
+def union(list1: LinkedList, list2: LinkedList):
+    head = list1.get_head()
+
+    while head.next_element:
+        head = head.next_element
+
+    head.next_element = list2.get_head()
+    remove_duplicates(list1)
+
+    return list1
+
+# Returns a list containing the intersection of list1 and list2
+
+
+def intersection(list1, list2):
+    head = list1.get_head()
+    st = set()
+
+    while head:
+        st.add(head.data)
+        head = head.next_element
+
+    head = list2.get_head()
+    list3 = LinkedList()
+
+    while head:
+        if head.data in st:
+            list3.insert_at_tail(head.data)
+        head = head.next_element
+
+    return list3
+

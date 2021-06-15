@@ -1,4 +1,4 @@
-from Node import Node
+from educative.linked_lists.Node import Node
 
 
 class LinkedList:
