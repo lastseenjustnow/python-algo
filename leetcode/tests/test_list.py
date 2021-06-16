@@ -30,4 +30,28 @@ class TestListSolution(unittest.TestCase):
             s.mergeSortedArray(lst1, lst1_len, lst2, lst2_len)
             self.assertEqual(expected_result, lst1)
 
+    def test_merge_intervals(self):
+        intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
+        expected_output = [[1, 6], [8, 10], [15, 18]]
+        function_output = s.merge_intervals(intervals)
+        self.assertEqual(expected_output, function_output)
 
+        intervals = [[1, 4], [4, 5]]
+        expected_output = [[1, 5]]
+        function_output = s.merge_intervals(intervals)
+        self.assertEqual(expected_output, function_output)
+
+        intervals = [[1, 3], [2, 6], [8, 10], [15, 18], [10, 14]]
+        expected_output = [[1, 6], [8, 14], [15, 18]]
+        function_output = s.merge_intervals(intervals)
+        self.assertEqual(expected_output, function_output)
+
+        intervals = [[1, 3], [-1, -1], [2, 6], [8, 10], [15, 18], [10, 14], [14, 15]]
+        expected_output = [[-1, -1], [1, 6], [8, 18]]
+        function_output = s.merge_intervals(intervals)
+        self.assertEqual(expected_output, function_output)
+
+        intervals = [[1, 4], [0, 4]]
+        expected_output = [[0, 4]]
+        function_output = s.merge_intervals(intervals)
+        self.assertEqual(expected_output, function_output)

@@ -1,3 +1,6 @@
+import operator
+from typing import List
+
 class ListSolution:
 
     # 3. Longest Substring Without Repeating Characters
@@ -39,3 +42,19 @@ class ListSolution:
                 nums1[i] = p2
                 nums2 = nums2[1:]
             i += 1
+
+    # 56. Merge Intervals
+    def merge_intervals(self, intervals: List[List[int]]) -> List[List[int]]:
+        out: List[List[int]] = []
+        for interval in sorted(intervals, key=operator.itemgetter(0)):
+            is_updated = False
+            for index_new_interval, new_interval in enumerate(out, 0):
+                if new_interval[0] <= interval[0] <= new_interval[1]:
+                    out[index_new_interval] = [new_interval[0], max(new_interval[1], interval[1])]
+                    is_updated = True
+                    break
+            if is_updated:
+                continue
+            out.append(interval)
+
+        return out
