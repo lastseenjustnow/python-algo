@@ -1,5 +1,7 @@
+from typing import List, Tuple
+
 import operator
-from typing import List
+import itertools
 
 class ListSolution:
 
@@ -76,3 +78,31 @@ class ListSolution:
                 i += 1
 
         return sorted_intervals
+
+    # 200. Number of Islands
+    # Must be resolved with graphs!
+    def numIslands(self, grid: List[List[str]]) -> int:
+        max_x = len(grid[0])
+        max_y = len(grid)
+        x_coord = [x for x in range(max_x)]
+        y_coord = [y for y in range(max_y)]
+        existing_coordinates = [x[::-1] for x in itertools.product(y_coord, x_coord)]
+        grid_values = [x for y in grid for x in y]
+        landmark_coords = {coords for coords, is_land in zip(existing_coordinates, grid_values) if int(is_land)}
+        count = 0
+
+        def remove_neighbors(st: set, elem: Tuple):
+            if elem in st:
+                st.remove(elem)
+                remove_neighbors(st, (elem[0] + 1, elem[1]))
+                remove_neighbors(st, (elem[0] - 1, elem[1]))
+                remove_neighbors(st, (elem[0], elem[1] + 1))
+                remove_neighbors(st, (elem[0], elem[1] - 1))
+            else:
+                return
+
+        while landmark_coords:
+            count += 1
+            remove_neighbors(landmark_coords, next(iter(landmark_coords)))
+
+        return count

@@ -31,6 +31,7 @@ class TestListSolution(unittest.TestCase):
             s.mergeSortedArray(lst1, lst1_len, lst2, lst2_len)
             self.assertEqual(expected_result, lst1)
 
+    # 56. Merge Intervals
     def test_merge_intervals(self):
         def test_merge_intervals_f(f: Callable):
             intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
@@ -61,3 +62,36 @@ class TestListSolution(unittest.TestCase):
         test_merge_intervals_f(s.merge_intervals)
         test_merge_intervals_f(s.merge_intervals_in_place)
 
+    # 200. Number of Islands
+    def test_numIslands(self):
+        grid = [
+            ["1", "1", "1", "1", "0"],
+            ["1", "1", "0", "1", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "0", "0", "0"]
+        ]
+
+        grid_2 = [
+            ["1", "1", "0", "0", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "1", "0", "0"],
+            ["0", "0", "0", "1", "1"]
+        ]
+
+        grid_3 = [
+            ["1", "1", "0", "1", "0"],
+            ["1", "1", "1", "1", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "1", "0", "1"]
+        ]
+
+        grid_4 = [
+            ["1", "0", "1", "1", "1"],
+            ["1", "0", "1", "0", "1"],
+            ["1", "1", "1", "0", "1"]
+        ]
+
+        self.assertEqual(1, s.numIslands(grid))
+        self.assertEqual(3, s.numIslands(grid_2))
+        self.assertEqual(3, s.numIslands(grid_3))
+        self.assertEqual(1, s.numIslands(grid_4))
