@@ -58,3 +58,21 @@ class ListSolution:
             out.append(interval)
 
         return out
+
+    # Has attempted to make inplace update of intervals, but it didn't improve memory usage
+    def merge_intervals_in_place(self, intervals: List[List[int]]) -> List[List[int]]:
+        sorted_intervals = sorted(intervals, key=operator.itemgetter(0))
+        i = 0
+        for outer_interval in sorted_intervals[i:]:
+            is_updated = False
+            for inner_index, inner_interval in enumerate(sorted_intervals[:i], 0):
+                if inner_interval[0] <= outer_interval[0] <= inner_interval[1]:
+                    sorted_intervals[inner_index] = [inner_interval[0], max(inner_interval[1], outer_interval[1])]
+                    is_updated = True
+                    break
+            if is_updated:
+                del sorted_intervals[i]
+            else:
+                i += 1
+
+        return sorted_intervals
