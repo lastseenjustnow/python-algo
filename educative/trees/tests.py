@@ -1,4 +1,5 @@
 import unittest
+import random
 
 from BinaryTreeNode import create_BST
 from solutions import *
@@ -44,10 +45,16 @@ class TestStackSolution(unittest.TestCase):
 
         self.assertFalse(are_identical(tree1, tree2))
 
-    # Write an In-Order Iterator for a Binary Tree
+    # In-Order Iterator for a Binary Tree
     def test_inorder_using_iterator(self):
         arr = sorted([25, 125, 200, 300, 75, 50, 12, 35, 60, 75])
         root = create_BST(arr)
         expected_result = "12 25 35 50 60 75 75 125 200 300 "
         function_result = InorderIterator(root).inorder_using_iterator()
         self.assertEqual(expected_result, function_result)
+
+    def test_inorder_successor_bst(self):
+        arr = sorted(list(set([random.randint(-1000, 1000) for _ in range(random.randint(0, 100000))])))
+        root = create_BST(arr)
+        for i, el in enumerate(arr[:-1], 0):
+            self.assertEqual(arr[i+1], inorder_successor_bst(root, el))

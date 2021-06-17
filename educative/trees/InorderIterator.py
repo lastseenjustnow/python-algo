@@ -28,7 +28,7 @@ class InorderIterator:
 
         return r_val
 
-    # Write an In-Order Iterator for a Binary Tree
+    # In-Order Iterator for a Binary Tree
     def inorder_using_iterator(self):
         result = ""
         while self.hasNext():
