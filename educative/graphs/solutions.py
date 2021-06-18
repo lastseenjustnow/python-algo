@@ -1,9 +1,10 @@
-from typing import List
+from typing import List, Set
 
 from Graph import Graph
 from educative.linked_lists.LinkedList import LinkedList, Node
 from educative.stacks_n_queues.Queue import MyQueue
 from educative.stacks_n_queues.Stack import MyStack
+
 
 # Challenge 1: Implement Breadth First Search
 def bfs_traversal(g: Graph, source: int):
@@ -28,7 +29,6 @@ def bfs_traversal(g: Graph, source: int):
 # Challenge 2: Depth First Search
 # Recursive approach
 def dfs_traversal_recursive(g: Graph, source: int) -> str:
-
     def rec(vertex: int, t: List[bool], res: str):
         if not t[vertex]:
             res += str(vertex)
@@ -74,3 +74,28 @@ def dfs_traversal(g: Graph, source: int) -> str:
                     break
 
     return res
+
+
+# Challenge 3: Detect Cycle in a Directed Graph
+# Recursive approach
+def detect_cycle(g: Graph):
+    outer_traversed_list = [False] * g.vertices
+    is_cycle = False
+
+    def go_deep(vertex_id: int, inner_traversed_list):
+        deep = False
+        if inner_traversed_list[vertex_id]:
+            deep = True
+        inner_traversed_list[vertex_id] = True
+        outer_traversed_list[vertex_id] = True
+        vertex_head = g.array[vertex_id].get_head()
+        while vertex_head:
+            deep = go_deep(vertex_head.data, inner_traversed_list)
+            if not deep:
+                vertex_head = vertex_head.next_element
+        return deep
+
+    while not all(outer_traversed_list):
+        is_cycle = go_deep(outer_traversed_list.index(False), [False] * g.vertices)
+
+    return is_cycle
