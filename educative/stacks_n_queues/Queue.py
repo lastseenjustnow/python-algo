@@ -1,4 +1,4 @@
-from Stack import MyStack
+from educative.stacks_n_queues.Stack import MyStack
 
 
 class MyQueue:
