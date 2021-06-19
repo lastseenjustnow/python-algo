@@ -24,6 +24,7 @@ class TestGraphSolution(unittest.TestCase):
         function_output = dfs_traversal_recursive(graph, 1)
         self.assertEqual(expected_result, function_output)
 
+    # Stack approach
     def test_dfs_traversal(self):
         graph = Graph(7)
         source_destination = [(1, 2), (1, 3), (2, 4), (2, 5), (3, 6)]
@@ -33,6 +34,7 @@ class TestGraphSolution(unittest.TestCase):
         function_output = dfs_traversal(graph, 1)
         self.assertEqual(expected_result, function_output)
 
+    # Challenge 3: Detect Cycle in a Directed Graph
     def test_detect_cycle_recursive(self):
         graph = Graph(7)
         source_destination = [(1, 2), (1, 3), (2, 4), (2, 5), (3, 6)]
@@ -52,6 +54,7 @@ class TestGraphSolution(unittest.TestCase):
         graph.add_edge(2, 0)
         self.assertTrue(detect_cycle(graph))
 
+    # Challenge 4: "Mother Vertex" in a Directed Graph
     def test_find_mother_vertex(self):
         g = Graph(3)
         source_destination = [(0, 1), (1, 2), (2, 0)]
@@ -69,3 +72,11 @@ class TestGraphSolution(unittest.TestCase):
         for x in source_destination:
             graph.add_edge(x[0], x[1])
         self.assertEqual(-1, find_mother_vertex(graph))
+
+    # Challenge 5: Count Number of Edges in an Undirected Graph
+    def test_num_edges(self):
+        g = UndirectedGraph(8)
+        source_destination = [(0, 1), (0, 4), (1, 2), (1, 3), (2, 4), (2, 5), (3, 5), (4, 5), (5, 6), (5, 7), (6, 7)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertEqual(11, num_edges(g))

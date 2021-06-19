@@ -1,6 +1,6 @@
-from typing import List, Set
+from typing import List
 
-from Graph import Graph
+from Graph import Graph, UndirectedGraph
 from educative.linked_lists.LinkedList import LinkedList, Node
 from educative.stacks_n_queues.Queue import MyQueue
 from educative.stacks_n_queues.Stack import MyStack
@@ -118,3 +118,17 @@ def find_mother_vertex(g):
                 break
 
     return mother_vertex
+
+
+# Challenge 5: Count Number of Edges in an Undirected Graph
+def num_edges(g: UndirectedGraph):
+    visited = [False] * g.vertices
+    num_edges = 0
+    for vertex_id in range(g.vertices):
+        visited[vertex_id] = True
+        vertex_head = g.array[vertex_id].get_head()
+        while vertex_head:
+            if not visited[vertex_head.data]:
+                num_edges += 1
+            vertex_head = vertex_head.next_element
+    return num_edges
