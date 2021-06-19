@@ -80,22 +80,21 @@ def dfs_traversal(g: Graph, source: int) -> str:
 # Recursive approach
 def detect_cycle(g: Graph):
     outer_traversed_list = [False] * g.vertices
-    is_cycle = False
 
     def go_deep(vertex_id: int, inner_traversed_list):
-        deep = False
         if inner_traversed_list[vertex_id]:
-            deep = True
+            return True
         inner_traversed_list[vertex_id] = True
         outer_traversed_list[vertex_id] = True
         vertex_head = g.array[vertex_id].get_head()
-        while vertex_head:
-            deep = go_deep(vertex_head.data, inner_traversed_list)
-            if not deep:
-                vertex_head = vertex_head.next_element
-        return deep
+        if vertex_head:
+            return go_deep(vertex_head.data, inner_traversed_list)
+        else:
+            return False
 
     while not all(outer_traversed_list):
         is_cycle = go_deep(outer_traversed_list.index(False), [False] * g.vertices)
+        if is_cycle:
+            return True
 
-    return is_cycle
+    return False

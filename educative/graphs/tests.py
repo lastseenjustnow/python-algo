@@ -50,5 +50,4 @@ class TestGraphSolution(unittest.TestCase):
         self.assertFalse(detect_cycle(graph))
 
         graph.add_edge(2, 0)
-        graph.print_graph()
         self.assertTrue(detect_cycle(graph))
