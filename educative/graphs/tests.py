@@ -51,3 +51,21 @@ class TestGraphSolution(unittest.TestCase):
 
         graph.add_edge(2, 0)
         self.assertTrue(detect_cycle(graph))
+
+    def test_find_mother_vertex(self):
+        g = Graph(3)
+        source_destination = [(0, 1), (1, 2), (2, 0)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+
+        g = Graph(4)
+        source_destination = [(3, 0), (3, 1), (1, 1)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertEqual(3, find_mother_vertex(g))
+
+        graph = Graph(7)
+        source_destination = [(1, 2), (1, 3), (2, 4), (2, 5), (3, 6)]
+        for x in source_destination:
+            graph.add_edge(x[0], x[1])
+        self.assertEqual(-1, find_mother_vertex(graph))

@@ -98,3 +98,23 @@ def detect_cycle(g: Graph):
             return True
 
     return False
+
+
+# Challenge 4: "Mother Vertex" in a Directed Graph
+def find_mother_vertex(g):
+    mother_vertex = -1
+    for vertex_id in range(g.vertices):
+        stack = MyStack()
+        stack.push(vertex_id)
+        count = 0
+        while not stack.is_empty():
+            vertex_head = g.array[stack.pop()].get_head()
+            count += 1
+            while vertex_head:
+                stack.push(vertex_head.data)
+                vertex_head = vertex_head.next_element
+            if count >= g.vertices:
+                mother_vertex = vertex_id
+                break
+
+    return mother_vertex
