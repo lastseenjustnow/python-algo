@@ -80,3 +80,13 @@ class TestGraphSolution(unittest.TestCase):
         for x in source_destination:
             g.add_edge(x[0], x[1])
         self.assertEqual(11, num_edges(g))
+
+    # Challenge 6: Check if a Path Exists Between Two Vertices
+    def test_check_path(self):
+        g = Graph(8)
+        source_destination = [(0, 1), (0, 4), (1, 2), (1, 3), (2, 5), (4, 2), (5, 3), (5, 6), (5, 7), (6, 7)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertTrue(check_path(g, 0, 6))
+        self.assertTrue(check_path(g, 1, 7))
+        self.assertFalse(check_path(g, 6, 3))

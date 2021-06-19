@@ -132,3 +132,23 @@ def num_edges(g: UndirectedGraph):
                 num_edges += 1
             vertex_head = vertex_head.next_element
     return num_edges
+
+
+# Challenge 6: Check if a Path Exists Between Two Vertices
+def check_path(g, source, destination):
+    traversed = [False] * g.vertices
+    # Write your code here
+    stack = MyStack()
+    stack.push(source)
+    while not stack.is_empty():
+        vertex_id = stack.pop()
+        if vertex_id == destination:
+            return True
+        traversed[vertex_id] = True
+        vertex_head = g.array[vertex_id].get_head()
+        while vertex_head:
+            if not traversed[vertex_head.data]:
+                stack.push(vertex_head.data)
+            vertex_head = vertex_head.next_element
+
+    return False
