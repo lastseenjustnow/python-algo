@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from Graph import Graph, UndirectedGraph
 from educative.linked_lists.LinkedList import LinkedList, Node
@@ -152,3 +152,60 @@ def check_path(g, source, destination):
             vertex_head = vertex_head.next_element
 
     return False
+
+
+# Challenge 7: Check if a Given Undirected Graph is Tree
+# Stack approach
+def is_tree(g):
+    visited = [False] * g.vertices
+
+    stack = MyStack()
+    stack.push(0)
+
+    parent_stack = MyStack()
+    parent_stack.push(None)
+
+    while not stack.is_empty():
+        vertex_id = stack.pop()
+        parent_vertex_id = parent_stack.pop()
+        vertex_head = g.array[vertex_id].get_head()
+        while vertex_head:
+            if vertex_head.data == parent_vertex_id:
+                pass
+            elif visited[vertex_head.data]:
+                return False
+            else:
+                stack.push(vertex_head.data)
+                parent_stack.push(vertex_id)
+            vertex_head = vertex_head.next_element
+        visited[vertex_id] = True
+
+    if not all(visited):
+        return False
+
+    return True
+
+
+# Recursive approach
+def is_tree_recursive(g):
+
+    visited = [False] * g.vertices
+
+    def go_deep(vertex_id: int, parent_vertex_id: Optional[int], v: List[bool]):
+        v[vertex_id] = True
+        vertex_head = g.array[vertex_id].get_head()
+        while vertex_head:
+            if vertex_head.data == parent_vertex_id:
+                pass
+            elif v[vertex_head.data]:
+                return False
+            else:
+                go_deep(vertex_head.data, vertex_id, v)
+            vertex_head = vertex_head.next_element
+        return True
+
+    res = go_deep(0, None, visited)
+    if not all(visited):
+        return False
+
+    return res

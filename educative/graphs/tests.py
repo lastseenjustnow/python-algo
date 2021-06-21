@@ -90,3 +90,53 @@ class TestGraphSolution(unittest.TestCase):
         self.assertTrue(check_path(g, 0, 6))
         self.assertTrue(check_path(g, 1, 7))
         self.assertFalse(check_path(g, 6, 3))
+
+    # Challenge 7: Check if a Given Undirected Graph is Tree
+    # Stack approach
+    def test_is_tree(self):
+        g = UndirectedGraph(5)
+        source_destination = [(0, 1), (0, 2), (0, 3), (3, 4)]
+
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertTrue(is_tree(g))
+
+        g.add_edge(4, 2)
+        self.assertFalse(is_tree(g))
+
+        g = UndirectedGraph(4)
+        source_destination = [(0, 1), (0, 2), (0, 3), (3, 2)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertFalse(is_tree(g))
+
+        g = UndirectedGraph(6)
+        source_destination = [(0, 1), (0, 2), (0, 3), (3, 4)]
+
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertFalse(is_tree(g))
+
+    def test_is_tree_recursive(self):
+        g = UndirectedGraph(5)
+        source_destination = [(0, 1), (0, 2), (0, 3), (3, 4)]
+
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertTrue(is_tree_recursive(g))
+
+        g.add_edge(4, 2)
+        self.assertFalse(is_tree_recursive(g))
+
+        g = UndirectedGraph(4)
+        source_destination = [(0, 1), (0, 2), (0, 3), (3, 2)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertFalse(is_tree_recursive(g))
+
+        g = UndirectedGraph(6)
+        source_destination = [(0, 1), (0, 2), (0, 3), (3, 4)]
+
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertFalse(is_tree_recursive(g))
