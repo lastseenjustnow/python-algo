@@ -1,6 +1,7 @@
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from Graph import Graph, UndirectedGraph
+from GraphNode import GraphNode
 from educative.linked_lists.LinkedList import LinkedList, Node
 from educative.stacks_n_queues.Queue import MyQueue
 from educative.stacks_n_queues.Stack import MyStack
@@ -251,3 +252,23 @@ def find_min_recursive(g, source, destination):
             return path_length
 
     return go_deep(source, 0, -1)
+
+
+# Clone a Directed Graph
+def clone(root: GraphNode) -> GraphNode:
+
+    def fill_rec(this_node: GraphNode, d_v: Dict[int, List[int]], d_n: Dict[int, GraphNode]):
+        if d_v.get(this_node.data) is None:
+            d_v[this_node.data] = [neighbor.data for neighbor in this_node.neighbors]
+            d_n[this_node.data] = GraphNode(this_node.data)
+        for neighbor in this_node.neighbors:
+            if d_v.get(neighbor.data) is None:
+                d_v, d_n = fill_rec(neighbor, d_v, d_n)
+        return d_v, d_n
+
+    d_values, d_nodes = fill_rec(root, dict(), dict())
+
+    for value, node in d_nodes.items():
+        node.neighbors = [d_nodes[node_value] for node_value in d_values[value]]
+
+    return d_nodes[root.data]

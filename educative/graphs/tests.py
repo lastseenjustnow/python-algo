@@ -160,3 +160,21 @@ class TestGraphSolution(unittest.TestCase):
         self.assertEqual(2, find_min_recursive(g, 0, 4))
         self.assertEqual(2, find_min_recursive(g, 3, 4))
         self.assertEqual(-1, find_min_recursive(g, 3, 6))
+
+    # Clone a Directed Graph
+    def test_clone(self):
+        root = GraphNode(0)
+        node_1 = GraphNode(1)
+        node_2 = GraphNode(2)
+        node_3 = GraphNode(3)
+        node_4 = GraphNode(4)
+        root.neighbors = [node_3, node_4]
+        node_1.neighbors = [node_2]
+        node_3.neighbors = [node_2]
+        node_4.neighbors = [root, node_1, node_3]
+
+        new_root = clone(root)
+        self.assertEqual(0, new_root.data)
+        self.assertEqual(3, new_root.neighbors[0].data)
+        self.assertEqual(4, new_root.neighbors[1].data)
+
