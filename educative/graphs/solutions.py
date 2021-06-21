@@ -209,3 +209,45 @@ def is_tree_recursive(g):
         return False
 
     return res
+
+
+# Challenge 8: Find the Shortest Path Between Two Vertices
+# Stack approach
+def find_min(g, source, destination):
+    min = -1
+    vertex_stack = MyStack()
+    steps_stack = MyStack()
+    vertex_stack.push(source)
+    steps_stack.push(0)
+
+    while not vertex_stack.is_empty():
+        vertex_id = vertex_stack.pop()
+        steps_num = steps_stack.pop()
+        if vertex_id == destination and (min < 0 or steps_num < min):
+            min = steps_num
+        else:
+            vertex_head = g.array[vertex_id].get_head()
+            while vertex_head:
+                vertex_stack.push(vertex_head.data)
+                steps_stack.push(steps_num + 1)
+                vertex_head = vertex_head.next_element
+
+    return min
+
+
+# Recursive approach
+def find_min_recursive(g, source, destination):
+
+    def go_deep(vertex_id: int, counter: int, path_length: int):
+        if vertex_id == destination and (path_length < 0 or counter < path_length):
+            return counter
+        else:
+            vertex_head = g.array[vertex_id].get_head()
+            while vertex_head:
+                go_further = go_deep(vertex_head.data, counter + 1, path_length)
+                if path_length < 0 or go_further < path_length:
+                    path_length = go_further
+                vertex_head = vertex_head.next_element
+            return path_length
+
+    return go_deep(source, 0, -1)

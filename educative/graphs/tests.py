@@ -140,3 +140,23 @@ class TestGraphSolution(unittest.TestCase):
         for x in source_destination:
             g.add_edge(x[0], x[1])
         self.assertFalse(is_tree_recursive(g))
+
+    # Challenge 8: Find the Shortest Path Between Two Vertices
+    def test_find_min(self):
+        g = Graph(7)
+        source_destination = [(0, 1), (0, 2), (0, 3), (2, 4), (3, 5), (5, 4)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+        self.assertEqual(2, find_min(g, 0, 4))
+        self.assertEqual(2, find_min(g, 3, 4))
+        self.assertEqual(-1, find_min(g, 3, 6))
+
+    def test_find_min_recursive(self):
+        g = Graph(7)
+        source_destination = [(0, 1), (0, 2), (0, 3), (2, 4), (3, 5), (5, 4)]
+        for x in source_destination:
+            g.add_edge(x[0], x[1])
+
+        self.assertEqual(2, find_min_recursive(g, 0, 4))
+        self.assertEqual(2, find_min_recursive(g, 3, 4))
+        self.assertEqual(-1, find_min_recursive(g, 3, 6))
