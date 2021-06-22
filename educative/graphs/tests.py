@@ -1,7 +1,7 @@
 import unittest
 
 from solutions import *
-
+from MinimumSpanningTree import *
 
 class TestGraphSolution(unittest.TestCase):
     # Challenge 1: Implement Breadth First Search
@@ -178,3 +178,16 @@ class TestGraphSolution(unittest.TestCase):
         self.assertEqual(3, new_root.neighbors[0].data)
         self.assertEqual(4, new_root.neighbors[1].data)
 
+    def test_find_min_spanning_tree(self):
+        vertices: List[Vertex] = [Vertex(x, False) for x in range(1, 6)]
+        edges: List[Edge] = [
+            Edge(1, False, vertices[0], vertices[1]),
+            Edge(1, False, vertices[0], vertices[2]),
+            Edge(2, False, vertices[1], vertices[2]),
+            Edge(3, False, vertices[1], vertices[3]),
+            Edge(3, False, vertices[2], vertices[4]),
+            Edge(2, False, vertices[3], vertices[4]),
+        ]
+        g = TypedGraph(vertices, edges)
+
+        self.assertEqual(7, g.find_min_spanning_tree())
