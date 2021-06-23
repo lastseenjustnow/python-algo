@@ -141,3 +141,35 @@ def find_successor(root, key):
                 deq.append(current_node.right)
 
     return None
+
+
+# Zigzag Traversal (medium)
+def zigzag_traverse(root):
+    result = []
+
+    deq: Deque[Optional[BinaryTreeNode]] = deque()
+    deq.append(root)
+    from_end = False
+
+    while deq:
+        len_deq = len(deq)
+        current_level_values = []
+        for _ in range(len_deq):
+            if from_end:
+                current_node = deq.pop()
+                current_level_values.append(current_node.data)
+                if current_node.right:
+                    deq.appendleft(current_node.right)
+                if current_node.left:
+                    deq.appendleft(current_node.left)
+            else:
+                current_node = deq.popleft()
+                current_level_values.append(current_node.data)
+                if current_node.left:
+                    deq.append(current_node.left)
+                if current_node.right:
+                    deq.append(current_node.right)
+        result.append(current_level_values)
+        from_end = not from_end
+
+    return result

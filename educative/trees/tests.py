@@ -109,3 +109,31 @@ class TestStackSolution(unittest.TestCase):
 
         self.assertEqual(7, find_successor(root, 12))
         self.assertEqual(10, find_successor(root, 9))
+
+    def test_zigzag_traverse(self):
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(2)
+        root.right = BinaryTreeNode(3)
+        root.left.left = BinaryTreeNode(4)
+        root.left.right = BinaryTreeNode(5)
+        root.right.left = BinaryTreeNode(6)
+        root.right.right = BinaryTreeNode(7)
+
+        expected_res = [[1], [3, 2], [4, 5, 6, 7]]
+        function_res = zigzag_traverse(root)
+
+        self.assertEqual(expected_res, function_res)
+
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(9)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+        root.right.left.left = BinaryTreeNode(20)
+        root.right.left.right = BinaryTreeNode(17)
+
+        expected_res = [[12], [1, 7], [9, 10, 5], [17, 20]]
+        function_res = zigzag_traverse(root)
+
+        self.assertEqual(expected_res, function_res)
