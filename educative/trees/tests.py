@@ -2,6 +2,7 @@ import unittest
 import random
 
 from BinaryTreeNode import create_BST
+from educative.trees.InorderIterator import InorderIterator
 from solutions import *
 
 
@@ -23,7 +24,7 @@ class TestStackSolution(unittest.TestCase):
         self.assertTrue(are_identical(tree1, tree2))
 
         lst1 = [25, 50, 75, 100, 125, 200, 350]
-        lst2 = [25, 50, 75, 100, 125, 200, 350]
+        lst2 = [25, 50, 75, 100, 125, 200, 355]
         tree1 = create_BST(lst1)
         tree2 = create_BST(lst2)
 
@@ -58,3 +59,15 @@ class TestStackSolution(unittest.TestCase):
         root = create_BST(arr)
         for i, el in enumerate(arr[:-1], 0):
             self.assertEqual(arr[i+1], inorder_successor_bst(root, el))
+
+    def test_level_order_traversal(self):
+        root = BinaryTreeNode(100)
+        root.left = BinaryTreeNode(50)
+        root.left.left = BinaryTreeNode(25)
+        root.left.right = BinaryTreeNode(75)
+        root.right = BinaryTreeNode(200)
+        root.right.right = BinaryTreeNode(350)
+
+        function_res = level_order_traversal(root)
+        expected_res = "100\n50 200\n25 75 350 "
+        self.assertEqual(expected_res, function_res)

@@ -231,7 +231,7 @@ def find_min(g, source, destination):
             while vertex_head:
                 vertex_stack.push(vertex_head.data)
                 steps_stack.push(steps_num + 1)
-                vertex_head = vertex_head.next_element
+                vertex_head = vertex_head.next_eleme3nt
 
     return min
 

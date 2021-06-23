@@ -1,7 +1,7 @@
-from typing import Optional
+from typing import Optional, Deque
+from collections import deque
 
 from BinaryTreeNode import BinaryTreeNode
-from InorderIterator import InorderIterator
 
 
 # Check if Two Binary Trees are Identical
@@ -35,3 +35,30 @@ def inorder_successor_bst(root: BinaryTreeNode, d: int) -> Optional[int]:
             right_tree = right_tree.left
 
     return potential_next
+
+
+# Level Order Traversal of Binary Tree
+def level_order_traversal(root):
+    result = ""
+
+    node_deque: Deque[BinaryTreeNode] = deque()
+    level_deque: Deque[int] = deque()
+    node_deque.append(root)
+    current_level = 0
+    level_deque.append(current_level)
+
+    while len(node_deque) != 0:
+        current_node = node_deque.popleft()
+        current_node_level = level_deque.popleft()
+        if current_node_level > current_level:
+            result = result[:-1] + "\n"
+            current_level = current_node_level
+        result += str(current_node.data) + " "
+        if current_node.left:
+            node_deque.append(current_node.left)
+            level_deque.append(current_level + 1)
+        if current_node.right:
+            node_deque.append(current_node.right)
+            level_deque.append(current_level + 1)
+
+    return result[:-1]
