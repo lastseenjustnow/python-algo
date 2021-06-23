@@ -1,7 +1,7 @@
 import unittest
 
 from solutions import *
-from MinimumSpanningTree import *
+from educative.graphs.challenges.MinimumSpanningTree import *
 
 class TestGraphSolution(unittest.TestCase):
     # Challenge 1: Implement Breadth First Search
