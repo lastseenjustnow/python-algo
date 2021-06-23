@@ -118,3 +118,26 @@ def find_level_averages(root):
         nodes_deque.append(head)
 
     return result
+
+
+# Level Order Successor (easy)
+def find_successor(root, key):
+
+    deq: Deque[Optional[BinaryTreeNode]] = deque()
+    deq.append(root)
+    is_key_found = False
+
+    while deq:
+        deq_len = len(deq)
+        for _ in range(deq_len):
+            if is_key_found:
+                return deq.popleft().data
+            current_node = deq.popleft()
+            if current_node.data == key:
+                is_key_found = True
+            if current_node.left:
+                deq.append(current_node.left)
+            if current_node.right:
+                deq.append(current_node.right)
+
+    return None

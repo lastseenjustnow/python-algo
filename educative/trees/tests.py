@@ -98,3 +98,14 @@ class TestStackSolution(unittest.TestCase):
         expected_res = [12.0, 4.0, 6.5]
 
         self.assertEqual(expected_res, function_res)
+
+    def test_find_successor(self):
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(9)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+
+        self.assertEqual(7, find_successor(root, 12))
+        self.assertEqual(10, find_successor(root, 9))
