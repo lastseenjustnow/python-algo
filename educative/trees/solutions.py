@@ -93,3 +93,28 @@ def traverse(root: BinaryTreeNode) -> Deque[List[int]]:
     result.appendleft(current_level_values)
 
     return result
+
+
+# Level Averages in a Binary Tree (easy)
+def find_level_averages(root):
+    result: List[float] = []
+    nodes_deque: Deque[Optional[BinaryTreeNode]] = deque()
+    nodes_deque.append(root)
+    nodes_deque.append(None)
+
+    while len(nodes_deque) != 1:
+        head = nodes_deque.popleft()
+        sum = 0
+        count = 0
+        while head:
+            sum += head.data
+            count += 1
+            if head.left:
+                nodes_deque.append(head.left)
+            if head.right:
+                nodes_deque.append(head.right)
+            head = nodes_deque.popleft()
+        result.append(sum / count)
+        nodes_deque.append(head)
+
+    return result

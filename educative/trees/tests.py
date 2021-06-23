@@ -84,3 +84,17 @@ class TestStackSolution(unittest.TestCase):
         expected_res = deque([[9, 10, 5], [7, 1], [12]])
 
         self.assertEqual(expected_res, function_res)
+
+    def test_find_level_averages(self):
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(9)
+        root.left.right = BinaryTreeNode(2)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+
+        function_res = find_level_averages(root)
+        expected_res = [12.0, 4.0, 6.5]
+
+        self.assertEqual(expected_res, function_res)
