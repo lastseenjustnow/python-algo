@@ -71,3 +71,16 @@ class TestStackSolution(unittest.TestCase):
         function_res = level_order_traversal(root)
         expected_res = "100\n50 200\n25 75 350 "
         self.assertEqual(expected_res, function_res)
+
+    def test_traverse(self):
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(9)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+
+        function_res = traverse(root)
+        expected_res = deque([[9, 10, 5], [7, 1], [12]])
+
+        self.assertEqual(expected_res, function_res)

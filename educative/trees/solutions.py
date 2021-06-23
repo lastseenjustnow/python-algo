@@ -1,4 +1,4 @@
-from typing import Optional, Deque
+from typing import Optional, List, Deque
 from collections import deque
 
 from BinaryTreeNode import BinaryTreeNode
@@ -38,7 +38,7 @@ def inorder_successor_bst(root: BinaryTreeNode, d: int) -> Optional[int]:
 
 
 # Level Order Traversal of Binary Tree
-def level_order_traversal(root):
+def level_order_traversal(root: BinaryTreeNode) -> str:
     result = ""
 
     node_deque: Deque[BinaryTreeNode] = deque()
@@ -62,3 +62,34 @@ def level_order_traversal(root):
             level_deque.append(current_level + 1)
 
     return result[:-1]
+
+
+# Reverse Level Order Traversal (easy)
+def traverse(root: BinaryTreeNode) -> Deque[List[int]]:
+    result = deque()
+
+    node_deque: Deque[BinaryTreeNode] = deque()
+    level_deque: Deque[int] = deque()
+    node_deque.append(root)
+    current_level_values = []
+    current_level = 0
+    level_deque.append(current_level)
+
+    while len(node_deque) != 0:
+        current_node = node_deque.popleft()
+        current_node_level = level_deque.popleft()
+        if current_node_level > current_level:
+            result.appendleft(current_level_values)
+            current_level = current_node_level
+            current_level_values = []
+        current_level_values.append(current_node.data)
+        if current_node.left:
+            node_deque.append(current_node.left)
+            level_deque.append(current_level + 1)
+        if current_node.right:
+            node_deque.append(current_node.right)
+            level_deque.append(current_level + 1)
+
+    result.appendleft(current_level_values)
+
+    return result
