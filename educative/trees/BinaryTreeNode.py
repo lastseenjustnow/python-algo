@@ -3,8 +3,7 @@ from typing import List
 
 class BinaryTreeNode:
     def __init__(self, data):
-        self.left = None
-        self.right = None
+        self.left, self.right, self.next = None, None, None
         self.data = data
 
 

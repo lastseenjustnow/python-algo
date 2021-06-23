@@ -173,3 +173,22 @@ def zigzag_traverse(root):
         from_end = not from_end
 
     return result
+
+
+# Connect Level Order Siblings (medium)
+def connect_level_order_siblings(root):
+
+    deq: Deque[Optional[BinaryTreeNode]] = deque()
+    deq.append(root)
+    deq.append(None)
+
+    while len(deq) != 1:
+        head = deq.popleft()
+        while head:
+            head.next = deq[0]
+            if head.left:
+                deq.append(head.left)
+            if head.right:
+                deq.append(head.right)
+            head = deq.popleft()
+        deq.append(head)

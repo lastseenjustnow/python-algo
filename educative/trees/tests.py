@@ -69,7 +69,7 @@ class TestStackSolution(unittest.TestCase):
         root.right.right = BinaryTreeNode(350)
 
         function_res = level_order_traversal(root)
-        expected_res = "100\n50 200\n25 75 350 "
+        expected_res = "100\n50 200\n25 75 350"
         self.assertEqual(expected_res, function_res)
 
     def test_traverse(self):
@@ -137,3 +137,16 @@ class TestStackSolution(unittest.TestCase):
         function_res = zigzag_traverse(root)
 
         self.assertEqual(expected_res, function_res)
+
+    def test_connect_level_order_siblings(self):
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(2)
+        root.right = BinaryTreeNode(3)
+        root.left.left = BinaryTreeNode(4)
+        root.left.right = BinaryTreeNode(5)
+        root.right.left = BinaryTreeNode(6)
+        root.right.right = BinaryTreeNode(7)
+
+        connect_level_order_siblings(root)
+        self.assertIsNone(root.next)
+        self.assertEqual(7, root.right.left.next.data)
