@@ -192,3 +192,24 @@ def connect_level_order_siblings(root):
                 deq.append(head.right)
             head = deq.popleft()
         deq.append(head)
+
+
+# Validity of binary search tree
+def is_bst(root: BinaryTreeNode) -> bool:
+
+    def min_max_rec(this_node: BinaryTreeNode, min_val: Optional[int], max_val: Optional[int], level: bool):
+        this_level = True
+        if this_node is None:
+            return None, None, True
+        else:
+            left_min_max = min_max_rec(this_node.left, min_val, max_val, level)
+            right_min_max = min_max_rec(this_node.right, min_val, max_val, level)
+            left_min = this_node.data if not left_min_max[0] else left_min_max[0]
+            left_max = this_node.data if not left_min_max[1] else left_min_max[1]
+            right_min = this_node.data if not right_min_max[0] else right_min_max[0]
+            right_max = this_node.data if not right_min_max[1] else right_min_max[1]
+            if left_max > this_node.data or right_min < this_node.data:
+                this_level = False
+            return left_min, right_max, all([left_min_max[2], right_min_max[2], this_level])
+
+    return min_max_rec(root, None, None, True)[2]

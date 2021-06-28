@@ -150,3 +150,34 @@ class TestStackSolution(unittest.TestCase):
         connect_level_order_siblings(root)
         self.assertIsNone(root.next)
         self.assertEqual(7, root.right.left.next.data)
+
+    def test_is_bst(self):
+        root = BinaryTreeNode(100)
+        root.left = BinaryTreeNode(50)
+        root.left.left = BinaryTreeNode(25)
+        root.left.right = BinaryTreeNode(75)
+        root.right = BinaryTreeNode(200)
+        root.right.left = BinaryTreeNode(125)
+        root.right.right = BinaryTreeNode(350)
+
+        self.assertTrue(is_bst(root))
+
+        root = BinaryTreeNode(100)
+        root.left = BinaryTreeNode(50)
+        root.left.left = BinaryTreeNode(25)
+        root.left.right = BinaryTreeNode(75)
+        root.right = BinaryTreeNode(200)
+        root.right.left = BinaryTreeNode(90)
+        root.right.right = BinaryTreeNode(350)
+
+        self.assertFalse(is_bst(root))
+
+        root = BinaryTreeNode(100)
+        root.left = BinaryTreeNode(50)
+        root.left.left = BinaryTreeNode(25)
+        root.left.right = BinaryTreeNode(110)
+        root.right = BinaryTreeNode(200)
+        root.right.left = BinaryTreeNode(150)
+        root.right.right = BinaryTreeNode(350)
+
+        self.assertFalse(is_bst(root))
