@@ -200,3 +200,19 @@ class TestStackSolution(unittest.TestCase):
         for result in expected_results:
             self.assertEqual(result, res_root.data)
             res_root = res_root.right
+
+    def test_display_tree_perimeter(self):
+        root = BinaryTreeNode(100)
+        root.left = BinaryTreeNode(50)
+        root.right = BinaryTreeNode(200)
+        root.left.left = BinaryTreeNode(25)
+        root.left.left.left = BinaryTreeNode(10)
+        root.left.right = BinaryTreeNode(60)
+        root.left.right.right = BinaryTreeNode(70)
+        root.right = BinaryTreeNode(200)
+        root.right.right = BinaryTreeNode(350)
+        root.right.right.right = BinaryTreeNode(400)
+
+        expected_result = '100 50 25 10 70 400 350 200 '
+
+        self.assertEqual(expected_result, display_tree_perimeter(root))

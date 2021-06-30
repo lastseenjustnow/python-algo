@@ -1,4 +1,4 @@
-from typing import Optional, List, Tuple, Deque
+from typing import Optional, List, Tuple, Deque, Callable
 from collections import deque
 
 from BinaryTreeNode import BinaryTreeNode
@@ -14,8 +14,8 @@ def are_identical(root1: BinaryTreeNode, root2: BinaryTreeNode) -> bool:
         return True
 
     return are_identical(root1.left, root2.left) \
-        and are_identical(root1.right, root2.right)\
-        and root1.data == root2.data
+           and are_identical(root1.right, root2.right) \
+           and root1.data == root2.data
 
 
 # In-order Successor of Binary Search Tree
@@ -122,7 +122,6 @@ def find_level_averages(root):
 
 # Level Order Successor (easy)
 def find_successor(root, key):
-
     deq: Deque[Optional[BinaryTreeNode]] = deque()
     deq.append(root)
     is_key_found = False
@@ -177,7 +176,6 @@ def zigzag_traverse(root):
 
 # Connect Level Order Siblings (medium)
 def connect_level_order_siblings(root):
-
     deq: Deque[Optional[BinaryTreeNode]] = deque()
     deq.append(root)
     deq.append(None)
@@ -196,7 +194,6 @@ def connect_level_order_siblings(root):
 
 # Validity of binary search tree
 def is_bst(root: BinaryTreeNode) -> bool:
-
     def min_max_rec(this_node: BinaryTreeNode, min_val: Optional[int], max_val: Optional[int], level: bool):
         this_level = True
         if this_node is None:
@@ -218,7 +215,6 @@ def is_bst(root: BinaryTreeNode) -> bool:
 # Convert Binary Tree to Doubly Linked List
 # Recursive approach
 def convert_to_linked_list(root: Optional[BinaryTreeNode]):
-
     def left_right(this_node) -> Tuple[BinaryTreeNode, BinaryTreeNode]:
 
         if this_node.left:
@@ -245,3 +241,42 @@ def convert_to_linked_list(root: Optional[BinaryTreeNode]):
         root = root.left
 
     return root
+
+
+# Print Tree Perimeter
+def display_tree_perimeter(root: BinaryTreeNode) -> str:
+
+    def empty_dec(dq: Deque[BinaryTreeNode], f1: Callable, f2: Callable, res: str):
+        while dq:
+            this_node = dq.popleft()
+            while this_node:
+                if f1(this_node):
+                    dq.append(f1(this_node))
+                if not (f2(this_node) or f1(this_node)):
+                    res = ' '.join([res, str(this_node.data)])
+                this_node = this_node.left
+        return res
+
+    result = str(root.data)
+    deq: Deque[BinaryTreeNode] = deque()
+
+    current_node = root.left if root.left else None
+    while current_node:
+        result = ' '.join([result, str(current_node.data)])
+        if current_node.right:
+            deq.append(current_node.right)
+        current_node = current_node.left
+
+    result = empty_dec(deq, lambda x: x.right, lambda x: x.left, result)
+
+    current_node = root.right if root.right else None
+    to_append = ''
+    while current_node.right:
+        to_append = ' '.join([str(current_node.data), to_append])
+        if current_node.right:
+            deq.append(current_node.right)
+        current_node = current_node.right
+
+    result = ' '.join([empty_dec(deq, lambda x: x.left, lambda x: x.right, result), to_append])
+
+    return result
