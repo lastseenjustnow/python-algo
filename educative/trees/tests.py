@@ -181,3 +181,22 @@ class TestStackSolution(unittest.TestCase):
         root.right.right = BinaryTreeNode(350)
 
         self.assertFalse(is_bst(root))
+
+    def test_convert_to_linked_list(self):
+        root = BinaryTreeNode(100)
+        root.left = BinaryTreeNode(50)
+        root.right = BinaryTreeNode(200)
+        root.left.left = BinaryTreeNode(25)
+        root.left.right = BinaryTreeNode(75)
+        root.left.left.right = BinaryTreeNode(30)
+        root.left.right.left = BinaryTreeNode(60)
+        root.left.right.left.left = BinaryTreeNode(55)
+        root.right.left = BinaryTreeNode(125)
+        root.right.right = BinaryTreeNode(350)
+
+        res_root = convert_to_linked_list(root)
+        expected_results = [25, 30, 50, 55, 60, 75, 100, 125, 200, 350]
+
+        for result in expected_results:
+            self.assertEqual(result, res_root.data)
+            res_root = res_root.right

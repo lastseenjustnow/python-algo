@@ -1,4 +1,4 @@
-from typing import Optional, List, Deque
+from typing import Optional, List, Tuple, Deque
 from collections import deque
 
 from BinaryTreeNode import BinaryTreeNode
@@ -213,3 +213,35 @@ def is_bst(root: BinaryTreeNode) -> bool:
             return left_min, right_max, all([left_min_max[2], right_min_max[2], this_level])
 
     return min_max_rec(root, None, None, True)[2]
+
+
+# Convert Binary Tree to Doubly Linked List
+# Recursive approach
+def convert_to_linked_list(root: Optional[BinaryTreeNode]):
+
+    def left_right(this_node) -> Tuple[BinaryTreeNode, BinaryTreeNode]:
+
+        if this_node.left:
+            pair_from_left = left_right(this_node.left)
+            this_node.left = pair_from_left[0]
+            pair_from_left[0].right = this_node
+            most_right = pair_from_left[1]
+        else:
+            most_right = this_node
+
+        if this_node.right:
+            pair_from_right = left_right(this_node.right)
+            this_node.right = pair_from_right[1]
+            pair_from_right[1].left = this_node
+            most_left = pair_from_right[0]
+        else:
+            most_left = this_node
+
+        return most_left, most_right
+
+    left_right(root)
+
+    while root.left:
+        root = root.left
+
+    return root
