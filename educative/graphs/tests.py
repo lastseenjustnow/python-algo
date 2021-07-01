@@ -1,3 +1,4 @@
+from typing import Callable
 import unittest
 
 from solutions import *
@@ -178,6 +179,7 @@ class TestGraphSolution(unittest.TestCase):
         self.assertEqual(3, new_root.neighbors[0].data)
         self.assertEqual(4, new_root.neighbors[1].data)
 
+    # Tasks Scheduling
     def test_find_min_spanning_tree(self):
         vertices: List[Vertex] = [Vertex(x, False) for x in range(1, 6)]
         edges: List[Edge] = [
@@ -191,3 +193,23 @@ class TestGraphSolution(unittest.TestCase):
         g = TypedGraph(vertices, edges)
 
         self.assertEqual(7, g.find_min_spanning_tree())
+
+    def test_is_scheduling_possible(self):
+        def test(f: Callable):
+            self.assertTrue(f(3, [[0, 1], [1, 2]]))
+            self.assertFalse(f(3, [[0, 1], [1, 2], [2, 0]]))
+            self.assertTrue(f(6, [[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]]))
+
+        test(is_scheduling_possible_graph)
+        test(is_scheduling_possible)
+
+    def test_sorted_order(self):
+        self.assertEqual(
+            [0, 1, 2],
+            find_order(3, [[0, 1], [1, 2]]))
+        self.assertEqual(
+            [],
+            find_order(3, [[0, 1], [1, 2], [2, 0]]))
+        self.assertEqual(
+            [0, 1, 4, 3, 2, 5],
+            find_order(6, [[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]]))

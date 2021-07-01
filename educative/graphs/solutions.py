@@ -52,7 +52,6 @@ def dfs_traversal_recursive(g: Graph, source: int) -> str:
 
 # Stack approach
 def dfs_traversal(g: Graph, source: int) -> str:
-
     is_traversed = [False] * g.vertices
 
     res = ""
@@ -189,7 +188,6 @@ def is_tree(g):
 
 # Recursive approach
 def is_tree_recursive(g):
-
     visited = [False] * g.vertices
 
     def go_deep(vertex_id: int, parent_vertex_id: Optional[int], v: List[bool]):
@@ -231,14 +229,13 @@ def find_min(g, source, destination):
             while vertex_head:
                 vertex_stack.push(vertex_head.data)
                 steps_stack.push(steps_num + 1)
-                vertex_head = vertex_head.next_eleme3nt
+                vertex_head = vertex_head.next_element
 
     return min
 
 
 # Recursive approach
 def find_min_recursive(g, source, destination):
-
     def go_deep(vertex_id: int, counter: int, path_length: int):
         if vertex_id == destination and (path_length < 0 or counter < path_length):
             return counter
@@ -256,7 +253,6 @@ def find_min_recursive(g, source, destination):
 
 # Clone a Directed Graph
 def clone(root: GraphNode) -> GraphNode:
-
     def fill_rec(this_node: GraphNode, d_v: Dict[int, List[int]], d_n: Dict[int, GraphNode]):
         if d_v.get(this_node.data) is None:
             d_v[this_node.data] = [neighbor.data for neighbor in this_node.neighbors]
@@ -272,3 +268,63 @@ def clone(root: GraphNode) -> GraphNode:
         node.neighbors = [d_nodes[node_value] for node_value in d_values[value]]
 
     return d_nodes[root.data]
+
+
+# Tasks Scheduling
+# Solution importing Graph data structure
+def is_scheduling_possible_graph(tasks, prerequisites):
+    g = Graph(tasks)
+    for edge in prerequisites:
+        g.add_edge(edge[0], edge[1])
+
+    return bool(1 - detect_cycle(g))
+
+
+# Plain python
+# Kahn algorithm
+def is_scheduling_possible(tasks, prerequisites):
+    edges, counts, heads = {}, {}, set()
+    for v in range(tasks):
+        edges[v] = set()
+        counts[v] = 0
+        heads.add(v)
+
+    for start, finish in prerequisites:
+        edges[start].add(finish)
+        counts[finish] += 1
+        heads.discard(finish)
+
+    while heads:
+        head = heads.pop()
+        while edges[head]:
+            dest = edges[head].pop()
+            counts[dest] -= 1
+            if counts[dest] == 0:
+                heads.add(dest)
+
+    return sum(counts.values()) == 0
+
+
+# Tasks Scheduling Order
+def find_order(tasks, prerequisites):
+    edges, counts, heads, sortedOrder = {}, {}, set(), []
+    for v in range(tasks):
+        edges[v] = set()
+        counts[v] = 0
+        heads.add(v)
+
+    for start, finish in prerequisites:
+        edges[start].add(finish)
+        counts[finish] += 1
+        heads.discard(finish)
+
+    while heads:
+        head = heads.pop()
+        sortedOrder.append(head)
+        while edges[head]:
+            dest = edges[head].pop()
+            counts[dest] -= 1
+            if counts[dest] == 0:
+                heads.add(dest)
+
+    return sortedOrder if sum(counts.values()) == 0 else []
