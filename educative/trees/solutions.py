@@ -383,3 +383,22 @@ def mirror_tree_rec(root: BinaryTreeNode):
         current_right_subtree = mirror_tree_rec(root.right) if root.right else None
         root.left, root.right = current_right_subtree, current_left_subtree
         return root
+
+
+# Delete Zero Sum Sub-Trees
+def delete_zero_sum_subtree(root):
+
+    def go(root: BinaryTreeNode) -> int:
+        if root is None:
+            return 0
+        else:
+            left_subsum = go(root.left)
+            right_subsum = go(root.right)
+            if left_subsum == 0:
+                root.left = None
+            if right_subsum == 0:
+                root.right = None
+            return left_subsum + right_subsum + root.data
+
+    go(root)
+    return root

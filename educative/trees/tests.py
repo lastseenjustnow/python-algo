@@ -270,3 +270,13 @@ class TestStackSolution(unittest.TestCase):
 
         test(mirror_tree)
         test(mirror_tree_rec)
+
+    def test_delete_zero_sum_subtree(self):
+        root = BinaryTreeNode(7)
+        root.left = BinaryTreeNode(5)
+        root.right = BinaryTreeNode(6)
+        root.left.left = BinaryTreeNode(-3)
+        root.left.right = BinaryTreeNode(-2)
+
+        new_root = delete_zero_sum_subtree(root)
+        self.assertIsNone(new_root.left)
