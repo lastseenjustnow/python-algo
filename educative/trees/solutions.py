@@ -1,5 +1,7 @@
 from typing import Optional, List, Tuple, Deque, Callable
 from collections import deque
+import sys
+import pickle
 
 from BinaryTreeNode import BinaryTreeNode
 
@@ -245,7 +247,6 @@ def convert_to_linked_list(root: Optional[BinaryTreeNode]):
 
 # Print Tree Perimeter
 def display_tree_perimeter(root: BinaryTreeNode) -> str:
-
     def empty_dec(dq: Deque[BinaryTreeNode], f1: Callable, f2: Callable, res: str):
         while dq:
             this_node = dq.popleft()
@@ -299,3 +300,29 @@ def populate_sibling_pointers(root: BinaryTreeNode):
         previous = current
 
     return root
+
+
+# Serialize/Deserialize Binary Tree
+def serialize(node, stream):
+    MARKER = sys.maxsize
+    if node == None:
+        stream.dump(MARKER)
+        return
+    stream.dump(node.data)
+    serialize(node.left, stream)
+    serialize(node.right, stream)
+
+
+def deserialize(stream):
+    MARKER = sys.maxsize
+    try:
+        data = pickle.load(stream)
+        if data == MARKER:
+            return None
+
+        node = BinaryTreeNode(data)
+        node.left = deserialize(stream)
+        node.right = deserialize(stream)
+        return node
+    except pickle.UnpicklingError:
+        return None

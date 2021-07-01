@@ -231,3 +231,15 @@ class TestStackSolution(unittest.TestCase):
         for result in expected_results:
             self.assertEqual(result, root.data)
             root = root.right
+
+    def test_serializer(self):
+        arr = [100, 50, 200, 25, 75, 125, 350]
+        root = create_BST(arr)
+        output = open('data.class', 'wb')
+        p = pickle.Pickler(output)
+        serialize(root, p)
+        output.close()
+        input2 = open('data.class', 'rb')
+        root_deserialized = deserialize(input2)
+        self.assertEqual(25, root_deserialized.data)
+        input2.close()
