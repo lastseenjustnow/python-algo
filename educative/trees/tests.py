@@ -216,3 +216,18 @@ class TestStackSolution(unittest.TestCase):
         expected_result = '100 50 25 10 70 400 350 200 '
 
         self.assertEqual(expected_result, display_tree_perimeter(root))
+
+    def test_populate_sibling_pointers(self):
+        root = BinaryTreeNode(100)
+        root.left = BinaryTreeNode(50)
+        root.right = BinaryTreeNode(200)
+        root.left.left = BinaryTreeNode(25)
+        root.left.right = BinaryTreeNode(75)
+        root.right.right = BinaryTreeNode(300)
+        root.right.right.right = BinaryTreeNode(350)
+
+        expected_results = [100, 50, 200, 25, 75, 300, 350]
+        populate_sibling_pointers(root)
+        for result in expected_results:
+            self.assertEqual(result, root.data)
+            root = root.right

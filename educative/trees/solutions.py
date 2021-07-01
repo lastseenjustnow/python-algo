@@ -280,3 +280,22 @@ def display_tree_perimeter(root: BinaryTreeNode) -> str:
     result = ' '.join([empty_dec(deq, lambda x: x.left, lambda x: x.right, result), to_append])
 
     return result
+
+
+# Connect All Siblings of a Binary Tree
+def populate_sibling_pointers(root: BinaryTreeNode):
+    deq = deque()
+    previous = None
+    deq.append(root)
+
+    while deq:
+        current = deq.popleft()
+        if previous:
+            previous.right = current
+        if current.left:
+            deq.append(current.left)
+        if current.right:
+            deq.append(current.right)
+        previous = current
+
+    return root
