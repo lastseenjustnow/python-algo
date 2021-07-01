@@ -243,3 +243,9 @@ class TestStackSolution(unittest.TestCase):
         root_deserialized = deserialize(input2)
         self.assertEqual(25, root_deserialized.data)
         input2.close()
+
+    def test_find_nth_highest_in_bst(self):
+        arr = [25, 50, 75, 100, 125, 200, 350]
+        bst = create_BST(arr)
+        for i, el in enumerate(arr[::-1]):
+            self.assertEqual(el, find_nth_highest_in_bst(bst, i + 1).data)

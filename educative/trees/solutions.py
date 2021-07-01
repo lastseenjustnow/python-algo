@@ -326,3 +326,26 @@ def deserialize(stream):
         return node
     except pickle.UnpicklingError:
         return None
+
+
+# Nth Highest Number in Binary Search Tree
+def find_nth_highest_in_bst(node: BinaryTreeNode, n) -> Optional[BinaryTreeNode]:
+    deq: Deque[BinaryTreeNode] = deque()
+
+    while node:
+        deq.append(node)
+        node = node.right
+
+    count = 0
+    current_node = None
+    while count != n:
+        current_node = deq.pop()
+        if current_node.left:
+            left_subtree = current_node.left
+            deq.append(left_subtree)
+            while left_subtree.right:
+                deq.append(left_subtree.right)
+                left_subtree = left_subtree.right
+        count += 1
+
+    return current_node
