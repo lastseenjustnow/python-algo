@@ -339,6 +339,8 @@ def find_nth_highest_in_bst(node: BinaryTreeNode, n) -> Optional[BinaryTreeNode]
     count = 0
     current_node = None
     while count != n:
+        if len(deq) == 0:
+            return None
         current_node = deq.pop()
         if current_node.left:
             left_subtree = current_node.left
@@ -349,3 +351,35 @@ def find_nth_highest_in_bst(node: BinaryTreeNode, n) -> Optional[BinaryTreeNode]
         count += 1
 
     return current_node
+
+
+# Mirror Binary Tree Nodes
+# Stack approach
+def mirror_tree(root):
+
+    deq = deque()
+    deq.append(root)
+
+    while deq:
+        current_node = deq.pop()
+        if current_node.left:
+            deq.append(current_node.left)
+        if current_node.right:
+            deq.append(current_node.right)
+        current_left_subtree = current_node.left if current_node.left else None
+        current_right_subtree = current_node.right if current_node.right else None
+        current_node.left, current_node.right = current_right_subtree, current_left_subtree
+
+    return root
+
+
+# Recursive approach
+def mirror_tree_rec(root: BinaryTreeNode):
+
+    if not root:
+        return None
+    else:
+        current_left_subtree = mirror_tree_rec(root.left) if root.left else None
+        current_right_subtree = mirror_tree_rec(root.right) if root.right else None
+        root.left, root.right = current_right_subtree, current_left_subtree
+        return root

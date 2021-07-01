@@ -249,3 +249,24 @@ class TestStackSolution(unittest.TestCase):
         bst = create_BST(arr)
         for i, el in enumerate(arr[::-1]):
             self.assertEqual(el, find_nth_highest_in_bst(bst, i + 1).data)
+
+    def test_mirror_tree(self):
+        def test(f: Callable):
+            root = BinaryTreeNode(20)
+            root.left = BinaryTreeNode(50)
+            root.right = BinaryTreeNode(200)
+            root.left.left = BinaryTreeNode(75)
+            root.left.right = BinaryTreeNode(25)
+            root.right.right = BinaryTreeNode(300)
+
+            mirror_root = f(root)
+
+            self.assertEqual(200, mirror_root.left.data)
+            self.assertIsNone(mirror_root.left.right)
+            self.assertEqual(50, mirror_root.right.data)
+            self.assertEqual(300, mirror_root.left.left.data)
+            self.assertEqual(25, mirror_root.right.left.data)
+            self.assertEqual(75, mirror_root.right.right.data)
+
+        test(mirror_tree)
+        test(mirror_tree_rec)
