@@ -36,3 +36,28 @@ def sort_list(arr):
         t.insert(w)
 
     return find_words(t.root)
+
+
+# Challenge 4: Word Formation From a Dictionary Using Trie
+def is_formation_possible(dictionary, word) -> bool:
+    t = Trie()
+
+    for w in dictionary:
+        t.insert(w)
+
+    current = t.root
+
+    for outer_index, outer_ch in enumerate(word[:-1], 0):
+        index = t.get_index(outer_ch)
+        if current.children[index]:
+            current = current.children[index]
+        if current.is_end_word:
+            nxt = t.root
+            for inner_ch in word[outer_index+1:]:
+                nxt = nxt.children[t.get_index(inner_ch)]
+                if not nxt:
+                    break
+            if nxt and nxt.is_end_word:
+                return True
+
+    return False

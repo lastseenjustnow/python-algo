@@ -1,6 +1,5 @@
 import unittest
 
-from Trie import Trie
 from solutions import *
 
 keys = ["the", "a", "there", "answer", "any",
@@ -28,3 +27,11 @@ class TestTriesSolution(unittest.TestCase):
         input_array = ["the", "a", "there", "answer", "any", "by", "bye", "their", "abc"]
         expected_result = ["a", "abc", "answer", "any", "by", "bye", "the", "their", "there"]
         self.assertEqual(sort_list(input_array), expected_result)
+
+    # Challenge 4: Word Formation From a Dictionary Using Trie
+    def test_is_formation_possible(self):
+        dictionary = ['the', 'hello', 'there', 'answer', 'any', 'by', 'world', 'their', 'abc']
+        self.assertTrue(is_formation_possible(dictionary, 'helloworld'))
+        self.assertFalse(is_formation_possible(dictionary, 'helloworldd'))
+        self.assertTrue(is_formation_possible(dictionary, 'byworld'))
+        self.assertFalse(is_formation_possible(dictionary, 'byword'))
