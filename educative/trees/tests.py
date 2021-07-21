@@ -280,3 +280,20 @@ class TestStackSolution(unittest.TestCase):
 
         new_root = delete_zero_sum_subtree(root)
         self.assertIsNone(new_root.left)
+
+    # Convert N-ary Tree to Binary Tree
+    def test_convert_n_ary_to_binary(self):
+        nary_root = NaryTreeNode(1)
+        nary_root.children.append(NaryTreeNode(2))
+        nary_root.children.append(NaryTreeNode(3))
+        nary_root.children.append(NaryTreeNode(4))
+        nary_root.children[1].children.append(NaryTreeNode(5))
+        nary_root.children[1].children.append(NaryTreeNode(6))
+
+        function_output = convert_n_ary_to_binary(nary_root)
+        self.assertEqual(1, function_output.data)
+        self.assertEqual(2, function_output.left.data)
+        self.assertEqual(3, function_output.left.left.data)
+        self.assertEqual(4, function_output.left.left.left.data)
+        self.assertEqual(5, function_output.left.left.right.data)
+        self.assertEqual(6, function_output.left.left.right.right.data)

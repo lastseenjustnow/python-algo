@@ -4,7 +4,7 @@ import sys
 import pickle
 
 from BinaryTreeNode import BinaryTreeNode
-
+from NaryTreeNode import NaryTreeNode
 
 # Check if Two Binary Trees are Identical
 def are_identical(root1: BinaryTreeNode, root2: BinaryTreeNode) -> bool:
@@ -402,3 +402,24 @@ def delete_zero_sum_subtree(root):
 
     go(root)
     return root
+
+
+# Convert N-ary Tree to Binary Tree
+def convert_n_ary_to_binary(node: NaryTreeNode) -> BinaryTreeNode:
+
+    def convert_rec(this_node: BinaryTreeNode, children: List[NaryTreeNode], flag_value: int):
+        current_node = this_node
+        for child in children:
+            if flag_value == 0:
+                current_node.left = BinaryTreeNode(child.data)
+                current_node = current_node.left
+                convert_rec(current_node, child.children, 1 - flag_value)
+            else:
+                current_node.right = BinaryTreeNode(child.data)
+                current_node = current_node.right
+                convert_rec(current_node, child.children, 1 - flag_value)
+
+    binary_node = BinaryTreeNode(node.data)
+    convert_rec(binary_node, node.children, 0)
+
+    return binary_node
