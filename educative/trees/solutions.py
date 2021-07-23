@@ -439,3 +439,24 @@ def find_minimum_depth(root: BinaryTreeNode):
             return rec(r.right, current_depth + 1)
 
     return rec(root, 0)
+
+
+# All Paths for a Sum
+def find_paths(root: BinaryTreeNode, summ: int):
+    allPaths = []
+
+    def rec(root: BinaryTreeNode, current_path: List[int]):
+        s = sum(current_path)
+        if not root or s + root.data > summ:
+            return
+        elif s + root.data == summ:
+            allPaths.append([*current_path, root.data])
+            return
+        else:
+            new_path = [*current_path, root.data]
+            rec(root.left, new_path)
+            rec(root.right, new_path)
+
+    rec(root, [])
+
+    return allPaths

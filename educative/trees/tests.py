@@ -325,3 +325,23 @@ class TestStackSolution(unittest.TestCase):
         root.right.right = BinaryTreeNode(5)
         root.right.left.left = BinaryTreeNode(11)
         self.assertEqual(3, find_minimum_depth(root))
+
+    def test_find_paths(self):
+        # Example 1
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(9)
+        root.left.left = BinaryTreeNode(4)
+        root.left.right = BinaryTreeNode(5)
+        root.right.left = BinaryTreeNode(2)
+        root.right.right = BinaryTreeNode(7)
+        self.assertEqual([[1, 7, 4], [1, 9, 2]], find_paths(root, 12))
+
+        # Example 2
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(4)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+        self.assertEqual([[12, 7, 4], [12, 1, 10]], find_paths(root, 23))
