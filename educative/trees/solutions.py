@@ -423,3 +423,19 @@ def convert_n_ary_to_binary(node: NaryTreeNode) -> BinaryTreeNode:
     convert_rec(binary_node, node.children, 0)
 
     return binary_node
+
+
+# Minimum Depth of a Binary Tree (easy)
+# Recursive approach
+def find_minimum_depth(root: BinaryTreeNode):
+    def rec(r: BinaryTreeNode, current_depth: int):
+        if not (r.left or r.right):
+            return current_depth + 1
+        elif r.left and r.right:
+            return min(rec(r.left, current_depth + 1), rec(r.right, current_depth + 1))
+        elif r.left:
+            return rec(r.left, current_depth + 1)
+        else:
+            return rec(r.right, current_depth + 1)
+
+    return rec(root, 0)

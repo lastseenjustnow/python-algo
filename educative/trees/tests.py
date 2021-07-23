@@ -297,3 +297,31 @@ class TestStackSolution(unittest.TestCase):
         self.assertEqual(4, function_output.left.left.left.data)
         self.assertEqual(5, function_output.left.left.right.data)
         self.assertEqual(6, function_output.left.left.right.right.data)
+
+    # Minimum Depth of a Binary Tree
+    def test_find_minimum_depth(self):
+        # Example 1
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(2)
+        root.right = BinaryTreeNode(3)
+        root.left.left = BinaryTreeNode(4)
+        root.left.right = BinaryTreeNode(5)
+        self.assertEqual(2, find_minimum_depth(root))
+
+        # Example 2
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(1)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+        self.assertEqual(2, find_minimum_depth(root))
+
+        # Example 3
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.left.left = BinaryTreeNode(9)
+        root.right = BinaryTreeNode(1)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+        root.right.left.left = BinaryTreeNode(11)
+        self.assertEqual(3, find_minimum_depth(root))
