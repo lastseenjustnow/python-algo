@@ -473,3 +473,20 @@ def find_sum_of_path_numbers(root: BinaryTreeNode):
                    + rec(node.left, int(str(n) + str(node.data)))
 
     return rec(root, 0)
+
+
+# Path With Given Sequence
+def find_path(root, sequence):
+    if root.data != sequence[0]:
+        return False
+    current_node = root
+    for val in sequence[1:]:
+        if current_node.right and current_node.right.data == val:
+            current_node = current_node.right
+        elif current_node.left and current_node.left.data == val:
+            current_node = current_node.left
+        else:
+            return False
+
+    return True
+

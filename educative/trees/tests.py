@@ -363,3 +363,15 @@ class TestStackSolution(unittest.TestCase):
         root.right.left = BinaryTreeNode(6)
         root.right.right = BinaryTreeNode(5)
         self.assertEqual(332, find_sum_of_path_numbers(root))
+
+    def test_find_path(self):
+
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(0)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(1)
+        root.right.left = BinaryTreeNode(6)
+        root.right.right = BinaryTreeNode(5)
+
+        self.assertFalse(find_path(root, [1, 0, 7]))
+        self.assertTrue(find_path(root, [1, 1, 6]))
