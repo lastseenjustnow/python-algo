@@ -385,8 +385,7 @@ class TestStackSolution(unittest.TestCase):
         root.right = BinaryTreeNode(9)
         root.right.left = BinaryTreeNode(2)
         root.right.right = BinaryTreeNode(3)
-        self.assertEqual()count_paths(root, 12)))
-
+        self.assertEqual(3, count_paths(root, 12))
 
         # Example 2
         root = BinaryTreeNode(12)
@@ -395,4 +394,4 @@ class TestStackSolution(unittest.TestCase):
         root.left.left = BinaryTreeNode(4)
         root.right.left = BinaryTreeNode(10)
         root.right.right = BinaryTreeNode(5)
-        print("Tree has paths: " + str(count_paths(root, 11)))
+        self.assertEqual(2, count_paths(root, 11))
