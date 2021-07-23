@@ -345,3 +345,21 @@ class TestStackSolution(unittest.TestCase):
         root.right.left = BinaryTreeNode(10)
         root.right.right = BinaryTreeNode(5)
         self.assertEqual([[12, 7, 4], [12, 1, 10]], find_paths(root, 23))
+
+    def test_find_sum_of_path_numbers(self):
+        # Example 1
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(9)
+        root.right.left = BinaryTreeNode(2)
+        root.right.right = BinaryTreeNode(9)
+        self.assertEqual(408, find_sum_of_path_numbers(root))
+
+        # Example 2
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(0)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(1)
+        root.right.left = BinaryTreeNode(6)
+        root.right.right = BinaryTreeNode(5)
+        self.assertEqual(332, find_sum_of_path_numbers(root))

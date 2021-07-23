@@ -6,6 +6,7 @@ import pickle
 from BinaryTreeNode import BinaryTreeNode
 from NaryTreeNode import NaryTreeNode
 
+
 # Check if Two Binary Trees are Identical
 def are_identical(root1: BinaryTreeNode, root2: BinaryTreeNode) -> bool:
     if root1 is None and root2 is not None:
@@ -356,7 +357,6 @@ def find_nth_highest_in_bst(node: BinaryTreeNode, n) -> Optional[BinaryTreeNode]
 # Mirror Binary Tree Nodes
 # Stack approach
 def mirror_tree(root):
-
     deq = deque()
     deq.append(root)
 
@@ -375,7 +375,6 @@ def mirror_tree(root):
 
 # Recursive approach
 def mirror_tree_rec(root: BinaryTreeNode):
-
     if not root:
         return None
     else:
@@ -387,7 +386,6 @@ def mirror_tree_rec(root: BinaryTreeNode):
 
 # Delete Zero Sum Sub-Trees
 def delete_zero_sum_subtree(root):
-
     def go(root: BinaryTreeNode) -> int:
         if root is None:
             return 0
@@ -406,7 +404,6 @@ def delete_zero_sum_subtree(root):
 
 # Convert N-ary Tree to Binary Tree
 def convert_n_ary_to_binary(node: NaryTreeNode) -> BinaryTreeNode:
-
     def convert_rec(this_node: BinaryTreeNode, children: List[NaryTreeNode], flag_value: int):
         current_node = this_node
         for child in children:
@@ -460,3 +457,19 @@ def find_paths(root: BinaryTreeNode, summ: int):
     rec(root, [])
 
     return allPaths
+
+
+# Sum of Path Numbers
+def find_sum_of_path_numbers(root: BinaryTreeNode):
+    def rec(node: BinaryTreeNode, n: int) -> int:
+        if not (node.left or node.right):
+            return int(str(n) + str(node.data))
+        elif not node.left:
+            return rec(node.right, int(str(n) + str(node.data)))
+        elif not node.right:
+            return rec(node.left, int(str(n) + str(node.data)))
+        else:
+            return rec(node.right, int(str(n) + str(node.data))) \
+                   + rec(node.left, int(str(n) + str(node.data)))
+
+    return rec(root, 0)
