@@ -490,3 +490,20 @@ def find_path(root, sequence):
 
     return True
 
+
+# Count Paths for a Sum
+def count_paths(root: BinaryTreeNode, S):
+
+    def rec(node: BinaryTreeNode, previous_nodes: List[int], c: int):
+        if not node:
+            return c
+        this_previous_nodes = [*previous_nodes, node.data]
+        while sum(this_previous_nodes) >= S:
+            if sum(this_previous_nodes) == S:
+                return rec(node.left, [], c + 1) + rec(node.right, [], c)
+            else:
+                this_previous_nodes = this_previous_nodes[1:]
+
+        return rec(node.left, this_previous_nodes, c) + rec(node.right, this_previous_nodes, c)
+
+    return rec(root, [], 0)

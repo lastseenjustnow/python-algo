@@ -375,3 +375,24 @@ class TestStackSolution(unittest.TestCase):
 
         self.assertFalse(find_path(root, [1, 0, 7]))
         self.assertTrue(find_path(root, [1, 1, 6]))
+
+    def test_count_paths(self):
+        # Example 1
+        root = BinaryTreeNode(1)
+        root.left = BinaryTreeNode(7)
+        root.left.left = BinaryTreeNode(6)
+        root.left.right = BinaryTreeNode(5)
+        root.right = BinaryTreeNode(9)
+        root.right.left = BinaryTreeNode(2)
+        root.right.right = BinaryTreeNode(3)
+        self.assertEqual()count_paths(root, 12)))
+
+
+        # Example 2
+        root = BinaryTreeNode(12)
+        root.left = BinaryTreeNode(7)
+        root.right = BinaryTreeNode(1)
+        root.left.left = BinaryTreeNode(4)
+        root.right.left = BinaryTreeNode(10)
+        root.right.right = BinaryTreeNode(5)
+        print("Tree has paths: " + str(count_paths(root, 11)))
