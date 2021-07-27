@@ -534,3 +534,49 @@ class MedianOfAStream:
         else:
             return (nlargest(1, self.max_heap)[0]
                     + nsmallest(1, self.min_heap)[0]) / 2
+
+
+# Sliding Window Median
+class SlidingWindowMedian:
+    def __init__(self):
+        self.min_heap, self.max_heap, self.is_odd = [], [], 0
+
+    def rebalance(self):
+        if len(self.max_heap) - len(self.min_heap) == 2:
+            heappush(self.min_heap, heappop(self.max_heap))
+        elif len(self.max_heap) - len(self.min_heap) == -1:
+            heappush(self.max_heap, heappop(self.min_heap))
+
+    def insert_num(self, num):
+        max_heap_max = nlargest(1, self.max_heap)
+        if not max_heap_max:
+            self.max_heap.append(num)
+        else:
+            heappush(self.max_heap if max_heap_max[0] > num else self.min_heap, num)
+            self.rebalance()
+        self.is_odd = 1 - self.is_odd
+
+        return
+
+    def find_median(self, k):
+        if k % 2 == 1 or len(self.min_heap) == 0:
+            return nlargest(1, self.max_heap)[0]
+        else:
+            return (nlargest(1, self.max_heap)[0]
+                    + nsmallest(1, self.min_heap)[0]) / 2
+
+    def find_sliding_window_median(self, nums, k):
+        result = []
+        for i in range(k):
+            self.insert_num(nums[i])
+
+        for i in range(k, len(nums)):
+            result.append(self.find_median(k))
+            heap_to_remove = self.max_heap if nlargest(1, self.max_heap)[0] >= nums[i-k] else self.min_heap
+            heap_to_remove.remove(nums[i-k])
+            self.rebalance()
+            self.insert_num(nums[i])
+
+        result.append(self.find_median(k))
+
+        return result

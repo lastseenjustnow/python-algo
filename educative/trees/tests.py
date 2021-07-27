@@ -405,3 +405,12 @@ class TestStackSolution(unittest.TestCase):
         self.assertEqual(3, medianOfAStream.find_median())
         medianOfAStream.insert_num(4)
         self.assertEqual(3.5, medianOfAStream.find_median())
+
+    def test_find_sliding_window_median(self):
+        slidingWindowMedian_1 = SlidingWindowMedian()
+        result_1 = slidingWindowMedian_1.find_sliding_window_median([1, 2, -1, 3, 5], 2)
+        self.assertEqual([1.5, 0.5, 1.0, 4.0], result_1)
+
+        slidingWindowMedian_2 = SlidingWindowMedian()
+        result_2 = slidingWindowMedian_2.find_sliding_window_median([1, 2, -1, 3, 5], 3)
+        self.assertEqual([1.0, 2.0, 3.0], result_2)
