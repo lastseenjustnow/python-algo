@@ -414,3 +414,7 @@ class TestStackSolution(unittest.TestCase):
         slidingWindowMedian_2 = SlidingWindowMedian()
         result_2 = slidingWindowMedian_2.find_sliding_window_median([1, 2, -1, 3, 5], 3)
         self.assertEqual([1.0, 2.0, 3.0], result_2)
+
+    def test_find_maximum_capital(self):
+        self.assertEqual(6, find_maximum_capital([0, 1, 2], [1, 2, 3], 2, 1))
+        self.assertEqual(8, find_maximum_capital([0, 1, 2, 3], [1, 2, 3, 5], 3, 0))

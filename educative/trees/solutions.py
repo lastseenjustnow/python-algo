@@ -580,3 +580,17 @@ class SlidingWindowMedian:
         result.append(self.find_median(k))
 
         return result
+
+
+# Maximize Capital
+def find_maximum_capital(capital, profits, numberOfProjects, initialCapital):
+    min_heap, max_heap = [], []
+    for _ in range(numberOfProjects):
+        for cap, prof in zip(capital, profits):
+            if cap <= initialCapital:
+                heappush(min_heap, cap)
+                heappush(max_heap, prof)
+
+        initialCapital += nlargest(1, max_heap)[0]
+
+    return initialCapital
