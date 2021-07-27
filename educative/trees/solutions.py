@@ -1,5 +1,6 @@
 from typing import Optional, List, Tuple, Deque, Callable
 from collections import deque
+from heapq import *
 import sys
 import pickle
 
@@ -507,3 +508,29 @@ def count_paths(root: BinaryTreeNode, S):
         return rec(node.left, this_previous_nodes, c) + rec(node.right, this_previous_nodes, c)
 
     return rec(root, [], 0)
+
+
+# Find the Median of a Number Stream
+class MedianOfAStream:
+    max_heap, min_heap, is_odd = [], [], 0
+
+    def insert_num(self, num):
+        max_heap_max = nlargest(1, self.max_heap)
+        if not max_heap_max:
+            self.max_heap.append(num)
+        else:
+            heappush(self.max_heap if max_heap_max[0] > num else self.min_heap, num)
+            if len(self.max_heap) - len(self.min_heap) == 2:
+                heappush(self.min_heap, heappop(self.max_heap))
+            elif len(self.max_heap) - len(self.min_heap) == -1:
+                heappush(self.max_heap, heappop(self.min_heap))
+        self.is_odd = 1 - self.is_odd
+
+        return
+
+    def find_median(self):
+        if self.is_odd == 1 or len(self.min_heap) == 0:
+            return nlargest(1, self.max_heap)[0]
+        else:
+            return (nlargest(1, self.max_heap)[0]
+                    + nsmallest(1, self.min_heap)[0]) / 2

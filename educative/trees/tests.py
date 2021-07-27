@@ -395,3 +395,13 @@ class TestStackSolution(unittest.TestCase):
         root.right.left = BinaryTreeNode(10)
         root.right.right = BinaryTreeNode(5)
         self.assertEqual(2, count_paths(root, 11))
+
+    def test_find_median(self):
+        medianOfAStream = MedianOfAStream()
+        medianOfAStream.insert_num(3)
+        medianOfAStream.insert_num(1)
+        self.assertEqual(2, medianOfAStream.find_median())
+        medianOfAStream.insert_num(5)
+        self.assertEqual(3, medianOfAStream.find_median())
+        medianOfAStream.insert_num(4)
+        self.assertEqual(3.5, medianOfAStream.find_median())
