@@ -39,3 +39,19 @@ class TestArraySolution(unittest.TestCase):
             lst = lst[rotate_arbitrary_number+1:] + lst[:rotate_arbitrary_number]
             for index, elem in enumerate(lst, 0):
                 self.assertEqual(index, binary_search_rotated_iter(lst, elem))
+
+    def test_find_least_common_number(self):
+        a = [6, 7, 10, 25, 30, 63, 64]
+        b = [0, 4, 5, 6, 7, 8, 50]
+        c = [1, 6, 10, 14]
+        self.assertTrue(6, find_least_common_number(a, b, c))
+
+        a = [1, 4, 6, 7, 8, 10, 14]
+        b = [1, 4, 5, 6, 7, 8, 50]
+        c = [0, 6, 7, 8, 10, 25, 30, 40]
+        self.assertTrue(6, find_least_common_number(a, b, c))
+
+        a = [1, 5, 6, 7, 17, 20]
+        b = [3, 4, 7, 9, 12, 16, 50]
+        c = [5, 6, 7, 10, 16, 25]
+        self.assertTrue(7, find_least_common_number(a, b, c))

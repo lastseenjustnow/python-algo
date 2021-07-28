@@ -65,3 +65,29 @@ def binary_search_rotated_iter(arr, key):
             right_index = middle_index
 
     return left_index if arr[left_index] == key else right_index
+
+
+# Find the Smallest Common Number
+def find_least_common_number(a, b, c):
+
+    a_i, b_i, c_i = 0, 0, 0
+    current_min = min(a[0], b[0], c[0])
+
+    while not a[a_i] == b[b_i] == c[c_i]:
+        while a_i <= len(a) - 1 and a[a_i] < current_min:
+            a_i += 1
+        if a[a_i] > current_min:
+            current_min = a[a_i]
+        while b_i <= len(b) - 1 and b[b_i] < current_min:
+            b_i += 1
+        if b[b_i] > current_min:
+            current_min = b[b_i]
+        while c_i <= len(c) - 1 and c[c_i] < current_min:
+            c_i += 1
+        if c[c_i] > current_min:
+            current_min = c[c_i]
+
+        if a_i > len(a) - 1 and b_i > len(b) - 1 and c_i > len(c) - 1:
+            return -1
+
+    return a[a_i]
