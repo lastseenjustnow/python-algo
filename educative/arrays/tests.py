@@ -146,3 +146,15 @@ class TestArraySolution(unittest.TestCase):
 
         arr = [1, 2, 3, 4, 3, 2, 1, 2, 5]
         self.assertEqual((1, 5), find_buy_sell_stock_prices(arr))
+
+    def test_merge_intervals(self):
+        arr = [Pair(1, 5), Pair(3, 7), Pair(4, 6), Pair(6, 8)]
+        self.assertEqual(1, merge_intervals(arr)[0].first)
+        self.assertEqual(8, merge_intervals(arr)[0].second)
+
+        arr = [Pair(10, 12), Pair(12, 15)]
+        self.assertEqual(10, merge_intervals(arr)[0].first)
+        self.assertEqual(15, merge_intervals(arr)[0].second)
+
+        arr =
+        merge_intervals([1, 5], [3, 7], [4, 6], [6, 8], [10, 12], [10, 15])

@@ -1,3 +1,5 @@
+from typing import List
+
 from collections import deque
 
 
@@ -200,3 +202,26 @@ def find_buy_sell_stock_prices(array):
         best_min_index = cur_min_index if cur_min_index < cur_max_index else best_min_index
 
     return array[best_min_index], array[cur_max_index]
+
+
+# Merge an Array With Overlapping Intervals
+class Pair:
+    def __init__(self, first, second):
+        self.first = first
+        self.second = second
+
+
+def merge_intervals(v: List[Pair]):
+    result = []
+
+    current_index, current_pair, count_to_del = 1, v[0], 0
+    while current_index < len(v):
+        if current_pair.first <= v[current_index].first <= current_pair.second:
+            current_pair.second = v[current_index].second
+            count_to_del += 1
+        else:
+            result.append(current_pair)
+            current_pair = v[current_index]
+        current_index += 1
+
+    return v
