@@ -91,3 +91,66 @@ def find_least_common_number(a, b, c):
             return -1
 
     return a[a_i]
+
+
+# Find Low/High Index of a Key in a Sorted Array
+# Recursive approach
+def find_low_index(arr, key):
+    def rec(left_index, right_index):
+        middle_index = (right_index - left_index) // 2 + left_index
+        if arr[middle_index] == key and arr[middle_index-1] != key:
+            return middle_index
+        elif left_index == middle_index == right_index:
+            return -1
+        elif arr[middle_index] < key:
+            return rec(middle_index + 1, right_index)
+        else:
+            return rec(left_index, middle_index)
+
+    return rec(0, len(arr) - 1)
+
+
+def find_high_index(arr, key):
+    def rec(left_index, right_index):
+        middle_index = (right_index - left_index) // 2 + left_index
+        if arr[middle_index] == key and (middle_index == right_index or arr[middle_index + 1] != key):
+            return middle_index
+        elif left_index == middle_index == right_index:
+            return -1
+        elif arr[middle_index] <= key:
+            return rec(middle_index + 1, right_index)
+        else:
+            return rec(left_index, middle_index)
+
+    return rec(0, len(arr) - 1)
+
+
+# Iterative approach
+def find_low_index_iter(arr, key):
+    left_index, middle_index, right_index = 0, (len(arr) - 1) // 2, len(arr) - 1
+
+    while not (arr[middle_index] == key and arr[middle_index-1] != key):
+        if left_index == middle_index == right_index:
+            return -1
+        middle_index = (right_index - left_index) // 2 + left_index
+        if arr[middle_index] < key:
+            left_index = middle_index + 1
+        else:
+            right_index = middle_index
+
+    return middle_index
+
+
+def find_high_index_iter(arr, key):
+    left_index, middle_index, right_index = 0, (len(arr) - 1) // 2, len(arr) - 1
+
+    while not (arr[middle_index] == key and (middle_index == right_index or arr[middle_index + 1] != key)):
+        if left_index == middle_index == right_index:
+            return -1
+        middle_index = (right_index - left_index) // 2 + left_index
+        if arr[middle_index] <= key:
+            left_index = middle_index + 1
+        else:
+            right_index = middle_index
+
+    return middle_index

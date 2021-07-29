@@ -1,6 +1,9 @@
 import unittest
 import random
 
+from collections import Counter
+from itertools import accumulate
+
 from solutions import *
 
 
@@ -55,3 +58,66 @@ class TestArraySolution(unittest.TestCase):
         b = [3, 4, 7, 9, 12, 16, 50]
         c = [5, 6, 7, 10, 16, 25]
         self.assertTrue(7, find_least_common_number(a, b, c))
+
+    def test_find_low_index(self):
+
+        def test_array(arr):
+            vals, indexes = Counter(arr).keys(), [0] + list(accumulate(Counter(arr).values()))[:-1]
+            for elem, index in zip(vals, indexes):
+                self.assertEqual(index, find_low_index(arr, elem))
+
+        arr = [1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 20]
+        test_array(arr)
+        arr = [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 6, 6]
+        test_array(arr)
+
+        for _ in range(100):
+            arr = sorted([random.randint(-10000, 10000) for _ in range(1, 100)])
+            test_array(arr)
+
+    def test_find_high_index(self):
+
+        def test_array(arr):
+            vals, indexes = Counter(arr).keys(), [x - 1 for x in accumulate(Counter(arr).values())]
+            for elem, index in zip(vals, indexes):
+                self.assertEqual(index, find_high_index(arr, elem))
+
+        arr = [1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 20]
+        test_array(arr)
+        arr = [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 6, 6]
+        test_array(arr)
+
+        for _ in range(100):
+            arr = sorted([random.randint(-10000, 10000) for _ in range(1, 100)])
+            test_array(arr)
+
+    def test_find_low_index_iter(self):
+        def test_array(arr):
+            vals, indexes = Counter(arr).keys(), [0] + list(accumulate(Counter(arr).values()))[:-1]
+            for elem, index in zip(vals, indexes):
+                self.assertEqual(index, find_low_index_iter(arr, elem))
+
+        arr = [1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 20]
+        test_array(arr)
+        arr = [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 6, 6]
+        test_array(arr)
+
+        for _ in range(100):
+            arr = sorted([random.randint(-10000, 10000) for _ in range(1, 1000)])
+            test_array(arr)
+
+    def test_find_high_index_iter(self):
+
+        def test_array(arr):
+            vals, indexes = Counter(arr).keys(), [x - 1 for x in accumulate(Counter(arr).values())]
+            for elem, index in zip(vals, indexes):
+                self.assertEqual(index, find_high_index_iter(arr, elem))
+
+        arr = [1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 20]
+        test_array(arr)
+        arr = [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 6, 6]
+        test_array(arr)
+
+        for _ in range(100):
+            arr = sorted([random.randint(-10000, 10000) for _ in range(1, 100)])
+            test_array(arr)
