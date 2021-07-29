@@ -133,3 +133,16 @@ class TestArraySolution(unittest.TestCase):
         expected_result = [0, 0, 1, 10, -1, 11, 5, -7, 25, -35]
         self.assertEqual(expected_result, move_zeros_to_left_naive(B))
         self.assertEqual(expected_result, move_zeros_to_left(B))
+
+    def test_find_buy_sell_stock_prices(self):
+        arr = [8, 5, 12, 9, 19, 1]
+        self.assertEqual((5, 19), find_buy_sell_stock_prices(arr))
+
+        arr = [21, 12, 11, 9, 6, 3]
+        self.assertEqual((12, 11), find_buy_sell_stock_prices(arr))
+
+        arr = [8, 6, 5, 4, 3, 2, 1]
+        self.assertEqual((6, 5), find_buy_sell_stock_prices(arr))
+
+        arr = [1, 2, 3, 4, 3, 2, 1, 2, 5]
+        self.assertEqual((1, 5), find_buy_sell_stock_prices(arr))

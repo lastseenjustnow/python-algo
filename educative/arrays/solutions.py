@@ -181,3 +181,22 @@ def move_zeros_to_left(A):
         write_index -= 1
 
     return A
+
+
+# Stock Buy Sell to Maximize Profit
+def find_buy_sell_stock_prices(array):
+
+    profit = float('-inf')
+    best_min_index = cur_max_index = cur_min_index = first_trough = 0
+    while first_trough != len(array) - 1 and array[first_trough + 1] - array[first_trough] < 0:
+        if array[first_trough + 1] - array[first_trough] > profit:
+            best_min_index, cur_max_index = first_trough, first_trough + 1
+            profit = array[first_trough + 1] - array[first_trough]
+        first_trough += 1
+
+    for index, elem in enumerate(array[first_trough:], first_trough):
+        cur_max_index = index if elem > array[cur_max_index] else cur_max_index
+        cur_min_index = index if elem < array[cur_min_index] else cur_min_index
+        best_min_index = cur_min_index if cur_min_index < cur_max_index else best_min_index
+
+    return array[best_min_index], array[cur_max_index]
