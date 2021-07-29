@@ -154,3 +154,30 @@ def find_high_index_iter(arr, key):
             right_index = middle_index
 
     return middle_index
+
+
+# Move All Zeros to the Beginning of the Array
+# Insert to a list is inefficient, the solution is naive
+def move_zeros_to_left_naive(A):
+    for i in range(len(A)):
+        if A[i] == 0:
+            del A[i]
+            A.insert(0, 0)
+
+    return A
+
+
+def move_zeros_to_left(A):
+    read_index, write_index = len(A) - 1, len(A) - 1
+
+    while read_index >= 0:
+        if not A[read_index] == 0:
+            A[write_index] = A[read_index]
+            write_index -= 1
+        read_index -= 1
+
+    while write_index >= 0:
+        A[write_index] = 0
+        write_index -= 1
+
+    return A

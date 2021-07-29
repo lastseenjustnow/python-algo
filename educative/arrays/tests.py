@@ -121,3 +121,15 @@ class TestArraySolution(unittest.TestCase):
         for _ in range(100):
             arr = sorted([random.randint(-10000, 10000) for _ in range(1, 100)])
             test_array(arr)
+
+    # Move All Zeros to the Beginning of the Array
+    def test_move_zeros_to_left(self):
+        A = [1, 10, 20, 0, 59, 63, 0, 88, 0]
+        expected_result = [0, 0, 0, 1, 10, 20, 59, 63, 88]
+        self.assertEqual(expected_result, move_zeros_to_left_naive(A))
+        self.assertEqual(expected_result, move_zeros_to_left(A))
+
+        B = [1, 10, -1, 11, 5, 0, -7, 0, 25, -35]
+        expected_result = [0, 0, 1, 10, -1, 11, 5, -7, 25, -35]
+        self.assertEqual(expected_result, move_zeros_to_left_naive(B))
+        self.assertEqual(expected_result, move_zeros_to_left(B))
