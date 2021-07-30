@@ -214,14 +214,15 @@ class Pair:
 def merge_intervals(v: List[Pair]):
     result = []
 
-    current_index, current_pair, count_to_del = 1, v[0], 0
+    current_index = 1
+    current_pair = Pair(v[0].first, v[0].second)
     while current_index < len(v):
         if current_pair.first <= v[current_index].first <= current_pair.second:
-            current_pair.second = v[current_index].second
-            count_to_del += 1
+            current_pair.second = max(current_pair.second, v[current_index].second)
         else:
             result.append(current_pair)
-            current_pair = v[current_index]
+            current_pair = Pair(v[current_index].first, v[current_index].second)
         current_index += 1
+    result.append(current_pair)
 
-    return v
+    return result
