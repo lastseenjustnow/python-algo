@@ -193,3 +193,11 @@ class TestArraySolution(unittest.TestCase):
         arr = [3, 4, 1, 1, 6]
         self.assertEqual(3, smallest_subarray_with_given_sum(8, arr))
 
+    def test_make_squares(self):
+        arr = [-2, -1, 0, 2, 3]
+        exp = [0, 1, 4, 4, 9]
+        self.assertEqual(exp, make_squares(arr))
+
+        arr = [-3, -1, 0, 1, 2]
+        exp = [0, 1, 1, 4, 9]
+        self.assertEqual(exp, make_squares(arr))

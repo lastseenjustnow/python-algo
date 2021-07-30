@@ -263,3 +263,18 @@ def smallest_subarray_with_given_sum(s, arr):
             subtract_index += 1
 
     return min_count
+
+
+# Squaring a Sorted Array
+def make_squares(arr):
+    left_index, right_index = 0, len(arr) - 1
+    squares = deque()
+    while left_index <= right_index:
+        if abs(arr[left_index]) >= abs(arr[right_index]):
+            squares.appendleft(arr[left_index] ** 2)
+            left_index += 1
+        else:
+            squares.appendleft(arr[right_index] ** 2)
+            right_index -= 1
+
+    return list(squares)
