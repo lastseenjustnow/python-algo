@@ -182,3 +182,14 @@ class TestArraySolution(unittest.TestCase):
 
         arr = [2, 3, 4, 1, 5]
         self.assertEqual(7, max_sub_array_of_size_k(2, arr))
+
+    def test_smallest_subarray_with_given_sum(self):
+        arr = [2, 1, 5, 2, 3, 2]
+        self.assertEqual(2, smallest_subarray_with_given_sum(7, arr))
+
+        arr = [2, 1, 5, 2, 8]
+        self.assertEqual(1, smallest_subarray_with_given_sum(7, arr))
+
+        arr = [3, 4, 1, 1, 6]
+        self.assertEqual(3, smallest_subarray_with_given_sum(8, arr))
+

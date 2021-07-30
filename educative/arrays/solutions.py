@@ -247,3 +247,19 @@ def max_sub_array_of_size_k(k, arr):
         max_summa = cur_summa if cur_summa > max_summa else max_summa
 
     return max_summa
+
+
+# Smallest Subarray with a given sum
+def smallest_subarray_with_given_sum(s, arr):
+    min_count = current_count = current_sum = subtract_index = 0
+    for index in range(len(arr)):
+        current_sum += arr[index]
+        current_count += 1
+        while current_sum >= s:
+            if min_count == 0 or min_count > current_count:
+                min_count = current_count
+            current_sum -= arr[subtract_index]
+            current_count -= 1
+            subtract_index += 1
+
+    return min_count
