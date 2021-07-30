@@ -162,3 +162,16 @@ class TestArraySolution(unittest.TestCase):
         self.assertEqual(8, merge_intervals(arr)[0].second)
         self.assertEqual(10, merge_intervals(arr)[1].first)
         self.assertEqual(15, merge_intervals(arr)[1].second)
+
+    def test_cyclic_sort(self):
+        input = [3, 1, 5, 4, 2]
+        output = [1, 2, 3, 4, 5]
+        self.assertEqual(output, cyclic_sort(input))
+
+        input = [2, 6, 4, 3, 1, 5]
+        output = [1, 2, 3, 4, 5, 6]
+        self.assertEqual(output, cyclic_sort(input))
+
+        input = [1, 5, 6, 4, 3, 2]
+        output = [1, 2, 3, 4, 5, 6]
+        self.assertEqual(output, cyclic_sort(input))

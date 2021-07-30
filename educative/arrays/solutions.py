@@ -226,3 +226,14 @@ def merge_intervals(v: List[Pair]):
     result.append(current_pair)
 
     return result
+
+
+# Cyclic Sort
+def cyclic_sort(nums):
+    for index in range(len(nums)):
+        elem = nums[index]
+        while index != elem - 1:
+            nums[elem - 1], nums[index] = nums[index], nums[elem - 1]
+            elem = nums[index]
+
+    return nums
