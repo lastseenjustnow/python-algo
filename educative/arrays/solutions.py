@@ -237,3 +237,13 @@ def cyclic_sort(nums):
             elem = nums[index]
 
     return nums
+
+
+# Maximum Sum Subarray of Size K
+def max_sub_array_of_size_k(k, arr):
+    max_summa = cur_summa = 0
+    for index in range(len(arr)):
+        cur_summa += arr[index] - (0 if index < k else arr[index - k])
+        max_summa = cur_summa if cur_summa > max_summa else max_summa
+
+    return max_summa

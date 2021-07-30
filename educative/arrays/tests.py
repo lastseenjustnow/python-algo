@@ -175,3 +175,10 @@ class TestArraySolution(unittest.TestCase):
         input = [1, 5, 6, 4, 3, 2]
         output = [1, 2, 3, 4, 5, 6]
         self.assertEqual(output, cyclic_sort(input))
+
+    def test_max_sub_array_of_size_k(self):
+        arr = [2, 1, 5, 1, 3, 2]
+        self.assertEqual(9, max_sub_array_of_size_k(3, arr))
+
+        arr = [2, 3, 4, 1, 5]
+        self.assertEqual(7, max_sub_array_of_size_k(2, arr))
