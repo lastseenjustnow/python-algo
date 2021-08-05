@@ -312,3 +312,16 @@ def find_max_in_bitonic_array(arr):
             return rec(left_index, middle_index)
 
     return rec(0, len(arr) - 1)
+
+
+# Permutations
+def find_permutations(nums):
+    result = []
+    result.append([])
+    for index, num in enumerate(nums, 0):
+        interresult = []
+        for subset in result:
+            [interresult.append(subset[:i] + [num] + subset[i:]) for i in range(index+1)]
+        result = interresult
+
+    return result

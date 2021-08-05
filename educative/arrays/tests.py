@@ -223,3 +223,13 @@ class TestArraySolution(unittest.TestCase):
 
         input = [10, 9, 8]
         self.assertEqual(10, find_max_in_bitonic_array(input))
+
+    def test_find_permutations(self):
+        input = [1, 3, 5]
+        function_output = find_permutations(input)
+        self.assertTrue(function_output.__contains__([1, 3, 5]))
+        self.assertTrue(function_output.__contains__([1, 5, 3]))
+        self.assertTrue(function_output.__contains__([3, 1, 5]))
+        self.assertTrue(function_output.__contains__([3, 5, 1]))
+        self.assertTrue(function_output.__contains__([5, 3, 1]))
+        self.assertTrue(function_output.__contains__([5, 1, 3]))
