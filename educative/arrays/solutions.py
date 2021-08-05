@@ -298,3 +298,17 @@ def find_subsets(nums):
         previous_subset_count = this_subset_count
 
     return subsets
+
+
+# Bitonic Array Maximum
+def find_max_in_bitonic_array(arr):
+    def rec(left_index, right_index):
+        middle_index = ((right_index - left_index) // 2) + left_index
+        if left_index == right_index or (arr[middle_index] > arr[middle_index - 1] and arr[middle_index] > arr[middle_index + 1]):
+            return arr[middle_index]
+        elif arr[middle_index] > arr[middle_index - 1]:
+            return rec(middle_index + 1, right_index)
+        else:
+            return rec(left_index, middle_index)
+
+    return rec(0, len(arr) - 1)

@@ -210,3 +210,16 @@ class TestArraySolution(unittest.TestCase):
         input = [1, 5, 3, 3]
         output = [[], [1], [3], [1, 3], [3, 3], [1, 3, 3], [5], [1, 5], [3, 5], [1, 3, 5], [3, 3, 5], [1, 3, 3, 5]]
         self.assertEqual(output, find_subsets(input))
+
+    def test_find_max_in_bitonic_array(self):
+        input = [1, 3, 8, 12, 4, 2]
+        self.assertEqual(12, find_max_in_bitonic_array(input))
+
+        input = [3, 8, 3, 1]
+        self.assertEqual(8, find_max_in_bitonic_array(input))
+
+        input = [1, 3, 8, 12]
+        self.assertEqual(12, find_max_in_bitonic_array(input))
+
+        input = [10, 9, 8]
+        self.assertEqual(10, find_max_in_bitonic_array(input))
