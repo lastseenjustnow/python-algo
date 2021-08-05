@@ -26,7 +26,7 @@ class TestArraySolution(unittest.TestCase):
             lst_len = random.randint(1, 100)
             rotate_arbitrary_number = random.randint(1, lst_len)
             lst = sorted(list(set([random.randint(-100, 100) for _ in range(lst_len)])))
-            lst = lst[rotate_arbitrary_number+1:] + lst[:rotate_arbitrary_number]
+            lst = lst[rotate_arbitrary_number + 1:] + lst[:rotate_arbitrary_number]
             for index, elem in enumerate(lst, 0):
                 self.assertEqual(index, binary_search_rotated(lst, elem))
 
@@ -39,7 +39,7 @@ class TestArraySolution(unittest.TestCase):
             lst_len = random.randint(1, 100)
             rotate_arbitrary_number = random.randint(1, lst_len)
             lst = sorted(list(set([random.randint(-100, 100) for _ in range(lst_len)])))
-            lst = lst[rotate_arbitrary_number+1:] + lst[:rotate_arbitrary_number]
+            lst = lst[rotate_arbitrary_number + 1:] + lst[:rotate_arbitrary_number]
             for index, elem in enumerate(lst, 0):
                 self.assertEqual(index, binary_search_rotated_iter(lst, elem))
 
@@ -201,3 +201,12 @@ class TestArraySolution(unittest.TestCase):
         arr = [-3, -1, 0, 1, 2]
         exp = [0, 1, 1, 4, 9]
         self.assertEqual(exp, make_squares(arr))
+
+    def test_find_subsets(self):
+        input = [1, 3, 3]
+        output = [[], [1], [3], [1, 3], [3, 3], [1, 3, 3]]
+        self.assertEqual(output, find_subsets(input))
+
+        input = [1, 5, 3, 3]
+        output = [[], [1], [3], [1, 3], [3, 3], [1, 3, 3], [5], [1, 5], [3, 5], [1, 3, 5], [3, 3, 5], [1, 3, 3, 5]]
+        self.assertEqual(output, find_subsets(input))

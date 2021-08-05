@@ -278,3 +278,23 @@ def make_squares(arr):
             right_index -= 1
 
     return list(squares)
+
+
+# Subsets With Duplicates
+def find_subsets(nums):
+    subsets = []
+    sorted_nums = sorted(nums)
+    subsets.append([])
+    previous_subset_count = 0
+    for elem_index in range(len(nums)):
+        this_subset_count = 0
+        if elem_index == 0 or sorted_nums[elem_index] != sorted_nums[elem_index - 1]:
+            subsets_index = 0
+        else:
+            subsets_index = len(subsets) - previous_subset_count
+        for subset_i in range(subsets_index, len(subsets)):
+            this_subset_count += 1
+            subsets.append(subsets[subset_i] + [sorted_nums[elem_index]])
+        previous_subset_count = this_subset_count
+
+    return subsets
