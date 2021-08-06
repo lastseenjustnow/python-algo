@@ -233,3 +233,12 @@ class TestArraySolution(unittest.TestCase):
         self.assertTrue(function_output.__contains__([3, 5, 1]))
         self.assertTrue(function_output.__contains__([5, 3, 1]))
         self.assertTrue(function_output.__contains__([5, 1, 3]))
+
+    def test_search_triplets(self):
+        input = [-3, 0, 1, 2, -1, 1, -2]
+        output = [[-3, 1, 2], [-2, 0, 2], [-2, 1, 1], [-1, 0, 1]]
+        self.assertEqual(output, search_triplets(input))
+
+        input = [-5, 2, -1, -2, 3]
+        output = [[-5, 2, 3], [-2, -1, 3]]
+        self.assertEqual(output, search_triplets(input))

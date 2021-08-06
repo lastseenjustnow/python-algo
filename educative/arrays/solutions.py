@@ -325,3 +325,30 @@ def find_permutations(nums):
         result = interresult
 
     return result
+
+
+# Triplet Sum to Zero
+def search_triplets(arr: List):
+    triplets = []
+    arr.sort()
+    left_pointer, right_pointer, triplet_sum = 0, len(arr) - 1, 0
+    while arr[left_pointer] <= 0:
+        triplet_sum += arr[left_pointer]
+        right_pointer = len(arr) - 1
+        while arr[right_pointer] >= 0:
+            if (right_pointer != len(arr) - 1) and arr[right_pointer] == arr[right_pointer + 1]:
+                right_pointer -= 1
+                continue
+            triplet_sum += arr[right_pointer]
+            middle_pointer = right_pointer - 1
+            while middle_pointer != left_pointer and arr[middle_pointer] >= triplet_sum * -1:
+                if arr[middle_pointer] == triplet_sum * -1:
+                    triplets.append([arr[left_pointer], arr[middle_pointer], arr[right_pointer]])
+                    break
+                middle_pointer -= 1
+            triplet_sum -= arr[right_pointer]
+            right_pointer -= 1
+        triplet_sum -= arr[left_pointer]
+        left_pointer += 1
+
+    return triplets
