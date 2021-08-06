@@ -242,3 +242,13 @@ class TestArraySolution(unittest.TestCase):
         input = [-5, 2, -1, -2, 3]
         output = [[-5, 2, 3], [-2, -1, 3]]
         self.assertEqual(output, search_triplets(input))
+
+    def test_triplet_sum_close_to_target(self):
+        input = [-2, 0, 1, 2]
+        self.assertEqual(1, triplet_sum_close_to_target(input, 2))
+
+        input = [-3, -1, 1, 2]
+        self.assertEqual(0, triplet_sum_close_to_target(input, 1))
+
+        input = [1, 0, 1, 1]
+        self.assertEqual(3, triplet_sum_close_to_target(input, 100))
