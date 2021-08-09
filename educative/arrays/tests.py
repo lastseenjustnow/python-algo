@@ -288,3 +288,16 @@ class TestArraySolution(unittest.TestCase):
 
         input = [1, 3, 8, 10, 15]
         self.assertEqual([-1, -1], find_range(input, 12))
+
+    def test_search_min_diff_element(self):
+        input = [4, 6, 10]
+        self.assertEqual(6, search_min_diff_element(input, 7))
+
+        input = [4, 6, 10]
+        self.assertEqual(4, search_min_diff_element(input, 4))
+
+        input = [1, 3, 8, 10, 15]
+        self.assertEqual(10, search_min_diff_element(input, 12))
+
+        input = [4, 6, 10]
+        self.assertEqual(10, search_min_diff_element(input, 17))

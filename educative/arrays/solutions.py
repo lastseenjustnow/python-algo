@@ -439,3 +439,23 @@ def find_range(arr, key):
             right = middle
 
     return result
+
+
+# Minimum Difference Element
+def search_min_diff_element(arr, key):
+    left, middle, right,  = 0, (len(arr) - 1) // 2, len(arr) - 1
+    while left < right and arr[middle] != key:
+        middle = (right - left) // 2 + left
+        if arr[middle] <= key:
+            left = middle + 1
+        else:
+            right = middle
+
+    if arr[middle] == key:
+        oi = middle
+    elif abs(arr[right] - key) > abs(arr[middle] - key):
+        oi = middle
+    else:
+        oi = right
+
+    return arr[oi]
