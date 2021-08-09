@@ -391,3 +391,18 @@ def triplet_with_smaller_sum(arr, target):
                 count += 1 if arr[first_index] + arr[second_index] + arr[third_index] < target else 0
 
     return count
+
+
+# Subarrays with Product Less than a Target
+def find_subarrays(arr, target):
+    result = []
+    for right in range(len(arr)):
+        left, prod = right, 1
+        while left >= 0:
+            prod *= arr[left]
+            if prod >= target:
+                break
+            result.append(arr[left:right+1])
+            left -= 1
+
+    return result

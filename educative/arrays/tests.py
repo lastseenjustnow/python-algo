@@ -259,3 +259,12 @@ class TestArraySolution(unittest.TestCase):
 
         input = [-1, 4, 2, 1, 3]
         self.assertEqual(4, triplet_with_smaller_sum(input, 5))
+
+    def test_find_subarrays(self):
+        input = [2, 5, 3, 10]
+        output = [[2], [5], [2, 5], [3], [5, 3], [10]]
+        self.assertEqual(output, find_subarrays(input, 30))
+
+        input = [8, 2, 6, 5]
+        output = [[8], [2], [8, 2], [6], [2, 6], [5], [6, 5]]
+        self.assertEqual(output, find_subarrays(input, 50))
