@@ -406,3 +406,12 @@ def find_subarrays(arr, target):
             left -= 1
 
     return result
+
+
+# Conflicting Appointments
+def can_attend_all_appointments(intervals):
+    intervals.sort()
+    for i in range(len(intervals) - 1):
+        if intervals[i][1] > intervals[i+1][0]:
+            return False
+    return True

@@ -268,3 +268,13 @@ class TestArraySolution(unittest.TestCase):
         input = [8, 2, 6, 5]
         output = [[8], [2], [8, 2], [6], [2, 6], [5], [6, 5]]
         self.assertEqual(output, find_subarrays(input, 50))
+
+    def test_can_attend_all_appointments(self):
+        input = [[1, 4], [2, 5], [7, 9]]
+        self.assertFalse(can_attend_all_appointments(input))
+
+        input = [[6, 7], [2, 4], [8, 12]]
+        self.assertTrue(can_attend_all_appointments(input))
+
+        input = [[4, 5], [2, 3], [3, 6]]
+        self.assertFalse(can_attend_all_appointments(input))
