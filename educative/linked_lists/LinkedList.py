@@ -1,3 +1,5 @@
+import heapq
+
 from educative.linked_lists.Node import Node, ArbitraryPointerNode
 from typing import List
 
@@ -379,7 +381,7 @@ def add_integers(integer1: LinkedList, integer2: LinkedList) -> LinkedList:
 def deep_copy_arbitrary_pointer(head: ArbitraryPointerNode):
 
     ht = {}
-    new_head, new_current = None, None
+    new_head = new_current = None
 
     while head:
         if new_head is None:
@@ -405,7 +407,7 @@ def deep_copy_arbitrary_pointer(head: ArbitraryPointerNode):
 
 # Merge K Sorted Lists (medium)
 # Solution with list, no heap
-def merge_lists(lists: List[Node]):
+def merge_lists_no_heap(lists: List[Node]):
     resultHead = None
     heads = [x for x in lists]
     while heads:
@@ -422,3 +424,30 @@ def merge_lists(lists: List[Node]):
         heads = [x for x in heads if x]
 
     return resultHead
+
+
+# Solution with heap
+def merge_lists(lists: List[Node]):
+    h = []
+    [heapq.heappush(h, head.data) for head in lists]
+    new_head = current = None
+    heads = [x for x in lists]
+
+    while h:
+        next_min = heapq.heappop(h)
+        if not new_head:
+            new_head = Node(next_min)
+            current = new_head
+        else:
+            current.next_element = Node(next_min)
+            current = current.next_element
+        for i in range(len(heads)):
+            if heads[i].data == next_min:
+                heads[i] = heads[i].next_element
+                if heads[i]:
+                    heapq.heappush(h, heads[i].data)
+                else:
+                    del heads[i]
+                break
+
+    return new_head
