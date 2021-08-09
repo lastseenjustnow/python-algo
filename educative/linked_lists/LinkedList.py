@@ -451,3 +451,24 @@ def merge_lists(lists: List[Node]):
                 break
 
     return new_head
+
+
+def find_Kth_smallest(lists: List[Node], k):
+    h = []
+    [heapq.heappush(h, head.data) for head in lists]
+    number, count, current = -1, 0, None
+    heads = [x for x in lists]
+
+    while count != k:
+        number = heapq.heappop(h)
+        count += 1
+        for i in range(len(heads)):
+            if heads[i].data == number:
+                heads[i] = heads[i].next_element
+                if heads[i]:
+                    heapq.heappush(h, heads[i].data)
+                else:
+                    del heads[i]
+                break
+
+    return number

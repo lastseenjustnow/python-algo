@@ -221,3 +221,14 @@ class TestLinkedListSolution(unittest.TestCase):
         function_output = merge_lists(heads).to_list()
         expected_result = [1, 2, 3, 3, 4, 6, 6, 7, 8]
         self.assertEqual(expected_result, function_output)
+
+    def test_find_Kth_smallest(self):
+        lists = [[2, 6, 8], [3, 6, 7], [1, 3, 4]]
+        linked_lists = [LinkedList().from_list(x) for x in lists]
+        heads = [lst.get_head() for lst in linked_lists]
+        self.assertEqual(4, find_Kth_smallest(heads, 5))
+
+        lists = [[5, 8, 9], [1, 7]]
+        linked_lists = [LinkedList().from_list(x) for x in lists]
+        heads = [lst.get_head() for lst in linked_lists]
+        self.assertEqual(7, find_Kth_smallest(heads, 3))
