@@ -60,6 +60,24 @@ class TestStackSolution(unittest.TestCase):
         for i, el in enumerate(arr[:-1], 0):
             self.assertEqual(arr[i+1], inorder_successor_bst(root, el))
 
+    # In-order Successor Binary Search Tree With Parent Pointers
+    def test_find_successor_with_parent_pointers(self):
+        tree = BinaryTreeNode(100)
+        tree.left = BinaryTreeNode(50)
+        tree.left.next = tree
+        tree.left.left = BinaryTreeNode(25)
+        tree.left.right = BinaryTreeNode(75)
+        tree.left.left.next = tree.left.right.next = tree.left
+        tree.right = BinaryTreeNode(200)
+        tree.right.next = tree
+        tree.right.left = BinaryTreeNode(125)
+        tree.right.right = BinaryTreeNode(350)
+        tree.right.left.next = tree.right.right.next = tree.right
+
+        self.assertEqual(100, find_successor_with_parent_pointers(tree, 75).data)
+        self.assertEqual(125, find_successor_with_parent_pointers(tree, 100).data)
+        self.assertEqual(350, find_successor_with_parent_pointers(tree, 200).data)
+
     def test_level_order_traversal(self):
         root = BinaryTreeNode(100)
         root.left = BinaryTreeNode(50)

@@ -41,6 +41,26 @@ def inorder_successor_bst(root: BinaryTreeNode, d: int) -> Optional[int]:
     return potential_next
 
 
+# In-order Successor Binary Search Tree With Parent Pointers
+def find_successor_with_parent_pointers(root: BinaryTreeNode, d: int):
+
+    while root.data != d:
+        if d < root.data:
+            root = root.left
+        else:
+            root = root.right
+
+    if not root.right:
+        while root.next and root.data <= d:
+            root = root.next
+        scr = root
+    else:
+        scr = root.right
+        while scr.left:
+            scr = scr.left
+
+    return scr
+
 # Level Order Traversal of Binary Tree
 def level_order_traversal(root: BinaryTreeNode) -> str:
     result = ""
