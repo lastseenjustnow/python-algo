@@ -278,3 +278,13 @@ class TestArraySolution(unittest.TestCase):
 
         input = [[4, 5], [2, 3], [3, 6]]
         self.assertFalse(can_attend_all_appointments(input))
+
+    def test_find_range(self):
+        input = [4, 6, 6, 6, 9]
+        self.assertEqual([1, 3], find_range(input, 6))
+
+        input = [1, 3, 8, 10, 15]
+        self.assertEqual([3, 3], find_range(input, 10))
+
+        input = [1, 3, 8, 10, 15]
+        self.assertEqual([-1, -1], find_range(input, 12))

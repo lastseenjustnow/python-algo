@@ -415,3 +415,27 @@ def can_attend_all_appointments(intervals):
         if intervals[i][1] > intervals[i+1][0]:
             return False
     return True
+
+
+# Number Range
+def find_range(arr, key):
+    result = [-1, -1]
+    left, right = 0, len(arr) - 1
+
+    while left < right:
+        middle = (right - left) // 2 + left
+        if arr[middle] == key:
+            left_side, right_side = middle, middle
+            while arr[left_side] == key:
+                result[0] = left_side
+                left_side -= 1
+            while arr[right_side] == key:
+                result[1] = right_side
+                right_side += 1
+            break
+        elif arr[middle] < key:
+            left = middle + 1
+        else:
+            right = middle
+
+    return result
