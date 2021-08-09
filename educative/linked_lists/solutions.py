@@ -170,6 +170,38 @@ class TestLinkedListSolution(unittest.TestCase):
             rand_k = random.randint(0, 1000000)
             self.assertTrue(add_integers_test(length, rand_k))
 
+    def test_deep_copy_arbitrary_pointer(self):
+        old_head = ArbitraryPointerNode(7)
+        old_head.next_element = ArbitraryPointerNode(14)
+        old_head.next_element.next_element = ArbitraryPointerNode(21)
+        old_head.arbitrary = old_head.next_element.next_element
+        old_head.next_element.next_element.arbitrary = old_head
+
+        new_head = deep_copy_arbitrary_pointer(old_head)
+        self.assertEqual(7, new_head.data)
+        self.assertEqual(14, new_head.next_element.data)
+        self.assertEqual(21, new_head.arbitrary.data)
+        self.assertIsNone(new_head.next_element.arbitrary)
+        self.assertEqual(21, new_head.next_element.next_element.data)
+        self.assertEqual(7, new_head.next_element.next_element.arbitrary.data)
+
+        old_head = ArbitraryPointerNode(49)
+        old_head.next_element = ArbitraryPointerNode(87)
+        old_head.next_element.next_element = ArbitraryPointerNode(63)
+        old_head.next_element.next_element.next_element = ArbitraryPointerNode(10)
+        old_head.next_element.next_element.next_element.next_element = ArbitraryPointerNode(26)
+        old_head.arbitrary = old_head.next_element.next_element.next_element.next_element
+        old_head.next_element.arbitrary = old_head.next_element
+        old_head.next_element.next_element.arbitrary = old_head.next_element
+        old_head.next_element.next_element.next_element.arbitrary = old_head.next_element.next_element.next_element
+        old_head.next_element.next_element.next_element.next_element.arbitrary = old_head.next_element
+
+        new_head = deep_copy_arbitrary_pointer(old_head)
+        self.assertEqual(49, new_head.data)
+        self.assertEqual(26, new_head.arbitrary.data)
+        self.assertEqual(87, new_head.next_element.data)
+        self.assertEqual(87, new_head.next_element.arbitrary.data)
+
     def test_merge_lists(self):
         lists = [LinkedList().from_list(x) for x in [[2, 6, 8], [3, 6, 7], [1, 3, 4]]]
         heads = [l.get_head() for l in lists]

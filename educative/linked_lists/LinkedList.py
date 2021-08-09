@@ -1,4 +1,4 @@
-from educative.linked_lists.Node import Node
+from educative.linked_lists.Node import Node, ArbitraryPointerNode
 from typing import List
 
 class LinkedList:
@@ -373,6 +373,34 @@ def add_integers(integer1: LinkedList, integer2: LinkedList) -> LinkedList:
         head2 = head2.next_element if head2 else None
 
     return head1
+
+
+# Copy Linked List with Arbitrary Pointer
+def deep_copy_arbitrary_pointer(head: ArbitraryPointerNode):
+
+    ht = {}
+    new_head, new_current = None, None
+
+    while head:
+        if new_head is None:
+            new_head = ArbitraryPointerNode(head.data)
+            new_head.arbitrary = head.arbitrary
+            new_current = new_head
+            ht[head] = new_current
+        else:
+            new_current.next_element = ArbitraryPointerNode(head.data)
+            new_current = new_current.next_element
+            new_current.arbitrary = head.arbitrary
+            ht[head] = new_current
+        head = head.next_element
+
+    new_current = new_head
+
+    while new_current:
+        new_current.arbitrary = ht.get(new_current.arbitrary)
+        new_current = new_current.next_element
+
+    return new_head
 
 
 # Merge K Sorted Lists (medium)

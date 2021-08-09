@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -17,3 +20,10 @@ class Node:
             self = self.next_element
 
         return lst
+
+
+class ArbitraryPointerNode:
+    def __init__(self, data):
+        self.data = data
+        self.next_element: Optional[ArbitraryPointerNode] = None
+        self.arbitrary: Optional[ArbitraryPointerNode] = None
