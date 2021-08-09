@@ -252,3 +252,10 @@ class TestArraySolution(unittest.TestCase):
 
         input = [1, 0, 1, 1]
         self.assertEqual(3, triplet_sum_close_to_target(input, 100))
+
+    def test_triplet_with_smaller_sum(self):
+        input = [-1, 0, 2, 3]
+        self.assertEqual(2, triplet_with_smaller_sum(input, 3))
+
+        input = [-1, 4, 2, 1, 3]
+        self.assertEqual(4, triplet_with_smaller_sum(input, 5))

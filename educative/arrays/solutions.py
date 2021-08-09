@@ -378,3 +378,16 @@ def triplet_sum_close_to_target(arr: List, target_sum):
                 right -= 1  # we need a triplet with a smaller sum
 
     return target_sum - smallest_difference
+
+
+# Triplet with Smaller Sum
+def triplet_with_smaller_sum(arr, target):
+    count = 0
+    for first_index in range(len(arr) - 2):
+        for second_index in range(first_index + 1, len(arr) - 1):
+            if arr[first_index] + arr[second_index] >= target:
+                continue
+            for third_index in range(second_index + 1, len(arr)):
+                count += 1 if arr[first_index] + arr[second_index] + arr[third_index] < target else 0
+
+    return count
