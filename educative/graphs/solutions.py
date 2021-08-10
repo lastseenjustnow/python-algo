@@ -1,4 +1,4 @@
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Set
 
 from Graph import Graph, UndirectedGraph
 from GraphNode import GraphNode
@@ -328,3 +328,54 @@ def find_order(tasks, prerequisites):
                 heads.add(dest)
 
     return sortedOrder if sum(counts.values()) == 0 else []
+
+
+# All Tasks Scheduling Order
+def print_orders(tasks, prerequisites):
+    # Initial construction of the graph
+    edges, counts, heads = {}, {}, set()
+    for v in range(tasks):
+        edges[v] = set()
+        counts[v] = 0
+        heads.add(v)
+
+    # Filling the graph
+    for start, finish in prerequisites:
+        edges[start].add(finish)
+        counts[finish] += 1
+        heads.discard(finish)
+
+    result = []
+
+    def rec(seq: List[int], this_edges: Dict, this_counts: Dict, this_heads: Set):
+
+        if len(seq) == tasks and sum(this_counts.values()) == 0:
+            print(seq)
+            result.append(seq)
+
+        for head in this_heads:
+            new_seq = seq + [head]
+            new_edges = this_edges.copy()
+            new_counts = this_counts.copy()
+            new_heads = this_heads.copy()
+            new_heads.discard(head)
+            dests = this_edges[head].copy()
+
+            # First stage of backtracking
+            for dest in dests:
+                new_edges[head].discard(dest)
+                new_counts[dest] -= 1
+                if new_counts[dest] == 0:
+                    new_heads.add(dest)
+
+            rec(new_seq, new_edges, new_counts, new_heads)
+
+            # Second stage of backtracking
+            for dest in dests:
+                if new_counts[dest] == 0:
+                    new_heads.discard(dest)
+                new_counts[dest] += 1
+                new_edges[head].add(dest)
+
+    rec([], edges, counts, heads)
+    return result

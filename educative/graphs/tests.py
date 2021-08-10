@@ -213,3 +213,29 @@ class TestGraphSolution(unittest.TestCase):
         self.assertEqual(
             [0, 1, 4, 3, 2, 5],
             find_order(6, [[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]]))
+
+    def test_print_orders(self):
+        example_1 = print_orders(3, [[0, 1], [1, 2]])
+        self.assertTrue([0, 1, 2] in example_1)
+        self.assertEqual(1, len(example_1))
+
+        example_2 = print_orders(4, [[3, 2], [3, 0], [2, 0], [2, 1]])
+        self.assertTrue([3, 2, 0, 1] in example_2)
+        self.assertTrue([3, 2, 1, 0] in example_2)
+        self.assertEqual(2, len(example_2))
+
+        example_3 = print_orders(6, [[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]])
+        self.assertTrue([0, 1, 4, 3, 2, 5] in example_3)
+        self.assertTrue([0, 1, 3, 4, 2, 5] in example_3)
+        self.assertTrue([0, 1, 3, 2, 4, 5] in example_3)
+        self.assertTrue([0, 1, 3, 2, 5, 4] in example_3)
+        self.assertTrue([1, 0, 3, 4, 2, 5] in example_3)
+        self.assertTrue([1, 0, 3, 2, 4, 5] in example_3)
+        self.assertTrue([1, 0, 3, 2, 5, 4] in example_3)
+        self.assertTrue([1, 0, 4, 3, 2, 5] in example_3)
+        self.assertTrue([1, 3, 0, 2, 4, 5] in example_3)
+        self.assertTrue([1, 3, 0, 2, 5, 4] in example_3)
+        self.assertTrue([1, 3, 0, 4, 2, 5] in example_3)
+        self.assertTrue([1, 3, 2, 0, 5, 4] in example_3)
+        self.assertTrue([1, 3, 2, 0, 4, 5] in example_3)
+        self.assertEqual(13, len(example_3))
