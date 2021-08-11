@@ -239,3 +239,13 @@ class TestGraphSolution(unittest.TestCase):
         self.assertTrue([1, 3, 2, 0, 5, 4] in example_3)
         self.assertTrue([1, 3, 2, 0, 4, 5] in example_3)
         self.assertEqual(13, len(example_3))
+
+    def test_alien_dictionary(self):
+        input = ["ba", "bc", "ac", "cab"]
+        self.assertEqual('bac', alien_dictionary(input))
+
+        input = ["cab", "aaa", "aab"]
+        self.assertEqual('cab', alien_dictionary(input))
+
+        input = ["ywx", "wz", "xww", "xz", "zyy", "zwz"]
+        self.assertEqual('ywxz', alien_dictionary(input))

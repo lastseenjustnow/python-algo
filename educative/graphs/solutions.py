@@ -332,7 +332,14 @@ def find_order(tasks, prerequisites):
 
 # All Tasks Scheduling Order
 def print_orders(tasks, prerequisites):
-    # Initial construction of the graph
+
+    """
+    Edges - a dictionary with keys as a list of vertices and values as a sets of destination vertices for key vertices
+    Counts - a dictionary with keys as a list of vertices and counts of incoming edges
+    Heads - a set of vertices with no incoming edges
+    """
+
+    # Initial construction of the graph:
     edges, counts, heads = {}, {}, set()
     for v in range(tasks):
         edges[v] = set()
@@ -379,3 +386,49 @@ def print_orders(tasks, prerequisites):
 
     rec([], edges, counts, heads)
     return result
+
+
+# Alien Dictionary
+def alien_dictionary(words):
+
+    # Initialize & fill the graph
+    edges, counts, heads, non_heads = {}, {}, set(), set()
+    for i in range(len(words) - 1):
+
+        # Find different letters
+        first_word, second_word = words[i], words[i+1]
+        letter_i = 0
+        while letter_i + 1 < min(len(first_word), len(second_word)) \
+                and first_word[letter_i] == second_word[letter_i]:
+            letter_i += 1
+        if letter_i + 1 > min(len(first_word), len(second_word)):
+            continue
+
+        # Add to edges & counts
+        if edges.get(first_word[letter_i]) is None:
+            edges[first_word[letter_i]] = set()
+            counts[first_word[letter_i]] = 0
+            heads.add(first_word[letter_i])
+        if edges.get(second_word[letter_i]) is None:
+            edges[second_word[letter_i]] = set()
+            counts[second_word[letter_i]] = 0
+            heads.add(second_word[letter_i])
+
+        if not edges[first_word[letter_i]].__contains__(second_word[letter_i]):
+            edges[first_word[letter_i]].add(second_word[letter_i])
+            counts[second_word[letter_i]] += 1
+            non_heads.add(second_word[letter_i])
+
+    heads = heads - non_heads
+    alphabet = ""
+
+    while heads:
+        head = heads.pop()
+        alphabet += head
+        while edges[head]:
+            dest = edges[head].pop()
+            counts[dest] -= 1
+            if counts[dest] == 0:
+                heads.add(dest)
+
+    return alphabet if sum(counts.values()) == 0 else ""
