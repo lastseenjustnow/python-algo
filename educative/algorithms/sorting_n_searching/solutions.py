@@ -82,3 +82,35 @@ def find_sum_set(lst, n):
             d.add(elem)
 
     return
+
+
+# Challenge 2: Search in a Rotated List
+def pivoted_binary_search(lst, n, key):
+    """
+    It's implied that a list is sorted and then rotated
+    Time: O(log n)
+    Space: O(1)
+
+    Function to search key in a list
+    :param lst: A list of integers
+    :param n: The size of the list
+    :param key: A key to be searched in the list
+    """
+
+    left, right = 0, n - 1
+    while left < right:
+        middle = (right - left) // 2 + left
+        if lst[middle] == key:
+            return middle
+        elif lst[middle] <= lst[right]:
+            if lst[middle] < key < lst[right]:
+                left = middle + 1
+            else:
+                right = middle
+        else:
+            if lst[left] < key < lst[middle]:
+                right = middle
+            else:
+                left = middle + 1
+
+    return
