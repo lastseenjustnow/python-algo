@@ -1,3 +1,5 @@
+from typing import Dict, Set, List
+
 # Challenge 1: Find Two Numbers that Add up to "n"
 
 def find_sum_brute_force(lst, n):
@@ -114,3 +116,35 @@ def pivoted_binary_search(lst, n, key):
                 left = middle + 1
 
     return
+
+
+# Challenge 3: Group Anagrams
+def anagrams(lst):
+    """
+    Function to find anagram pairs
+
+    Time: O(n) (?)
+    Space: O(n)
+
+    :param lst: A lst of strings
+    :return: Group of anagrams
+    """
+
+    groups = []
+    decomposed_anagrams: Dict[str, Set[str]] = {}
+
+    for anagram in lst:
+        # 26 letters of alphabet + space. Other symbols of english words also should be included
+        alphabet_dict = [0] * 27
+        for letter in anagram:
+            alphabet_dict[min(abs(ord(letter)-97), 26)] += 1
+
+        alphabet_key = ' '.join(map(str, alphabet_dict))
+        if decomposed_anagrams.get(alphabet_key):
+            for word in decomposed_anagrams.get(alphabet_key):
+                groups.append([word, anagram])
+            decomposed_anagrams.get(alphabet_key).add(anagram)
+        else:
+            decomposed_anagrams[alphabet_key] = {anagram}
+
+    return groups

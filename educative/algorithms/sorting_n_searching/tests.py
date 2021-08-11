@@ -17,4 +17,22 @@ class TestArraySolution(unittest.TestCase):
 
     def test_pivoted_binary_search(self):
         lst = [7, 8, 9, 0, 3, 5, 6]
-        print(pivoted_binary_search(lst, 7, 3))
+        self.assertEqual(4, pivoted_binary_search(lst, 7, 3))
+
+    def test_anagrams(self):
+        input = [
+            'tom marvolo riddle ',
+            'abc',
+            'def',
+            'cab',
+            'fed',
+            'brag',
+            'clint eastwood ',
+            'i am lord voldemort',
+            'elvis',
+            'grab',
+            'old west action',
+            'lives'
+        ]
+        expected_result = [['abc', 'cab'], ['def', 'fed'], ['tom marvolo riddle ', 'i am lord voldemort'], ['brag', 'grab'], ['clint eastwood ', 'old west action'], ['elvis', 'lives']]
+        self.assertEqual(expected_result, anagrams(input))
