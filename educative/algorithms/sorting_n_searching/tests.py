@@ -36,3 +36,7 @@ class TestArraySolution(unittest.TestCase):
         ]
         expected_result = [['abc', 'cab'], ['def', 'fed'], ['tom marvolo riddle ', 'i am lord voldemort'], ['brag', 'grab'], ['clint eastwood ', 'old west action'], ['elvis', 'lives']]
         self.assertEqual(expected_result, anagrams(input))
+
+    def test_sort_binary_list(self):
+        lst = [1, 0, 1, 0, 1, 1, 0, 0]
+        self.assertEqual(sorted(lst), sort_binary_list(lst))

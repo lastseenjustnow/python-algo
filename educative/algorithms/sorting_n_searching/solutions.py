@@ -148,3 +148,23 @@ def anagrams(lst):
             decomposed_anagrams[alphabet_key] = {anagram}
 
     return groups
+
+
+# Challenge 4: Arrange a Binary List
+def sort_binary_list(lst):
+
+    """
+    A function to sort binary list
+
+    Time: O(n)
+    Space: O(1)
+
+    :param lst: A list containing binary numbers
+    :return: A sorted binary list
+    """
+
+    binary_dict = {0: 0, 1: 0}
+    for elem in lst:
+        binary_dict[elem] += 1
+
+    return [0] * binary_dict[0] + [1] * binary_dict[1]
