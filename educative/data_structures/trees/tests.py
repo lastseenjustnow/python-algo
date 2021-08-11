@@ -2,7 +2,7 @@ import unittest
 import random
 
 from BinaryTreeNode import create_BST
-from educative.trees.InorderIterator import InorderIterator
+from educative.data_structures.trees.InorderIterator import InorderIterator
 from solutions import *
 
 

@@ -4,7 +4,7 @@ import random
 from Queue import MyQueue
 from NewQueue import NewQueue
 from MinStack import MinStack
-from educative.stacks_n_queues.solutions import *
+from educative.data_structures.stacks_n_queues.solutions import *
 
 
 class TestStackSolution(unittest.TestCase):

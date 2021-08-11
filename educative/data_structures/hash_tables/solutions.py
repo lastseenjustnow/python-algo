@@ -1,6 +1,5 @@
 from HashTable import HashTable
-from educative.linked_lists.LinkedList import LinkedList
-from educative.linked_lists.Node import Node
+from educative.data_structures.linked_lists.LinkedList import LinkedList
 
 
 # Challenge 1. A List as a Subset of Another List

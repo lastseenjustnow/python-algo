@@ -1,6 +1,6 @@
 from typing import List
 
-from educative.linked_lists.LinkedList import LinkedList
+from educative.data_structures.linked_lists.LinkedList import LinkedList
 
 
 class Graph:

@@ -2,7 +2,7 @@ from typing import Callable
 import unittest
 
 from solutions import *
-from educative.graphs.challenges.MinimumSpanningTree import *
+from educative.data_structures.graphs.challenges.MinimumSpanningTree import *
 
 class TestGraphSolution(unittest.TestCase):
     # Challenge 1: Implement Breadth First Search

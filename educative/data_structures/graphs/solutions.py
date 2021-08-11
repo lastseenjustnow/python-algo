@@ -2,9 +2,9 @@ from typing import List, Optional, Dict, Set
 
 from Graph import Graph, UndirectedGraph
 from GraphNode import GraphNode
-from educative.linked_lists.LinkedList import LinkedList, Node
-from educative.stacks_n_queues.Queue import MyQueue
-from educative.stacks_n_queues.Stack import MyStack
+from educative.data_structures.linked_lists.LinkedList import LinkedList, Node
+from educative.data_structures.stacks_n_queues.Queue import MyQueue
+from educative.data_structures.stacks_n_queues.Stack import MyStack
 
 
 # Challenge 1: Implement Breadth First Search

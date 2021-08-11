@@ -1,6 +1,6 @@
 import heapq
 
-from educative.linked_lists.Node import Node, ArbitraryPointerNode
+from educative.data_structures.linked_lists.Node import Node, ArbitraryPointerNode
 from typing import List
 
 class LinkedList:

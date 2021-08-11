@@ -1,4 +1,4 @@
-from educative.stacks_n_queues.Stack import MyStack
+from educative.data_structures.stacks_n_queues.Stack import MyStack
 
 
 class InorderIterator:
