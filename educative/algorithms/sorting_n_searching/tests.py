@@ -92,3 +92,17 @@ class TestArraySolution(unittest.TestCase):
         self.assertFalse(find_in(list, 0))
         self.assertTrue(find_in(list, 32))
         self.assertFalse(find_in(list, 22))
+
+    # Challenge 9: Dutch National Flag Problem
+    def test_dutch_national_flag(self):
+        lst = [2, 0, 0, 1, 2, 1, 0]
+        result = [0, 0, 0, 1, 1, 2, 2]
+        self.assertEqual(result, dutch_national_flag(lst))
+
+        lst = [2, 0, 0, 1, 2, 1]
+        result = [0, 0, 1, 1, 2, 2]
+        self.assertEqual(result, dutch_national_flag(lst))
+
+        lst = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 1]
+        result = [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2]
+        self.assertEqual(result, dutch_national_flag(lst))

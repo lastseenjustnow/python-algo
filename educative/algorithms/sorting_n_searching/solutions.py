@@ -2,6 +2,7 @@ from typing import Dict, Set
 
 import heapq
 
+
 # Challenge 1: Find Two Numbers that Add up to "n"
 def find_sum_brute_force(lst, n):
     """
@@ -265,3 +266,33 @@ def find_in(lst, number):
             left = mid + 1
 
     return False
+
+
+# Challenge 9: Dutch National Flag Problem
+def dutch_national_flag(lst):
+    """
+
+    Time: O(n)
+    Space: O(1)
+
+    A function to solve Dutch National Flag Problem
+    :param lst: A list of integers
+    :return: A list of solved Dutch National Flag Problem
+    """
+
+    i, mid, j = 0, 0, len(lst) - 1
+
+    while lst[j] == 2:
+        j -= 1
+
+    while mid <= j:
+        if lst[mid] == 2:
+            lst[mid], lst[j] = lst[j], lst[mid]
+            while lst[j] == 2:
+                j -= 1
+        if lst[mid] == 0:
+            lst[mid], lst[i] = lst[i], lst[mid]
+            i += 1
+        mid += 1
+
+    return lst
