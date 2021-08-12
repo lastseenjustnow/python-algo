@@ -1,7 +1,8 @@
-from typing import Dict, Set, List
+from typing import Dict, Set
+
+import heapq
 
 # Challenge 1: Find Two Numbers that Add up to "n"
-
 def find_sum_brute_force(lst, n):
     """
     Function to find two number that add up to n
@@ -168,3 +169,28 @@ def sort_binary_list(lst):
         binary_dict[elem] += 1
 
     return [0] * binary_dict[0] + [1] * binary_dict[1]
+
+
+# Challenge 5: Find the Maximum Product of Two Integers in a List
+def find_max_prod(lst):
+    """
+
+    Time: O(n)
+    Space: O(1)
+
+    Finds the pair having maximum product in a given list
+    :param lst: A list of integers
+    :return: A pair of integer
+    """
+    min_heap, max_heap = [], []
+    for elem in lst[:2]:
+        heapq.heappush(min_heap, elem)
+        heapq.heappush(max_heap, elem * -1)
+
+    for elem in lst[2:]:
+        if elem > heapq.nsmallest(1, min_heap)[0]:
+            heapq.heappushpop(min_heap, elem)
+        if elem < abs(heapq.nsmallest(1, max_heap)[0]):
+            heapq.heappushpop(max_heap, elem * -1)
+
+    return min_heap if min_heap[0] * min_heap[1] > max_heap[0] * max_heap[1] else list(map(lambda x: x * -1, max_heap))
