@@ -194,3 +194,29 @@ def find_max_prod(lst):
             heapq.heappushpop(max_heap, elem * -1)
 
     return min_heap if min_heap[0] * min_heap[1] > max_heap[0] * max_heap[1] else list(map(lambda x: x * -1, max_heap))
+
+
+# Challenge 6: Find Duplicates in a List with No Repetition
+def find_duplicates(lst):
+    """
+    Function to find duplicates in a given lst
+
+    Time: O(n)
+    Space: O(n)
+
+    :param lst: A list of integers
+    :return: A list of duplicate integers with no repetition
+    """
+
+    result = []  # A list to store duplicates
+    dup = dict()
+
+    for elem in lst:
+        if elem in dup and dup[elem] == 0:
+            result.append(elem)
+        if dup.get(elem) is not None:
+            dup[elem] += 1
+        else:
+            dup[elem] = 0
+
+    return result

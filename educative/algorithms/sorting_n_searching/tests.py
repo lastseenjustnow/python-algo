@@ -57,3 +57,14 @@ class TestArraySolution(unittest.TestCase):
 
         lst = [1, -3, -5, 2, 6]
         self.assertEqual([-3, -5], find_max_prod(lst))
+
+    # Challenge 6: Find Duplicates in a List with No Repetition
+    def test_find_duplicates(self):
+        lst = [1, 3, 1, 3, 5, 1, 4, 7, 7]
+        self.assertEqual([1, 3, 7], find_duplicates(lst))
+
+        lst = [1, 1, 2, 2, 5, 1, 5, 6]
+        self.assertEqual([1, 2, 5], find_duplicates(lst))
+
+        lst = [0, 1, 2, 3, 4, 5, 6]
+        self.assertEqual([], find_duplicates(lst))
