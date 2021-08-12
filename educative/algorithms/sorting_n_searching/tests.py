@@ -68,3 +68,27 @@ class TestArraySolution(unittest.TestCase):
 
         lst = [0, 1, 2, 3, 4, 5, 6]
         self.assertEqual([], find_duplicates(lst))
+
+    # Challenge 7: Search in a 2D List
+    def test_find_in(self):
+        list = [[10, 11, 12, 13],
+                [14, 15, 16, 17],
+                [27, 29, 30, 31],
+                [32, 33, 39, 50]]
+
+        self.assertTrue(find_in(list, 30))
+        self.assertFalse(find_in(list, 34))
+
+        list = [[10, 11, 12, 13],
+                [14, 15, 16, 17],
+                [27, 29, 30, 31],
+                [32, 33, 39, 80]]
+
+        self.assertTrue(find_in(list, 10))
+        self.assertFalse(find_in(list, 35))
+        self.assertFalse(find_in(list, 48))
+        self.assertTrue(find_in(list, 80))
+        self.assertTrue(find_in(list, 11))
+        self.assertFalse(find_in(list, 0))
+        self.assertTrue(find_in(list, 32))
+        self.assertFalse(find_in(list, 22))

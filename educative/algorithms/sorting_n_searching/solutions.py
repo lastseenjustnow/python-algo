@@ -220,3 +220,48 @@ def find_duplicates(lst):
             dup[elem] = 0
 
     return result
+
+
+# Challenge 7: Search in a 2D List
+def find_in(lst, number):
+    """
+    A function to find a number in a 2D list
+
+    Time: O(log ^ 2 n)
+    Space: O(1)
+
+    :param lst: A 2D list of integers
+    :param number: A number to be searched in the 2D list
+    :return: True if the number is found, otherwise False
+    """
+
+    left, right = 0, len(lst) - 1
+    sublist = None
+
+    while left <= right:
+        mid = (right - left) // 2 + left
+        if lst[mid][0] <= number <= lst[mid][len(lst[mid]) - 1]:
+            sublist = lst[mid]
+            break
+
+        if number < lst[mid][0]:
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    if not sublist:
+        return False
+
+    left, right = 0, len(sublist) - 1
+
+    while left <= right:
+        mid = (right - left) // 2 + left
+        if sublist[mid] == number:
+            return True
+
+        if sublist[mid] > number:
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    return False
