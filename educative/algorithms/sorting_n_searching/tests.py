@@ -116,3 +116,10 @@ class TestArraySolution(unittest.TestCase):
         reader = ArrayReader([1, 3, 8, 10, 15])
         self.assertEqual(4, search_in_infinite_array(reader, 15))
         self.assertEqual(-1, search_in_infinite_array(reader, 200))
+
+    # Next Letter
+    def test_search_next_letter(self):
+        self.assertEqual('h', search_next_letter(['a', 'c', 'f', 'h'], 'f'))
+        self.assertEqual('c', search_next_letter(['a', 'c', 'f', 'h'], 'b'))
+        self.assertEqual('a', search_next_letter(['a', 'c', 'f', 'h'], 'm'))
+        self.assertEqual('a', search_next_letter(['a', 'c', 'f', 'h'], 'h'))

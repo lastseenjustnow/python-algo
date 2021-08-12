@@ -323,3 +323,32 @@ def search_in_infinite_array(reader: ArrayReader, key):
             left = mid + 1
 
     return -1
+
+
+# Next Letter
+def search_next_letter(letters, key):
+
+    """
+    Time: O(log n)
+    Space: O(1)
+
+    :param letters: Letters in a circular list
+    :param key: A searched key
+    :return: The letter which is next to the searched key in the circular list
+    """
+    left, right = 0, len(letters) - 1
+    while abs(left - right) > 1:
+        mid = (right - left) // 2 + left
+        if ord(letters[mid]) == ord(key):
+            return letters[mid + 1]
+        elif ord(letters[mid]) > ord(key):
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    if ord(letters[left]) <= ord(key) < ord(letters[right]):
+        result_index = right
+    else:
+        result_index = right + 1 - (right + 1) // len(letters) * len(letters)
+
+    return letters[result_index]
