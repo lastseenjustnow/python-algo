@@ -106,3 +106,13 @@ class TestArraySolution(unittest.TestCase):
         lst = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 1]
         result = [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2]
         self.assertEqual(result, dutch_national_flag(lst))
+
+    # Search in a Sorted Infinite Array
+    def test_search_in_infinite_array(self):
+        reader = ArrayReader([4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30])
+        self.assertEqual(6, search_in_infinite_array(reader, 16))
+        self.assertEqual(-1, search_in_infinite_array(reader, 11))
+
+        reader = ArrayReader([1, 3, 8, 10, 15])
+        self.assertEqual(4, search_in_infinite_array(reader, 15))
+        self.assertEqual(-1, search_in_infinite_array(reader, 200))

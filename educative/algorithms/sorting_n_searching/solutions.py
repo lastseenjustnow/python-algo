@@ -1,7 +1,7 @@
 from typing import Dict, Set
 
 import heapq
-
+from ArrayReader import ArrayReader
 
 # Challenge 1: Find Two Numbers that Add up to "n"
 def find_sum_brute_force(lst, n):
@@ -296,3 +296,30 @@ def dutch_national_flag(lst):
         mid += 1
 
     return lst
+
+
+# Search in a Sorted Infinite Array
+def search_in_infinite_array(reader: ArrayReader, key):
+
+    """
+    Time: O(log n)
+    Space: O(1)
+
+    :param reader: Infinite array
+    :param key: Searched number
+    :return:
+    """
+    left, right = 1, 2
+    while not reader.get(left - 1) < key < reader.get(right - 1):
+        left, right = left * 2, right * 2
+
+    while left < right:
+        mid = (right - left) // 2 + left
+        if reader.get(mid) == key:
+            return mid
+        elif reader.get(mid) > key:
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    return -1
