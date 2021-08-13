@@ -100,3 +100,13 @@ def find_all_paths(graph, source, destination):
 
     rec(source, [], [0] * graph.V)
     return paths
+
+
+# Challenge 6: Check if a Graph is Strongly Connected
+def is_strongly_connected(graph):
+    """
+    Finds if the graph is strongly connected or not
+    :param graph: The graph
+    :return: returns True if the graph is strongly connected, otherwise False
+    """
+    pass

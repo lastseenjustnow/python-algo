@@ -24,8 +24,21 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(1, new_g.graph[4].vertex)
 
     def test_find_all_paths(self):
-        g = Graph(5)
+        g = Graph(6)
         edges = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [3, 5], [4, 5]]
         g.create_graph(edges)
         expected_result = [[0, 2, 5], [0, 1, 4, 5], [0, 1, 3, 5]]
         self.assertEqual(expected_result, find_all_paths(g, 0, 5))
+
+    def test_is_strongly_connected(self):
+        g = Graph(5)
+        edges = [[0, 1], [1, 2], [2, 3], [2, 4], [3, 0], [4, 2]]
+        g.create_graph(edges)
+        self.assertTrue(is_strongly_connected(g))
+
+        g = Graph(4)
+        edges = [[0, 1], [1, 2], [2, 3]]
+        g.create_graph(edges)
+        self.assertFalse(is_strongly_connected(g))
+        g.add_edge(3, 2)
+        self.assertFalse(is_strongly_connected(g))
