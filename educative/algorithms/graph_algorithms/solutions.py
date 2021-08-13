@@ -1,3 +1,4 @@
+import heapq
 from typing import Optional
 
 from collections import deque
@@ -35,3 +36,38 @@ def number_of_nodes(graph: Graph, level):
             current_node = current_node.next
 
     return saved_count
+
+
+# Challenge 4: Transpose a Graph
+def transpose(graph: Graph):
+    """
+    Transpose the given graph
+
+    Time: O(V+E)
+    Space: O(V+E)
+
+    :param graph: The graph
+    :return: a new transposed graph of the given graph
+    """
+
+    new_graph = Graph(graph.V)  # Creating a new graph
+    visited = [0] * graph.V
+    heads = {i for i in range(graph.V)}
+    stack = deque()
+
+    while sum(visited) != len(visited):
+        head_id = heads.pop()
+        stack.append(head_id)
+        while stack:
+            head = stack.popleft()
+            dest: Optional[AdjNode] = graph.graph[head]
+            while dest:
+                new_graph.add_edge(dest.vertex, head)
+                if not visited[dest.vertex]:
+                    stack.append(dest.vertex)
+                dest = dest.next
+            visited[head] = 1
+            heads.discard(head_id)
+
+    return new_graph
+

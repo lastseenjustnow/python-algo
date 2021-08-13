@@ -1,3 +1,5 @@
+from typing import List, Optional
+
 class AdjNode:
     """
     A class to represent the adjacency list of the node
@@ -23,7 +25,7 @@ class Graph:
         :param vertices : Total vertices in a graph
         """
         self.V = vertices
-        self.graph = [None] * self.V
+        self.graph: List[Optional[AdjNode]] = [None] * self.V
 
         # Function to add an edge in an undirected graph
 
