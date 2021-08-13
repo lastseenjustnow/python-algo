@@ -1,5 +1,4 @@
-import heapq
-from typing import Optional
+from typing import Optional, List
 
 from collections import deque
 
@@ -71,3 +70,33 @@ def transpose(graph: Graph):
 
     return new_graph
 
+
+# Challenge 5: Find all Paths between Two Nodes
+def find_all_paths(graph, source, destination):
+    """
+    Finds all paths between source and destination in given graph
+
+    Time: O(V + E)
+    Space: O(V!)
+
+    :param graph: A directed graph
+    :param source: Source Vertex
+    :param destination: Destination Vertex
+    """
+
+    paths = []
+
+    def rec(this_node: int, current_path: List[int], visited: List[bool]):
+        if this_node == destination:
+            paths.append(current_path + [this_node])
+            return
+
+        node_dest: Optional[AdjNode] = graph.graph[this_node]
+        while node_dest:
+            new_visited = visited.copy()
+            new_visited[this_node] = True
+            rec(node_dest.vertex, current_path + [this_node], new_visited)
+            node_dest = node_dest.next
+
+    rec(source, [], [0] * graph.V)
+    return paths

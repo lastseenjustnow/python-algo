@@ -48,6 +48,9 @@ class Graph:
         # node.next = self.graph[destination]
         # self.graph[destination] = node
 
+    def create_graph(self, edges: List[List[int]]):
+        [self.add_edge(x, y) for x, y in edges]
+
     def print_graph(self):
         """
         A function to print a graph

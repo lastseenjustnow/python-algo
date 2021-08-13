@@ -22,3 +22,10 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(0, new_g.graph[2].vertex)
         self.assertEqual(1, new_g.graph[3].vertex)
         self.assertEqual(1, new_g.graph[4].vertex)
+
+    def test_find_all_paths(self):
+        g = Graph(5)
+        edges = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [3, 5], [4, 5]]
+        g.create_graph(edges)
+        expected_result = [[0, 2, 5], [0, 1, 4, 5], [0, 1, 3, 5]]
+        self.assertEqual(expected_result, find_all_paths(g, 0, 5))
