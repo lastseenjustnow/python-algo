@@ -42,3 +42,11 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertFalse(is_strongly_connected(g))
         g.add_edge(3, 2)
         self.assertFalse(is_strongly_connected(g))
+
+    def test_connected_components(self):
+        g = UndirectedGraph(7)
+        edges = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6]]
+        g.create_graph(edges)
+        g.print_graph()
+
+        print(connected_components(g))

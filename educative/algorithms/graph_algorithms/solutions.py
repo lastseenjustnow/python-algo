@@ -1,8 +1,9 @@
 from typing import Optional, List
 
 from collections import deque
+import copy
 
-from Graph_Class import Graph, AdjNode
+from Graph_Class import Graph, UndirectedGraph, AdjNode
 
 
 # Challenge 3: Calculate the Number of Nodes in a Graph Level
@@ -144,3 +145,63 @@ def is_strongly_connected(graph):
         assign(elem, elem)
 
     return True if len(components) == 1 else False
+
+
+# Challenge 7: Find All Connected Components in a Graph
+def connected_components(graph: UndirectedGraph):
+    """
+    Function to find the connected components
+
+    Time: O(V + E)
+
+    :param graph: The graph
+    :return: returns a list of connected components
+    """
+
+    # Helper Function of DFS. Might be useful
+    def dfs(g, source, visited):
+        """
+        Function to print a DFS of graph
+        :param graph: The graph
+        :param source: starting vertex
+        :return: returns the traversal in a list
+        """
+
+        graph = copy.deepcopy(g)
+
+        # Create a stack for DFS
+        stack = []
+
+        # Result list
+        result = []
+
+        # Push the source
+        stack.append(source)
+
+        while stack:
+
+            # Pop a vertex from stack
+            source = stack[-1]
+            stack.pop()
+
+            if not visited[source]:
+                result += str(source)
+                visited[source] = True
+
+            # Get all adjacent vertices of the popped vertex source.
+            # If a adjacent has not been visited, then push it
+            while graph.graph[source] is not None:
+                data = graph.graph[source].vertex
+                if not visited[data]:
+                    stack.append(data)
+                graph.graph[source] = graph.graph[source].next
+
+        return result
+
+    visited, results = [False] * graph.V, []
+    for elem in range(graph.V):
+        res = dfs(graph, elem, visited)
+        if res:
+            results.append(res)
+
+    return results
