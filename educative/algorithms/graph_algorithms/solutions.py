@@ -106,7 +106,41 @@ def find_all_paths(graph, source, destination):
 def is_strongly_connected(graph):
     """
     Finds if the graph is strongly connected or not
+
+    Kosaraju-Sharir's algorithm:
+    https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm
+
+    Time: O(n)
+
     :param graph: The graph
     :return: returns True if the graph is strongly connected, otherwise False
     """
-    pass
+    L, visited, root_dict, components = deque(), [False] * graph.V, {}, set()
+
+    def visit(u):
+        if not visited[u]:
+            visited[u] = True
+            out_neighbor: AdjNode = graph.graph[u]
+            while out_neighbor:
+                visit(out_neighbor.vertex)
+                out_neighbor = out_neighbor.next
+            L.appendleft(u)
+
+    for vertex in range(graph.V):
+        visit(vertex)
+
+    transposed_graph = transpose(graph)
+
+    def assign(vertex, root):
+        if root_dict.get(vertex) is None:
+            components.add(root)
+            root_dict[vertex] = root
+            in_neighbor = transposed_graph.graph[vertex]
+            while in_neighbor:
+                assign(in_neighbor.vertex, root)
+                in_neighbor = in_neighbor.next
+
+    for elem in L:
+        assign(elem, elem)
+
+    return True if len(components) == 1 else False
