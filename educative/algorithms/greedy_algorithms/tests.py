@@ -29,5 +29,7 @@ class TestGreedyAlgorithmSolution(unittest.TestCase):
         departure = [230, 240, 320, 430, 400, 520]
         self.assertEqual(2, find_platform(arrival, departure))
 
+    # Challenge 5: Find the Largest Number Possible
     def test_find_largest_number(self):
-        print(find_largest_number(3, 20))
+        self.assertEqual([9, 9, 2], find_largest_number(3, 20))
+        self.assertEqual([-1], find_largest_number(3, 2))
