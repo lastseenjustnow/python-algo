@@ -77,3 +77,33 @@ def egyptian_fraction(numerator, denominator):
     result.append(denominator)
 
     return result
+
+
+# Challenge 4: Find the Minimum Platforms Required for a Station
+def find_platform(arrival, departure):
+    """
+    Finds the minimum number of platforms required for a railway Station
+
+    Time: O(n log n)
+
+    :param arrival: A list of arrival Timing
+    :param departure: A list of departure Timing
+    :return: Minimum number of platforms required for a railway Station
+    """
+    heapq.heapify(arrival)
+    heapq.heapify(departure)
+    result = max_result = 0
+
+    while arrival and departure:
+        arrival_least = heapq.nsmallest(1, arrival)[0]
+        departure_least = heapq.nsmallest(1, departure)[0]
+        if arrival_least < departure_least:
+            result += 1
+            heapq.heappop(arrival)
+        else:
+            result -= 1
+            heapq.heappop(departure)
+        if result > max_result:
+            max_result = result
+
+    return max_result

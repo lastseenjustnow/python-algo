@@ -19,3 +19,12 @@ class TestGreedyAlgorithmSolution(unittest.TestCase):
         self.assertEqual([2, 6], egyptian_fraction(2, 3))
         self.assertEqual([2, 8], egyptian_fraction(5, 8))
         self.assertEqual([3, 11, 231], egyptian_fraction(6, 14))
+
+    # Challenge 4: Find the Minimum Platforms Required for a Station
+    def test_find_platform(self):
+        arrival = [900, 940, 950, 1100, 1500, 1800]
+        departure = [910, 1200, 1120, 1130, 1900, 2000]
+        self.assertEqual(3, find_platform(arrival, departure))
+        arrival = [200, 210, 300, 320, 350, 500]
+        departure = [230, 240, 320, 430, 400, 520]
+        self.assertEqual(2, find_platform(arrival, departure))
