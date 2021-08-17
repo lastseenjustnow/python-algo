@@ -28,3 +28,6 @@ class TestGreedyAlgorithmSolution(unittest.TestCase):
         arrival = [200, 210, 300, 320, 350, 500]
         departure = [230, 240, 320, 430, 400, 520]
         self.assertEqual(2, find_platform(arrival, departure))
+
+    def test_find_largest_number(self):
+        print(find_largest_number(3, 20))

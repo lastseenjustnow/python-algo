@@ -107,3 +107,21 @@ def find_platform(arrival, departure):
             max_result = result
 
     return max_result
+
+
+# Challenge 5: Find the Largest Number Possible
+def find_largest_number(number_of_digits, sum_of_digits):
+    """
+    Finds the largest number with given number of digits and sum of Digits
+
+    Time: O(1)
+
+    :param number_of_digits: Number of digits
+    :param sum_of_digits: Sum of digits
+    :return: Possible largest number
+    """
+    if sum_of_digits < number_of_digits or sum_of_digits > 9 * number_of_digits:
+        return [-1]
+
+    count_of_nines = sum_of_digits // 9
+    return [9] * count_of_nines + [sum_of_digits - 9 * count_of_nines]
