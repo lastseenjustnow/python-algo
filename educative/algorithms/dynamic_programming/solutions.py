@@ -35,24 +35,38 @@ def knap_sack_brute_force_iterative(profits, profits_length, weights, capacity):
 
 def knap_sack_brute_force_recursive(profits, profits_length, weights, capacity):
 
-    def rec(cum_profit, profit_residuals, cum_weight, weight_residuals):
+    def rec(i, cum_profit, cum_weight):
         if cum_weight > capacity:
             return 0
-        if not profit_residuals:
+        if i == profits_length:
             return cum_profit
-        put = rec(
-            cum_profit + profit_residuals[0],
-            profit_residuals[1:],
-            cum_weight + weight_residuals[0],
-            weight_residuals[1:])
-        not_put = rec(
-            cum_profit,
-            profit_residuals[1:],
-            cum_weight,
-            weight_residuals[1:])
-        if put > not_put:
-            return put
-        else:
-            return not_put
+        put = rec(i + 1, cum_profit + profits[i], cum_weight + weights[i])
+        not_put = rec(i + 1, cum_profit, cum_weight)
+        return max(put, not_put)
 
-    return rec(0, profits, 0, weights)
+    return rec(0, 0, 0)
+
+
+def knap_sack_memoization(profits, profits_length, weights, capacity):
+
+    memo = dict()
+
+    def rec(i, cum_profit, cum_weight):
+        if cum_weight > capacity:
+            return 0
+        if i == profits_length:
+            key = ' '.join(map(str, [i, cum_weight]))
+            if memo.get(key) is None:
+                memo[key] = cum_profit
+            return cum_profit
+
+        key = ' '.join(map(str, [i + 1, cum_weight + weights[i]]))
+        put = rec(i + 1, cum_profit + profits[i], cum_weight + weights[i]) if memo.get(key) is None else memo[key]
+
+        key = ' '.join(map(str, [i + 1, cum_weight]))
+        not_put = rec(i + 1, cum_profit, cum_weight) if memo.get(key) is None else memo[key]
+
+        return max(put, not_put)
+
+    return rec(0, 0, 0)
+
