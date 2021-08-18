@@ -1,5 +1,5 @@
 # Challenge 1: The 0/1 Knapsack Problem
-def knap_sack(profits, profits_length, weights, capacity):
+def knap_sack_brute_force_iterative(profits, profits_length, weights, capacity):
     """
     Finds the maximum value that can be put in a knapsack
 
@@ -31,3 +31,28 @@ def knap_sack(profits, profits_length, weights, capacity):
 
     print(max_profit)
     return max_profit
+
+
+def knap_sack_brute_force_recursive(profits, profits_length, weights, capacity):
+
+    def rec(cum_profit, profit_residuals, cum_weight, weight_residuals):
+        if cum_weight > capacity:
+            return 0
+        if not profit_residuals:
+            return cum_profit
+        put = rec(
+            cum_profit + profit_residuals[0],
+            profit_residuals[1:],
+            cum_weight + weight_residuals[0],
+            weight_residuals[1:])
+        not_put = rec(
+            cum_profit,
+            profit_residuals[1:],
+            cum_weight,
+            weight_residuals[1:])
+        if put > not_put:
+            return put
+        else:
+            return not_put
+
+    return rec(0, profits, 0, weights)
