@@ -70,3 +70,84 @@ def knap_sack_memoization(profits, profits_length, weights, capacity):
 
     return rec(0, 0, 0)
 
+
+def knap_sack_tabularization(profits, profits_length, weights, capacity):
+    """
+
+    Time: O(N * C)
+    Space: O(N * C)
+
+    N - items count
+    C - capacity
+
+    Finds the maximum value that can be put in a knapsack
+    :param profits: The profit that can be gained by each
+    :param profits_length: The number of pieces of jewelry
+    :param weights: The weight of each piece of jewelry
+    :param capacity: The maximum weight that the knapsack can hold
+    :return: Maximum value that can be put in a knapsack
+    """
+
+    # Basic checks
+    if capacity <= 0 or profits_length == 0:
+        return 0
+
+    lookup_table = [[0 for x in range(capacity + 1)] for x in range(profits_length + 1)]
+
+    # Building the lookup table in bottom up manner
+    for i in range(profits_length + 1):
+        for j in range(capacity + 1):
+            if i == 0 or j == 0:
+                lookup_table[i][j] = 0
+            elif weights[i - 1] <= j:
+                lookup_table[i][j] = max(profits[i - 1] + lookup_table[i - 1][j - weights[i - 1]],
+                                         lookup_table[i - 1][j])
+            else:
+                lookup_table[i][j] = lookup_table[i - 1][j]
+
+    return lookup_table[profits_length][capacity]
+
+
+def knap_sack_tabularization_optimized(profits, profits_length, weights, capacity):
+    """
+    Finds the maximum value that can be put in a knapsack
+
+    Time: O(N * C)
+    Space: O(C)
+
+    N - items count
+    C - capacity
+
+    :param profits: The profit that can be gained by each
+    :param profits_length: The number of pieces of jewelry
+    :param weights: The weight of each piece of jewelry
+    :param capacity: The maximum weight that the knapsack can hold
+    :return: Maximum value that can be put in a knapsack
+    """
+
+    # basic checks
+    if capacity <= 0 or profits_length == 0:
+        return 0
+
+    lookup_table = [0 for x in range(capacity + 1)]
+    # if we have only one weight, we will take it if it is not more than the
+    # capacity
+    for i in range(capacity + 1):
+        if weights[0] <= i:
+            lookup_table[i] = profits[0]
+
+    # process all sub-lists for all the capacities
+    for i in range(1, profits_length):
+        for j in reversed(range(capacity + 1)):
+
+            profit1 = 0
+
+            # include the item, if it is not more than the capacity
+            if weights[i] <= j:
+                profit1 = profits[i] + lookup_table[j - weights[i]]
+            # exclude the item
+            profit2 = lookup_table[j]
+            # take maximum
+            lookup_table[j] = max(profit1, profit2)
+
+    return lookup_table[capacity]
