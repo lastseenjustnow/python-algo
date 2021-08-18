@@ -1,3 +1,6 @@
+from collections import deque
+
+
 # Challenge 1: The 0/1 Knapsack Problem
 def knap_sack_brute_force_iterative(profits, profits_length, weights, capacity):
     """
@@ -151,3 +154,31 @@ def knap_sack_tabularization_optimized(profits, profits_length, weights, capacit
             lookup_table[j] = max(profit1, profit2)
 
     return lookup_table[capacity]
+
+
+# Challenge 2: Staircase Problem
+def count_ways_brute_force(n):
+    """
+    Calculates the number of ways a stair can be climbed
+
+    Amount of maximum stairs that can be jumped: 3
+
+    :param n: Number of stairs
+    :return: Number of ways to climb a stair
+    """
+    count = 0
+    if n <= 3:
+        return n
+
+    stack = deque([x for x in range(1, 4)])
+
+    while stack:
+        cum_stairs = stack.popleft()
+        if cum_stairs == n:
+            count += 1
+        else:
+            for stairs in range(1, 4):
+                if cum_stairs + stairs <= n:
+                    stack.append(cum_stairs + stairs)
+
+    return count

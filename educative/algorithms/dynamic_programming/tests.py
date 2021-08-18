@@ -35,3 +35,7 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
     def test_knap_sack_tabularization_optimized(self):
         self.assertEqual(220, knap_sack_tabularization_optimized(profit_1, profits_length_1, weight_1, capacity_1))
         self.assertEqual(15, knap_sack_tabularization_optimized(profit_2, profits_length_2, weight_2, capacity_2))
+
+    # Challenge 2: Staircase Problem
+    def test_count_ways_brute_force(self):
+        self.assertEqual(7, count_ways_brute_force(4))
