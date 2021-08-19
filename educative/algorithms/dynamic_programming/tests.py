@@ -38,4 +38,21 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
 
     # Challenge 2: Staircase Problem
     def test_count_ways_brute_force(self):
+        self.assertEqual(4, count_ways_brute_force(3))
         self.assertEqual(7, count_ways_brute_force(4))
+        self.assertEqual(13, count_ways_brute_force(5))
+
+    def test_count_ways_memoization(self):
+        self.assertEqual(4, count_ways_memoization(3))
+        self.assertEqual(7, count_ways_memoization(4))
+        self.assertEqual(13, count_ways_memoization(5))
+
+    def test_count_ways_tabularization(self):
+        self.assertEqual(4, count_ways_tabularization(3))
+        self.assertEqual(7, count_ways_tabularization(4))
+        self.assertEqual(13, count_ways_tabularization(5))
+
+    def test_count_ways_tabularization_optimized(self):
+        self.assertEqual(4, count_ways_tabularization_optimized(3))
+        self.assertEqual(7, count_ways_tabularization_optimized(4))
+        self.assertEqual(13, count_ways_tabularization_optimized(5))

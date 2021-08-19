@@ -32,7 +32,6 @@ def knap_sack_brute_force_iterative(profits, profits_length, weights, capacity):
             if new_profit > max_profit and new_weight <= capacity:
                 max_profit = new_profit
 
-    print(max_profit)
     return max_profit
 
 
@@ -163,12 +162,16 @@ def count_ways_brute_force(n):
 
     Amount of maximum stairs that can be jumped: 3
 
+    Time: O(3^n)
+
     :param n: Number of stairs
     :return: Number of ways to climb a stair
     """
-    count = 0
+    const = {0: 1, 1: 1, 2: 2, 3: 4}
     if n <= 3:
-        return n
+        return const[n]
+
+    count = 0
 
     stack = deque([x for x in range(1, 4)])
 
@@ -182,3 +185,76 @@ def count_ways_brute_force(n):
                     stack.append(cum_stairs + stairs)
 
     return count
+
+
+def count_ways_memoization(n):
+    """
+    Time: O(n ^ 2)
+    Space: O(n ^ 2)
+    """
+
+    const = {0: 1, 1: 1, 2: 2, 3: 4}
+    if n <= 3:
+        return const[n]
+
+    lookup_table = [[0 for _ in range(n)] for _ in range(n)]
+
+    def fill_lookup_table(i, j):
+        if i < 0 or j < 0:
+            return 0
+
+        if i == 0 and 0 <= j <= 2:
+            lookup_table[i][j] = 1
+            return 1
+
+        if lookup_table[i][j] > 0:
+            return lookup_table[i][j]
+        else:
+            result = sum([fill_lookup_table(i-1, j-x) for x in range(1, 4)])
+            lookup_table[i][j] = result
+            return result
+
+    return sum([fill_lookup_table(y, n-1) for y in range(n)])
+
+
+
+def count_ways_tabularization(n):
+    """
+    Time: O(n ^ 2)
+    Space: O(n ^ 2)
+    """
+
+    if n <= 2:
+        return max(1, n)
+
+    lookup_table = [[0 for _ in range(n)] for _ in range(n)]
+    for i in range(3):
+        lookup_table[0][i] = 1
+
+    for i in range(1, n):
+        for j in range(n):
+            subarray = lookup_table[i-1][max(j - 3, 0):max(j, 0)]
+            lookup_table[i][j] = sum(subarray)
+
+    result = sum([x[n - 1] for x in lookup_table])
+    return result
+
+
+def count_ways_tabularization_optimized(n):
+    """
+    Time: O(n ^ 2)
+    Space: O(n)
+    """
+
+    const = {0: 1, 1: 1, 2: 2, 3: 4}
+    if n <= 3:
+        return const[n]
+
+    array, i, result = [1, 1, 1] + [0] * (n - 4), 1, 0
+
+    while i <= n:
+        result += array[n-i] if i > 1 else 0
+        i += 1
+        array = [sum(array[max(0, j - 2):max(0, j + 1)]) for j in range(n-1)]
+
+    return result
