@@ -56,3 +56,16 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(4, count_ways_tabularization_optimized(3))
         self.assertEqual(7, count_ways_tabularization_optimized(4))
         self.assertEqual(13, count_ways_tabularization_optimized(5))
+
+    # Challenge 7: The Coin Change Problem
+    def test_count_change_brute_force_recursive(self):
+        self.assertEqual(18, count_change_brute_force_recursive([25, 10, 5, 1], 4, 30))
+        self.assertEqual(4, count_change_brute_force_recursive([25, 10, 5, 1], 4, 10))
+        self.assertEqual(13, count_change_brute_force_recursive([25, 10, 5, 1], 4, 28))
+        self.assertEqual(121, count_change_brute_force_recursive([25, 10, 5, 1], 4, 75))
+
+    def test_count_change_memoization(self):
+        self.assertEqual(18, count_change_memoization([25, 10, 5, 1], 4, 30))
+        self.assertEqual(4, count_change_memoization([25, 10, 5, 1], 4, 10))
+        self.assertEqual(13, count_change_memoization([25, 10, 5, 1], 4, 28))
+        self.assertEqual(121, count_change_memoization([25, 10, 5, 1], 4, 75))

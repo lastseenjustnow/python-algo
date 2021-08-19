@@ -217,7 +217,6 @@ def count_ways_memoization(n):
     return sum([fill_lookup_table(y, n-1) for y in range(n)])
 
 
-
 def count_ways_tabularization(n):
     """
     Time: O(n ^ 2)
@@ -258,3 +257,73 @@ def count_ways_tabularization_optimized(n):
         array = [sum(array[max(0, j - 2):max(0, j + 1)]) for j in range(n-1)]
 
     return result
+
+
+# Challenge 3: The Partition Problem
+def can_partition(set):
+    """
+    Checks if two sub-lists has equal sum or not
+    :param set: Integer list having positive numbers only
+    :return: returns True if two sub-lists have equal sum, otherwise False
+    """
+
+    # Write your code here!
+    pass
+
+
+# Challenge 7: The Coin Change Problem
+def count_change_brute_force_recursive(denoms, denoms_length, amount):
+    """
+    Finds the number of ways that the given number of cents can be represented.
+
+    Time: O(2^n)
+    Space: O(1)
+
+    :param denoms: Values of the coins available
+    :param denoms_length: Number of denoms
+    :param amount: Given cent
+    :return: The number of ways that the given number of cents can be represented.
+    """
+
+    def rec(available_denoms, available_denoms_length, cur_amount):
+        if cur_amount < 0 or available_denoms_length == 0:
+            return 0
+        if cur_amount == 0:
+            return 1
+        put_coin = rec(available_denoms, available_denoms_length, cur_amount - available_denoms[0])
+        not_put_coin = rec(available_denoms[1:], available_denoms_length - 1, cur_amount)
+        return put_coin + not_put_coin
+
+    return rec(denoms, denoms_length, amount)
+
+
+def count_change_memoization(denoms, denoms_length, amount):
+    """
+    Finds the number of ways that the given number of cents can be represented.
+
+    Time: O(n * m)
+    Space: O(n * m)
+
+    n - length of denoms
+    m - amount
+
+    :param denoms: Values of the coins available
+    :param denoms_length: Number of denoms
+    :param amount: Given cent
+    :return: The number of ways that the given number of cents can be represented.
+    """
+    lookup_table = [[-1 for _ in range(denoms_length)] for _ in range(amount)]
+
+    def rec(i, current_amount):
+        if current_amount < 0 or i < 0:
+            return 0
+        if current_amount == 0:
+            return 1
+        if lookup_table[current_amount - 1][i] != -1:
+            return lookup_table[current_amount - 1][i]
+        put_coin = rec(i, current_amount - denoms[i])
+        not_put_coin = rec(i - 1, current_amount)
+        lookup_table[current_amount - 1][i] = put_coin + not_put_coin
+        return put_coin + not_put_coin
+
+    return rec(denoms_length - 1, amount)
