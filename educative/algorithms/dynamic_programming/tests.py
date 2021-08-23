@@ -69,3 +69,16 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(4, count_change_memoization([25, 10, 5, 1], 4, 10))
         self.assertEqual(13, count_change_memoization([25, 10, 5, 1], 4, 28))
         self.assertEqual(121, count_change_memoization([25, 10, 5, 1], 4, 75))
+
+    def test_count_change_tabularization(self):
+        self.assertEqual(18, count_change_tabularization([25, 10, 5, 1], 4, 30))
+        self.assertEqual(4, count_change_tabularization([25, 10, 5, 1], 4, 10))
+        self.assertEqual(13, count_change_tabularization([25, 10, 5, 1], 4, 28))
+        self.assertEqual(121, count_change_tabularization([25, 10, 5, 1], 4, 75))
+
+    def test_count_change_tabularization_optimized(self):
+        self.assertEqual(18, count_change_tabularization_optimized([25, 10, 5, 1], 4, 30))
+        self.assertEqual(4, count_change_tabularization_optimized([25, 10, 5, 1], 4, 10))
+        self.assertEqual(13, count_change_tabularization_optimized([25, 10, 5, 1], 4, 28))
+        self.assertEqual(121, count_change_tabularization_optimized([25, 10, 5, 1], 4, 75))
+

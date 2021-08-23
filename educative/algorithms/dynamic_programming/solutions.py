@@ -327,3 +327,61 @@ def count_change_memoization(denoms, denoms_length, amount):
         return put_coin + not_put_coin
 
     return rec(denoms_length - 1, amount)
+
+
+def count_change_tabularization(denoms, denoms_length, amount):
+    """
+    Finds the number of ways that the given number of cents can be represented.
+
+    Time: O(n * m)
+    Space: O(n * m)
+
+
+    n - length of denoms
+    m - amount
+
+    :param denoms: Values of the coins available
+    :param denoms_length: Number of denoms
+    :param amount: Given cent
+    :return: The number of ways that the given number of cents can be represented.
+    """
+    lookup_table = [[-1 for _ in range(amount + 1)] for _ in range(denoms_length)]
+
+    for x in range(denoms_length):
+        lookup_table[x][0] = 1
+
+    for x in range(denoms_length):
+        for y in range(1, amount + 1):
+            first_term = lookup_table[x-1][y] if x > 0 else 0
+            second_term = lookup_table[x][y - denoms[x]] if y - denoms[x] >= 0 else 0
+            lookup_table[x][y] = first_term + second_term
+
+    return lookup_table[denoms_length - 1][amount]
+
+
+def count_change_tabularization_optimized(denoms, denoms_length, amount):
+    """
+    Finds the number of ways that the given number of cents can be represented.
+
+    Time: O(n * m)
+    Space: O(m)
+
+    n - length of denoms
+    m - amount
+
+    :param denoms: Values of the coins available
+    :param denoms_length: Number of denoms
+    :param amount: Given cent
+    :return: The number of ways that the given number of cents can be represented.
+    """
+    lookup_table = [1] + [0] * amount
+
+    for x in range(denoms_length):
+        new_lookup_table = [1] + [0] * amount
+        for y in range(1, amount + 1):
+            first_term = lookup_table[y] if x > 0 else 0
+            second_term = new_lookup_table[y - denoms[x]] if y - denoms[x] >= 0 else 0
+            new_lookup_table[y] = first_term + second_term
+        lookup_table = new_lookup_table
+
+    return lookup_table[amount]
