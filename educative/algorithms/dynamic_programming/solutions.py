@@ -1,3 +1,5 @@
+from typing import Deque, Tuple, Optional
+
 from collections import deque
 
 
@@ -260,15 +262,66 @@ def count_ways_tabularization_optimized(n):
 
 
 # Challenge 3: The Partition Problem
-def can_partition(set):
+def can_partition_brute_force(st):
     """
     Checks if two sub-lists has equal sum or not
-    :param set: Integer list having positive numbers only
+
+    Time: O(2^n)
+
+    :param st: Integer list having positive numbers only
     :return: returns True if two sub-lists have equal sum, otherwise False
     """
 
-    # Write your code here!
-    pass
+    stack: Deque[Optional[Tuple[int, int]]] = deque()
+    stack.append((0, sum(st)))
+    stack.append(None)
+    i = 0
+
+    while i != len(st):
+        current_tuple = stack.popleft()
+        if not current_tuple:
+            i += 1
+            stack.append(None)
+            continue
+        if current_tuple[0] + st[i] == current_tuple[1] - st[i]:
+            return True
+        stack.append((current_tuple[0], current_tuple[1]))
+        stack.append((current_tuple[0] + st[i], current_tuple[1] - st[i]))
+
+    return False
+
+
+def can_partition_tabularization_optimized(st):
+    """
+    Checks if two sub-lists has equal sum or not
+
+    Time: O(s * l)
+    Space: O(s)
+
+    l - length of a set
+    s - sum of a set
+
+    :param st: Integer list having positive numbers only
+    :return: returns True if two sub-lists have equal sum, otherwise False
+    """
+
+    set_sum = sum(st)
+    if set_sum % 2 == 1:
+        return False
+
+    lookup_table = [0] * (int(set_sum / 2))
+    lookup_table[int(set_sum / 2) - 1] = 1
+    i = 0
+
+    while i != len(st):
+        new_lookup_table = lookup_table
+        for j in range(int(set_sum / 2)):
+            if lookup_table[j] == 1 and j - st[i] == 0:
+                return True
+            new_lookup_table[abs(j - st[i])] = 1
+        lookup_table = new_lookup_table
+
+    return False
 
 
 # Challenge 7: The Coin Change Problem

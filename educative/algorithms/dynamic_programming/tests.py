@@ -57,6 +57,17 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(7, count_ways_tabularization_optimized(4))
         self.assertEqual(13, count_ways_tabularization_optimized(5))
 
+    # Challenge 3: The Partition Problem
+    def test_can_partition_brute_force(self):
+        self.assertTrue(can_partition_brute_force([1, 2, 3, 4]))
+        self.assertTrue(can_partition_brute_force([1, 1, 3, 4, 7]))
+        self.assertFalse(can_partition_brute_force([2, 3, 4, 6]))
+
+    def test_can_partition_tabularization_optimized(self):
+        self.assertTrue(can_partition_tabularization_optimized([1, 2, 3, 4]))
+        self.assertTrue(can_partition_tabularization_optimized([1, 1, 3, 4, 7]))
+        self.assertFalse(can_partition_tabularization_optimized([2, 3, 4, 6]))
+
     # Challenge 7: The Coin Change Problem
     def test_count_change_brute_force_recursive(self):
         self.assertEqual(18, count_change_brute_force_recursive([25, 10, 5, 1], 4, 30))
