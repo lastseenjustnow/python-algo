@@ -324,6 +324,54 @@ def can_partition_tabularization_optimized(st):
     return False
 
 
+# Challenge 6: Longest Palindromic Subsequence
+def longest_palindromic_subsequence_recursive_brute_force(s):
+    """
+    Finds the longest palindromic subsequence length
+
+    Time: O(n!)
+
+    :param s: Input string
+    :return: Length of shortest common superstring
+    """
+    def rec(subsec):
+        for i in range(len(subsec) // 2):
+            if subsec[i] != subsec[len(subsec) - i - 1]:
+                subseq_max = max([rec(subsec[:j] + subsec[(j+1):]) for j in range(len(subsec))])
+                return subseq_max
+
+        return len(subsec)
+
+    return rec(s)
+
+
+def longest_palindromic_subsequence_memoization(s):
+    """
+    Finds the longest palindromic subsequence length
+
+    Time: O(n!)
+
+    :param s: Input string
+    :return: Length of shortest common superstring
+    """
+    lookup_table = dict()
+
+    def rec(subsec):
+
+        if lookup_table.get(subsec):
+            return lookup_table[subsec]
+
+        for i in range(len(subsec) // 2):
+            if subsec[i] != subsec[len(subsec) - i - 1]:
+                subseq_max = max([rec(subsec[:j] + subsec[(j+1):]) for j in range(len(subsec))])
+                lookup_table[subsec] = subseq_max
+                return subseq_max
+
+        return len(subsec)
+
+    return rec(s)
+
+
 # Challenge 7: The Coin Change Problem
 def count_change_brute_force_recursive(denoms, denoms_length, amount):
     """

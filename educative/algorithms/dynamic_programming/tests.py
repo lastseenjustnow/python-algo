@@ -68,6 +68,18 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertTrue(can_partition_tabularization_optimized([1, 1, 3, 4, 7]))
         self.assertFalse(can_partition_tabularization_optimized([2, 3, 4, 6]))
 
+    # Challenge 6: Longest Palindromic Subsequence
+    def test_longest_palindromic_subsequence(self):
+        self.assertEqual(3, longest_palindromic_subsequence_recursive_brute_force('aabca'))
+        self.assertEqual(5, longest_palindromic_subsequence_recursive_brute_force('abdbca'))
+        self.assertEqual(7, longest_palindromic_subsequence_recursive_brute_force('abadabaca'))
+
+    def test_longest_palindromic_subsequence_memoization(self):
+        self.assertEqual(3, longest_palindromic_subsequence_memoization('aabca'))
+        self.assertEqual(5, longest_palindromic_subsequence_memoization('abdbca'))
+        self.assertEqual(7, longest_palindromic_subsequence_memoization('abadabaca'))
+
+
     # Challenge 7: The Coin Change Problem
     def test_count_change_brute_force_recursive(self):
         self.assertEqual(18, count_change_brute_force_recursive([25, 10, 5, 1], 4, 30))
