@@ -1,5 +1,6 @@
 from typing import Deque, Tuple, Optional
 
+import math
 from collections import deque
 
 
@@ -486,3 +487,35 @@ def count_change_tabularization_optimized(denoms, denoms_length, amount):
         lookup_table = new_lookup_table
 
     return lookup_table[amount]
+
+
+# Challenge 8: Egg Dropping Problem
+def egg_drop_naive(eggs, floors):
+    """
+    Figures out which floor of the skyscraper that the eggs can be safely dropped from without breaking.
+    :param eggs: Number of stories of the skyscraper
+    :param floors: Number of eggs
+    :return: Return the floor
+    """
+
+    if eggs <= 0 or floors <= 0:
+        return 0
+
+    def arithmetic_progression(s):
+        i = 1
+        while True:
+            j, cumsum = i, i
+            while j != 0:
+                j -= 1
+                cumsum += j
+            if cumsum >= s:
+                return i
+            i += 1
+
+    binary_search_factor = 0
+    while floors > 3 and eggs > 2:
+        binary_search_factor += 1
+        floors //= 2
+        eggs -= 1
+
+    return binary_search_factor + arithmetic_progression(floors)

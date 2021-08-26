@@ -79,7 +79,6 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(5, longest_palindromic_subsequence_memoization('abdbca'))
         self.assertEqual(7, longest_palindromic_subsequence_memoization('abadabaca'))
 
-
     # Challenge 7: The Coin Change Problem
     def test_count_change_brute_force_recursive(self):
         self.assertEqual(18, count_change_brute_force_recursive([25, 10, 5, 1], 4, 30))
@@ -105,3 +104,10 @@ class TestGraphAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(13, count_change_tabularization_optimized([25, 10, 5, 1], 4, 28))
         self.assertEqual(121, count_change_tabularization_optimized([25, 10, 5, 1], 4, 75))
 
+    # Challenge 8: Egg Dropping Problem
+    def test_egg_drop_naive(self):
+        self.assertEqual(14, egg_drop_naive(2, 100))
+        self.assertEqual(4, egg_drop_naive(7, 15))
+        self.assertEqual(5, egg_drop_naive(2, 15))
+        self.assertEqual(0, egg_drop_naive(0, 100))
+        self.assertEqual(0, egg_drop_naive(100, 0))
