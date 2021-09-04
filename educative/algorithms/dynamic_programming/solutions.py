@@ -1,6 +1,5 @@
 from typing import Deque, Tuple, Optional
 
-import math
 from collections import deque
 
 
