@@ -10,6 +10,10 @@ g.add_edge(1, 4)
 
 
 class TestGraphAlgorithmsSolution(unittest.TestCase):
+    # Challenge 1: Breadth-First Graph Traversal
+    def test_bfs(self):
+        self.assertEqual("02143", bfs(g, 0))
+
     def test_number_of_nodes(self):
         self.assertEqual(1, number_of_nodes(g, 1))
         self.assertEqual(2, number_of_nodes(g, 2))

@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+
 class AdjNode:
     """
     A class to represent the adjacency list of the node

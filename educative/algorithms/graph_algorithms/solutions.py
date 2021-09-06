@@ -6,6 +6,70 @@ import copy
 from Graph_Class import Graph, UndirectedGraph, AdjNode
 
 
+# Challenge 1: Breadth-First Graph Traversal
+def bfs(graph: Graph, source):
+    """
+    Function to print a BFS of graph
+    :param graph: The graph
+    :param source: starting vertex
+    :return:
+    """
+
+    stack = deque()
+    stack.append(source)
+    result = ''
+
+    while stack:
+        this_node_id = stack.popleft()
+        result += str(this_node_id)
+        this_node: AdjNode = graph.graph[this_node_id]
+        while this_node:
+            stack.append(this_node.vertex)
+            this_node = this_node.next
+
+    return result
+
+
+# Challenge 2: Depth-First Graph Traversal
+def dfs(graph: Graph, source):
+    """
+    Function to print a DFS of graph
+    :param graph: The graph
+    :param source: starting vertex
+    :return:
+    """
+    # Mark all the vertices as not visited
+    visited = [False] * (len(graph.graph))
+
+    # Create a stack for DFS
+    stack = []
+
+    # Result string
+    result = ""
+
+    # Push the source
+    stack.append(source)
+
+    while stack:
+
+        # Pop a vertex from stack
+        source = stack.pop()
+
+        if not visited[source]:
+            result += str(source)
+            visited[source] = True
+
+        # Get all adjacent vertices of the popped vertex source.
+        # If a adjacent has not been visited, then push it
+        while graph.graph[source] is not None:
+            data = graph.graph[source].vertex
+            if not visited[data]:
+                stack.append(data)
+            graph.graph[source] = graph.graph[source].next
+
+    return result
+
+
 # Challenge 3: Calculate the Number of Nodes in a Graph Level
 def number_of_nodes(graph: Graph, level):
     """
