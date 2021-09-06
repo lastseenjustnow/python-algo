@@ -41,3 +41,34 @@ class TestDivideNConquerAlgorithmsSolution(unittest.TestCase):
         self.assertEqual(4, find_closest(lst, 5))
         lst = [1, 2, 5, 10, 23, 25, 30, 50]
         find_closest(lst, 100)
+
+    # Challenge 8: Shuffle Integers
+    def test_shuffle_list(self):
+        lst = [1, 2, 3, 4]
+        expected_res = [1, 3, 2, 4]
+        self.assertEqual(lst, shuffle_list_naive(expected_res))
+        lst = [1, 2, 3, 4]
+        expected_res = [1, 3, 2, 4]
+        self.assertEqual(lst, shuffle_list_recursive(expected_res))
+
+        lst = [x for x in range(1, 9)]
+        expected_res = [1, 5, 2, 6, 3, 7, 4, 8]
+        self.assertEqual(expected_res, shuffle_list_naive(lst))
+        lst = [x for x in range(1, 9)]
+        expected_res = [1, 5, 2, 6, 3, 7, 4, 8]
+        self.assertEqual(expected_res, shuffle_list_recursive(lst))
+
+        lst = [x for x in range(1, 17)]
+        expected_res = [1, 9, 2, 10, 3, 11, 4, 12, 5, 13, 6, 14, 7, 15, 8, 16]
+        self.assertEqual(expected_res, shuffle_list_naive(lst))
+        lst = [x for x in range(1, 17)]
+        expected_res = [1, 9, 2, 10, 3, 11, 4, 12, 5, 13, 6, 14, 7, 15, 8, 16]
+        self.assertEqual(expected_res, shuffle_list_recursive(lst))
+
+    # Challenge 9: Inversion Count in a List
+    def test_inversion_count(self):
+        self.assertEqual(5, inversion_count([9, 5, 6, 11, 8, 10]))
+        self.assertEqual(3, inversion_count([7, 6, 5, 8]))
+        self.assertEqual(2, inversion_count([3, 2, 8, 4]))
+        self.assertEqual(0, inversion_count([1, 2, 3, 4, 5]))
+        self.assertEqual(10, inversion_count([10, 9, 8, 7, 6]))

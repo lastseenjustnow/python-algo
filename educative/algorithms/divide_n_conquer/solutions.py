@@ -1,3 +1,5 @@
+import math
+
 # Challenge 2: Find the Peak Element
 
 def find_peak(lst):
@@ -147,5 +149,97 @@ def find_closest(lst, target):
         if abs(lst[mid] - target) > abs(lst[mid-1] - target):
             return rec(start, mid)
         return lst[mid]
+
+    return rec(0, len(lst) - 1)
+
+
+# Challenge 8: Shuffle Integers
+def shuffle_list_naive(lst):
+    """
+    Shuffles the list
+    :param lst: List of integers
+    """
+    log_base = math.log2(len(lst))
+    if not log_base.is_integer():
+        return lst
+
+    swap_count = math.pow(2, log_base - 1) - 1
+    while swap_count > 0:
+        this_swap_count = swap_count
+        i, j = int(len(lst) / 2) - 1, int(len(lst) / 2)
+        while this_swap_count > 0:
+            if this_swap_count == swap_count:
+                lst[i], lst[j] = lst[j], lst[i]
+            else:
+                lst[i], lst[i - 1] = lst[i - 1], lst[i]
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+                i -= 1
+                j += 1
+            this_swap_count -= 1
+        swap_count -= 2
+
+    return lst
+
+
+def shuffle_list_recursive(lst):
+
+    """
+    Shuffles the list
+
+    Time: O(n log n)
+
+    :param lst: List of integers
+    """
+
+    log_base = math.log2(len(lst))
+    if not log_base.is_integer():
+        return lst
+
+    def rec(left, right):
+        if right - left == 1:
+            return
+
+        swap_step = int(((right - left) + 1) / 4)
+        middle = (right - left) // 2 + left
+        step = middle
+        for _ in range(swap_step):
+            lst[step], lst[step + swap_step] = lst[step + swap_step], lst[step]
+            step -= 1
+        rec(left, middle)
+        rec(middle + 1, right)
+
+    rec(0, len(lst)-1)
+    return lst
+
+
+# Challenge 9: Inversion Count in a List
+def inversion_count(lst):
+    """
+    Function to find Inversion Count
+    :param lst: List of integers
+    :return: The inversion count of the list
+    """
+
+    def rec(left, right):
+        if right - left == 1:
+            if lst[left] > lst[right]:
+                lst[left], lst[right] = lst[right], lst[left]
+                return 1
+            return 0
+        elif right - left == 0:
+            return 0
+
+        mid = (right - left) // 2 + left
+        left_count = rec(left, mid)
+        right_count = rec(mid+1, right)
+        merge_count = 0
+        while mid + 1 < len(lst) and lst[mid+1] < lst[mid]:
+            i = mid + 1
+            while i > 0 and lst[i] < lst[i-1]:
+                lst[i], lst[i-1] = lst[i-1], lst[i]
+                merge_count += 1
+                i -= 1
+            mid += 1
+        return left_count + right_count + merge_count
 
     return rec(0, len(lst) - 1)
