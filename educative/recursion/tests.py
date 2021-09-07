@@ -19,3 +19,8 @@ class TestRecursion(unittest.TestCase):
         self.assertEqual('1011', decimalToBinary(11))
         self.assertEqual('0', decimalToBinary(0))
         self.assertEqual('10', decimalToBinary(2))
+
+    # Challenge 2: Balance Parenthesis
+    def test_balanced(self):
+        testVariable = ["(", ")", "(", ")"]
+        self.assertTrue(balanced(testVariable, 0, 0))

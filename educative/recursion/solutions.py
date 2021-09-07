@@ -36,3 +36,16 @@ def decimalToBinary(testVariable):
         return rec(i - 1, residual, result + '0')
 
     return rec(init - 1, testVariable, '')
+
+
+# Challenge 2: Balance Parenthesis
+def balanced(testVariable, startIndex = 0, currentIndex = 0) :
+    if startIndex == len(testVariable):
+        return currentIndex == 0
+    if currentIndex < 0:
+        return False
+    if testVariable[startIndex] == '(':
+        return balanced(testVariable, startIndex + 1, currentIndex + 1)
+    if testVariable[startIndex] == ')':
+        return balanced(testVariable, startIndex + 1, currentIndex - 1)
+    return balanced(testVariable, startIndex + 1, currentIndex)
