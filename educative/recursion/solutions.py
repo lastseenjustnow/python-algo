@@ -1,3 +1,6 @@
+import graph as g
+
+
 # Challenge 1: Find the Greatest Common Divisor
 def gcd(testVariable1, testVariable2):
     # Euclidian algorithm
@@ -14,13 +17,12 @@ def printPascal(testVariable):
         return [1] * (testVariable + 1)
     else:
         prev = printPascal(testVariable - 1)
-        result = [1] + [prev[i] + prev[i+1] for i in range(len(prev) - 1)] + [1]
+        result = [1] + [prev[i] + prev[i + 1] for i in range(len(prev) - 1)] + [1]
         return result
 
 
 # Challenge 3: Convert Decimal Number to Binary Number
 def decimalToBinary(testVariable):
-
     if testVariable == 0:
         return '0'
 
@@ -39,7 +41,7 @@ def decimalToBinary(testVariable):
 
 
 # Challenge 2: Balance Parenthesis
-def balanced(testVariable, startIndex = 0, currentIndex = 0) :
+def balanced(testVariable, startIndex=0, currentIndex=0):
     if startIndex == len(testVariable):
         return currentIndex == 0
     if currentIndex < 0:
@@ -49,3 +51,19 @@ def balanced(testVariable, startIndex = 0, currentIndex = 0) :
     if testVariable[startIndex] == ')':
         return balanced(testVariable, startIndex + 1, currentIndex - 1)
     return balanced(testVariable, startIndex + 1, currentIndex)
+
+
+# Challenge 2: Reverse a Stack
+def reverse(testVariable):
+    def insertAtBottom(stack, x):
+        if len(stack) == 0:
+            stack.append(x)
+        else:
+            h = stack.pop()
+            insertAtBottom(stack, x)
+            stack.append(h)
+
+    if not len(testVariable) == 0:
+        head = testVariable.pop()
+        reverse(testVariable)
+        insertAtBottom(testVariable, head)
