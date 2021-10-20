@@ -1,6 +1,3 @@
-import graph as g
-
-
 # Challenge 1: Find the Greatest Common Divisor
 def gcd(testVariable1, testVariable2):
     # Euclidian algorithm
