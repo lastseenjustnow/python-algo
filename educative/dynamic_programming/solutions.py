@@ -1,3 +1,5 @@
+from typing import List
+
 # Largest Sum Subarray
 def find_max_sum_sub_array(A):
     """Find a contiguous subarray with the largest sum."""
@@ -53,3 +55,23 @@ def scoring_options(n):
         return memo[residual - 1][pointer]
 
     return rec(n, 0)
+
+
+# Equal Subset Sum Partition
+def can_partition(num: List[int]):
+    summa = sum(num)
+    if summa % 2 != 0:
+        return False
+
+    half_sum = int(summa / 2)
+    lookup = [0] * half_sum
+    lookup[0] = 1
+
+    for elem in num:
+        if lookup[half_sum - elem] == 1:
+            return True
+
+        for i in range(elem, half_sum):
+            lookup[i] = lookup[i - elem]
+
+    return False

@@ -28,3 +28,9 @@ class TestDynamicProgramming(unittest.TestCase):
         inputs, expected_results = [3, 4, 5], [3, 6, 10]
         for x, y in zip(inputs, expected_results):
             self.assertEqual(scoring_options(x), y)
+
+    # Equal Subset Sum Partition
+    def test_can_partition(self):
+        self.assertTrue(can_partition([1, 2, 3, 4]))
+        self.assertTrue(can_partition([1, 1, 3, 4, 7]))
+        self.assertFalse(can_partition([2, 3, 4, 6]))
