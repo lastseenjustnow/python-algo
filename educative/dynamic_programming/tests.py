@@ -22,3 +22,9 @@ class TestDynamicProgramming(unittest.TestCase):
         self.assertEqual(9, find_max_sum_nonadjacent(arr2))
         arr3 = [1, 6, 10, 14, 50, -20, -5, -10]
         self.assertEqual(61, find_max_sum_nonadjacent(arr3))
+
+    # Find Combinations for Game Scoring
+    def test_scoring_options(self):
+        inputs, expected_results = [3, 4, 5], [3, 6, 10]
+        for x, y in zip(inputs, expected_results):
+            self.assertEqual(scoring_options(x), y)

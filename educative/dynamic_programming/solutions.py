@@ -24,3 +24,32 @@ def find_max_sum_nonadjacent(a):
             first_sum = second_sum = 0
 
     return max_sum + max(first_sum, second_sum)
+
+
+# Find Combinations for Game Scoring
+def scoring_options(n):
+
+    memo = [[None for _ in range(3)] for _ in range(n)]
+    runs = [1, 2, 4]
+
+    def rec(residual, pointer):
+        if pointer > len(runs) - 1:
+            return 0
+
+        if residual < runs[pointer]:
+            memo[residual - 1][pointer] = 0
+            return 0
+
+        if memo[residual - 1][pointer] is not None:
+            return memo[residual - 1][pointer]
+
+        if residual == runs[pointer]:
+            memo[residual - 1][pointer] = 1
+            return 1
+
+        first_term = rec(residual - runs[pointer], 0)
+        secont_term = rec(residual, pointer + 1)
+        memo[residual - 1][pointer] = first_term + secont_term
+        return memo[residual - 1][pointer]
+
+    return rec(n, 0)
