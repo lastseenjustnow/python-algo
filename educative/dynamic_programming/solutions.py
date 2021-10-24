@@ -75,3 +75,25 @@ def can_partition(num: List[int]):
             lookup[i] = lookup[i - elem]
 
     return False
+
+
+# Subset Sum
+def can_partition_subset_sum(num, sum):
+    """
+    Time: O(sum * l)
+    Space: O(sum)
+
+    l - length of array given
+
+    """
+    lookup = [0] * (sum + 1)
+    lookup[0] = 1
+
+    for elem in num:
+        if lookup[sum] == 1:
+            return True
+
+        for i in range(sum, elem - 1, -1):
+            lookup[i] = lookup[i - elem]
+
+    return False
