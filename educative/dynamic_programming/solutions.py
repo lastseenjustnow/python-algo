@@ -97,3 +97,20 @@ def can_partition_subset_sum(num, sum):
             lookup[i] = lookup[i - elem]
 
     return False
+
+
+# Minimum Subset Sum Difference
+def can_partition_minumum_subset_sum_difference(num):
+
+    def rec(left_subset, right_subset, pointer):
+        if pointer == len(num):
+            return left_subset, right_subset
+
+        left_pair = rec(left_subset, right_subset + [num[pointer]], pointer + 1)
+        right_pair = rec(left_subset + [num[pointer]], right_subset, pointer + 1)
+
+        if abs(sum(left_pair[0]) - sum(left_pair[1])) < abs(sum(right_pair[0]) - sum(right_pair[1])):
+            return left_pair
+        return right_pair
+
+    return rec([], [], 0)

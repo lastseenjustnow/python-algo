@@ -35,7 +35,17 @@ class TestDynamicProgramming(unittest.TestCase):
         self.assertTrue(can_partition([1, 1, 3, 4, 7]))
         self.assertFalse(can_partition([2, 3, 4, 6]))
 
+    # Subset Sum
     def test_can_partition_subset_sum(self):
         self.assertTrue(can_partition_subset_sum([1, 2, 3, 7], 6))
         self.assertTrue(can_partition_subset_sum([1, 2, 7, 1, 5], 10))
         self.assertFalse(can_partition_subset_sum([1, 3, 4, 8], 6))
+
+    # Minimum Subset Sum Difference
+    def test_can_partition_minumum_subset_sum_difference(self):
+        arr1 = [1, 2, 3, 9]
+        print(can_partition_minumum_subset_sum_difference(arr1))
+        arr2 = [1, 2, 7, 1, 5]
+        print(can_partition_minumum_subset_sum_difference(arr2))
+        arr3 = [1, 3, 100, 4]
+        print(can_partition_minumum_subset_sum_difference(arr3))
