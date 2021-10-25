@@ -123,3 +123,14 @@ def can_partition_minumum_subset_sum_difference(num):
     for i in range(half_sum, -1, -1):
         if lookup[i] == 1:
             return (half_sum - i) * 2 + is_odd
+
+
+# Longest Subarray with Ones after Replacement
+def length_of_longest_substring_naive(arr, k):
+    summa = sum(arr) + k
+
+    while True:
+        for i in range(summa, len(arr) + 1):
+            if sum(arr[i - summa:i]) + k == summa:
+                return summa
+        summa -= 1
