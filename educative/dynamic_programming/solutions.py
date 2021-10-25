@@ -101,16 +101,25 @@ def can_partition_subset_sum(num, sum):
 
 # Minimum Subset Sum Difference
 def can_partition_minumum_subset_sum_difference(num):
+    """
+    Time: O(sum * l)
+    Space: O(sum)
 
-    def rec(left_subset, right_subset, pointer):
-        if pointer == len(num):
-            return left_subset, right_subset
+    l - length of array given
 
-        left_pair = rec(left_subset, right_subset + [num[pointer]], pointer + 1)
-        right_pair = rec(left_subset + [num[pointer]], right_subset, pointer + 1)
+    """
+    half_sum = int(sum(num) / 2)
+    is_odd = sum(num) % 2
+    lookup = [0] * (half_sum + 1)
+    lookup[0] = 1
 
-        if abs(sum(left_pair[0]) - sum(left_pair[1])) < abs(sum(right_pair[0]) - sum(right_pair[1])):
-            return left_pair
-        return right_pair
+    for elem in num:
+        if lookup[half_sum] == 1:
+            return is_odd
 
-    return rec([], [], 0)
+        for i in range(half_sum, elem - 1, -1):
+            lookup[i] = lookup[i - elem]
+
+    for i in range(half_sum, -1, -1):
+        if lookup[i] == 1:
+            return (half_sum - i) * 2 + is_odd
