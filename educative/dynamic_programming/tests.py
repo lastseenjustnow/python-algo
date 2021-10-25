@@ -69,9 +69,16 @@ class TestDynamicProgramming(unittest.TestCase):
         expected_result3 = 92
         self.assertEqual(expected_result3, can_partition_minimum_subset_sum_difference(arr3))
 
-    def test_length_of_longest_substring(self):
+    def test_length_of_longest_substring_naive(self):
         arr1 = [0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1]
         self.assertEqual(6, length_of_longest_substring_naive(arr1, 2))
 
         arr2 = [0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1]
         self.assertEqual(9, length_of_longest_substring_naive(arr2, 3))
+
+    def test_length_of_longest_substring(self):
+        arr1 = [0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1]
+        self.assertEqual(6, length_of_longest_substring(arr1, 2))
+
+        arr2 = [0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1]
+        self.assertEqual(9, length_of_longest_substring(arr2, 3))

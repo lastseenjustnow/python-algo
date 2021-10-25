@@ -135,3 +135,22 @@ def length_of_longest_substring_naive(arr, k):
             if sum(arr[i - summa:i]) + k == summa:
                 return summa
         summa -= 1
+
+
+# Correct solution
+def length_of_longest_substring(arr, k):
+
+    window_start, window_end, current_ones, max_contiguous_ones = 0, 0, 0, 0
+
+    while window_end < len(arr):
+        if arr[window_end] == 1:
+            current_ones += 1
+        while window_end - window_start + 1 - current_ones > k:
+            if arr[window_start] == 1:
+                current_ones -= 1
+            window_start += 1
+        if current_ones > max_contiguous_ones:
+            max_contiguous_ones = current_ones
+        window_end += 1
+
+    return max_contiguous_ones + k
