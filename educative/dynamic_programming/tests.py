@@ -43,31 +43,31 @@ class TestDynamicProgramming(unittest.TestCase):
 
     # Minimum Subset Sum Difference
     # Brute force
-    def test_can_partition_minumum_subset_sum_difference_brute_force(self):
+    def test_can_partition_minimum_subset_sum_difference_brute_force(self):
         arr1 = [1, 2, 3, 9]
         expected_result1 = ([1, 2, 3], [9])
-        self.assertEqual(expected_result1, can_partition_minumum_subset_sum_difference(arr1))
+        self.assertEqual(expected_result1, can_partition_minimum_subset_sum_difference(arr1))
 
         arr2 = [1, 2, 7, 1, 5]
         expected_result2 = ([1, 2, 5], [7, 1])
-        self.assertEqual(expected_result2, can_partition_minumum_subset_sum_difference(arr2))
+        self.assertEqual(expected_result2, can_partition_minimum_subset_sum_difference(arr2))
 
         arr3 = [1, 3, 100, 4]
         expected_result3 = ([1, 3, 4], [100])
-        self.assertEqual(expected_result3, can_partition_minumum_subset_sum_difference(arr3))
+        self.assertEqual(expected_result3, can_partition_minimum_subset_sum_difference(arr3))
 
-    def test_can_partition_minumum_subset_sum_difference_memoization(self):
+    def test_can_partition_minimum_subset_sum_difference_memoization(self):
         arr1 = [1, 2, 3, 9]
         expected_result1 = 3
-        self.assertEqual(expected_result1, can_partition_minumum_subset_sum_difference(arr1))
+        self.assertEqual(expected_result1, can_partition_minimum_subset_sum_difference(arr1))
 
         arr2 = [1, 2, 7, 1, 5]
         expected_result2 = 0
-        self.assertEqual(expected_result2, can_partition_minumum_subset_sum_difference(arr2))
+        self.assertEqual(expected_result2, can_partition_minimum_subset_sum_difference(arr2))
 
         arr3 = [1, 3, 100, 4]
         expected_result3 = 92
-        self.assertEqual(expected_result3, can_partition_minumum_subset_sum_difference(arr3))
+        self.assertEqual(expected_result3, can_partition_minimum_subset_sum_difference(arr3))
 
     def test_length_of_longest_substring(self):
         arr1 = [0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1]

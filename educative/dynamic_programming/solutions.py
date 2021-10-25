@@ -1,5 +1,6 @@
 from typing import List
 
+
 # Largest Sum Subarray
 def find_max_sum_sub_array(A):
     """Find a contiguous subarray with the largest sum."""
@@ -50,8 +51,8 @@ def scoring_options(n):
             return 1
 
         first_term = rec(residual - runs[pointer], 0)
-        secont_term = rec(residual, pointer + 1)
-        memo[residual - 1][pointer] = first_term + secont_term
+        second_term = rec(residual, pointer + 1)
+        memo[residual - 1][pointer] = first_term + second_term
         return memo[residual - 1][pointer]
 
     return rec(n, 0)
@@ -100,7 +101,7 @@ def can_partition_subset_sum(num, sum):
 
 
 # Minimum Subset Sum Difference
-def can_partition_minumum_subset_sum_difference(num):
+def can_partition_minimum_subset_sum_difference(num):
     """
     Time: O(sum * l)
     Space: O(sum)
