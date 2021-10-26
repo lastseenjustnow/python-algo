@@ -154,3 +154,16 @@ def length_of_longest_substring(arr, k):
         window_end += 1
 
     return max_contiguous_ones + k
+
+
+# Unbounded Knapsack
+def solve_knapsack(profits, weights, capacity):
+    lookup_table = [0] * capacity
+    for i in range(len(profits)):
+        for j in range(weights[i] - 1, capacity):
+            current_profit = 0 if j == weights[i] - 1 else lookup_table[j - weights[i]]
+            if current_profit + profits[i] > lookup_table[j]:
+                current_profit += profits[i]
+                lookup_table[j] = current_profit
+
+    return max(lookup_table)

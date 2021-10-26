@@ -82,3 +82,15 @@ class TestDynamicProgramming(unittest.TestCase):
 
         arr2 = [0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1]
         self.assertEqual(9, length_of_longest_substring(arr2, 3))
+
+    def test_solve_knapsack(self):
+        profits1 = [15, 20, 50]
+        weights1 = [1, 2, 3]
+        capacity1 = 5
+
+        self.assertEqual(80, solve_knapsack(profits1, weights1, capacity1))
+        profits2 = profits3 = [15, 50, 60, 90]
+        weights2 = weights3 = [1, 3, 4, 5]
+
+        self.assertEqual(140, solve_knapsack(profits2, weights2, 8))
+        self.assertEqual(105, solve_knapsack(profits3, weights3, 6))
