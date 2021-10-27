@@ -109,3 +109,10 @@ class TestDynamicProgramming(unittest.TestCase):
 
         for i in range(len(arrs)):
             self.assertEqual(ress[i], count_ribbon_pieces(arrs[i], targets[i]))
+
+    def test_find_max_steal(self):
+        arr1 = [2, 5, 1, 3, 6, 2, 4]
+        self.assertEqual(15, find_max_steal(arr1))
+
+        arr2 = [2, 10, 14, 8, 1]
+        self.assertEqual(18, find_max_steal(arr2))

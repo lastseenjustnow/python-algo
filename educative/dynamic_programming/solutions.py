@@ -189,3 +189,21 @@ def count_ribbon_pieces(ribbonLengths, total):
                 lookup_table[ribbons_count - 1] = lookup_table[ribbons_count - ribbon - 1] + 1
 
     return lookup_table[total - 1]
+
+
+# House thief
+def find_max_steal(wealth):
+    """
+    Time: O(n)
+    Space: O(1)
+
+    t - total length of ribbons needed
+    l - possible variations of ribbons lengths
+
+    """
+    lookup = [wealth[0], max(wealth[0], wealth[1])]
+    for w in wealth[2:]:
+        cur_wealth = max(w + lookup[0], lookup[1])
+        lookup[0], lookup[1] = lookup[1], cur_wealth
+
+    return lookup[1]
