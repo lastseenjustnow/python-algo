@@ -1,3 +1,4 @@
+import math
 from typing import List
 
 
@@ -167,3 +168,24 @@ def solve_knapsack(profits, weights, capacity):
                 lookup_table[j] = current_profit
 
     return max(lookup_table)
+
+
+# Maximum Ribbon Cut
+def count_ribbon_pieces(ribbonLengths, total):
+    """
+    Time: O(total * l)
+    Space: O(total)
+
+    t - total length of ribbons needed
+    l - possible variations of ribbons lengths
+
+    """
+    lookup_table = [-1] * total
+    for ribbon in ribbonLengths:
+        if lookup_table[ribbon - 1] == -1:
+            lookup_table[ribbon - 1] = 1
+        for ribbons_count in range(ribbon + 1, total + 1):
+            if lookup_table[ribbons_count - ribbon - 1] != -1 and lookup_table[ribbons_count - 1] < lookup_table[ribbons_count - ribbon - 1] + 1:
+                lookup_table[ribbons_count - 1] = lookup_table[ribbons_count - ribbon - 1] + 1
+
+    return lookup_table[total - 1]

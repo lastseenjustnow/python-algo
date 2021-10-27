@@ -94,3 +94,18 @@ class TestDynamicProgramming(unittest.TestCase):
 
         self.assertEqual(140, solve_knapsack(profits2, weights2, 8))
         self.assertEqual(105, solve_knapsack(profits3, weights3, 6))
+
+    def test_count_ribbon_pieces(self):
+        arrs = [
+            [2, 3, 5],
+            [2, 3],
+            [3, 5, 7],
+            [7, 3, 5],
+            [6, 3, 9, 3],
+            [3, 5]
+        ]
+        targets = [5, 7, 13, 13, 9, 7]
+        ress = [2, 3, 3, 3, 3, -1]
+
+        for i in range(len(arrs)):
+            self.assertEqual(ress[i], count_ribbon_pieces(arrs[i], targets[i]))
