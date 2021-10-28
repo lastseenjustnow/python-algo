@@ -116,3 +116,17 @@ class TestDynamicProgramming(unittest.TestCase):
 
         arr2 = [2, 10, 14, 8, 1]
         self.assertEqual(18, find_max_steal(arr2))
+
+    def test_find_minimum_deletions(self):
+        arrs = [
+            [4, 2, 3, 6, 10, 1, 12],
+            [-4, 10, 3, 7, 15],
+            [3, 2, 1, 0],
+            [-4, 6, 7, 8, -2, -1, 0, 1, -6, -5],
+            [-4, 6, -2, 10, -1, 12, 0],
+            [-4, 6, -2, 10, -1, 12, 0, 1],
+            [-4, 6, -2, 10, -1, 12, 0, 1, 13]
+        ]
+        results = [2, 1, 3, 5, 3, 3, 3]
+        for i, arr in enumerate(arrs, 0):
+            self.assertEqual(results[i], find_minimum_deletions(arr))

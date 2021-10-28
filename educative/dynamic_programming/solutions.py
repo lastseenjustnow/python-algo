@@ -1,4 +1,3 @@
-import math
 from typing import List
 
 
@@ -207,3 +206,24 @@ def find_max_steal(wealth):
         lookup[0], lookup[1] = lookup[1], cur_wealth
 
     return lookup[1]
+
+
+# Minimum Deletions to Make a Sequence Sorted
+def find_minimum_deletions(nums):
+    """
+    Time: O((max(n) - min(n))^2)
+    Space: O(max(n) - min(n))
+    """
+    global_max, global_min = max(nums), min(nums)
+    lookup = [0] * (global_max - global_min + 1)
+    for n in nums[::-1]:
+        if lookup[n - global_min] == 0:
+            lookup[n - global_min] = 1
+        counter = 1
+        for i in range(n - global_min + 1, global_max - global_min + 1):
+            if lookup[i] >= counter:
+                counter += 1
+            if 0 < lookup[i] < counter:
+                lookup[i] = counter
+
+    return len(nums)-max(lookup)
