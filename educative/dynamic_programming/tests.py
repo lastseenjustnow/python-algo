@@ -130,3 +130,9 @@ class TestDynamicProgramming(unittest.TestCase):
         results = [2, 1, 3, 5, 3, 3, 3]
         for i, arr in enumerate(arrs, 0):
             self.assertEqual(results[i], find_minimum_deletions(arr))
+
+    def test_palindromic_partitioning(self):
+        ss = ['abdbca', 'cddpd', 'pqr', 'pp']
+        ress = [3, 2, 2, 0]
+        for s, res in zip(ss, ress):
+            self.assertEqual(res, palindromic_partitioning(s))

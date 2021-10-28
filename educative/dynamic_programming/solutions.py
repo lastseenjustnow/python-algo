@@ -227,3 +227,26 @@ def find_minimum_deletions(nums):
                 lookup[i] = counter
 
     return len(nums)-max(lookup)
+
+
+# Palindromic Partitioning
+def palindromic_partitioning(s):
+    """
+    Time: O(n^2)
+    Space: O(1)
+    """
+    unique_ids = 1
+    for i in range(1, len(s)):
+        if s[i] == s[i-1]:
+            continue
+        unique_ids += 1
+        j = i
+        while j > 1:
+            if s[j - 2] != s[i]:
+                break
+            unique_ids -= 2
+            j -= 2
+        if j != i and j > 0 and s[j] == s[j-1]:
+            unique_ids += 1
+
+    return unique_ids - 1
