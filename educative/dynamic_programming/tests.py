@@ -147,3 +147,8 @@ class TestDynamicProgramming(unittest.TestCase):
             7]
         for i, arr in enumerate(arrs, 0):
             self.assertEqual(results[i], find_LBS_length(arr))
+
+    def test_find_min_operations(self):
+        self.assertEqual(1, find_min_operations('bat', 'but'))
+        self.assertEqual(2, find_min_operations('abdca', 'cbda'))
+        self.assertEqual(3, find_min_operations('passpot', 'ppsspqrt'))

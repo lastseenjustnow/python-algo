@@ -277,3 +277,31 @@ def find_LBS_length(nums):
         maxLength = max(maxLength, lis[i] + lds[i] - 1)
 
     return maxLength
+
+
+# Edit Distance
+def find_min_operations(s1, s2):
+    """
+    Time: O(max(s1, s2))
+    Space: O(n)
+    """
+
+    max_l, min_l = max(len(s1), len(s2)), min(len(s1), len(s2))
+    long_s, short_s = (s1, s2) if len(s1) > len(s2) else (s2, s1)
+    insertions_left = diff = max_l - min_l
+    i = j = 0
+
+    while i < max_l:
+        if long_s[i] != short_s[j]:
+            if short_s[j] == long_s[i+1] and insertions_left > 0:
+                insertions_left -= 1
+                i += 1
+            else:
+                diff += 1
+                i += 1
+                j += 1
+        else:
+            i += 1
+            j += 1
+
+    return diff
