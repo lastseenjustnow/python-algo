@@ -250,3 +250,30 @@ def palindromic_partitioning(s):
             unique_ids += 1
 
     return unique_ids - 1
+
+
+# Longest Bitonic Subsequence
+def find_LBS_length(nums):
+    """
+    Time: O(n^2)
+    Space: O(n)
+    """
+
+    l = len(nums)
+    lis, lds = [0] * l, [0] * l
+    lis[0], lds[-1] = 1, 1
+
+    for i in range(1, l):
+        lis[i] = 1
+        lds[l - i - 1] = 1
+        for j in range(i):
+            if nums[i] > nums[j]:
+                lis[i] = lis[j] + 1
+            if nums[l - i - 1] > nums[l - j - 1]:
+                lds[l - i - 1] = lds[l - j - 1] + 1
+
+    maxLength = 0
+    for i in range(l):
+        maxLength = max(maxLength, lis[i] + lds[i] - 1)
+
+    return maxLength

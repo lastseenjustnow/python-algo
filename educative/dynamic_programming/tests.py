@@ -136,3 +136,14 @@ class TestDynamicProgramming(unittest.TestCase):
         ress = [3, 2, 2, 0]
         for s, res in zip(ss, ress):
             self.assertEqual(res, palindromic_partitioning(s))
+
+    def test_find_LBS_length(self):
+        arrs = [
+            [4, 2, 3, 6, 10, 1, 12],
+            [4, 2, 5, 9, 7, 6, 10, 3, 1]
+        ]
+        results = [
+            5,
+            7]
+        for i, arr in enumerate(arrs, 0):
+            self.assertEqual(results[i], find_LBS_length(arr))
