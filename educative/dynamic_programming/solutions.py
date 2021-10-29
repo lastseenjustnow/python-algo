@@ -283,7 +283,7 @@ def find_LBS_length(nums):
 def find_min_operations(s1, s2):
     """
     Time: O(max(s1, s2))
-    Space: O(n)
+    Space: O(1)
     """
 
     max_l, min_l = max(len(s1), len(s2)), min(len(s1), len(s2))
@@ -305,3 +305,23 @@ def find_min_operations(s1, s2):
             j += 1
 
     return diff
+
+
+# Strings Interleaving
+def find_SI(m, n, p):
+    """
+    Time: O(p)
+    Space: O(1)
+    """
+    m_i, n_i = 0, 0
+
+    for i in range(len(p)):
+        if m_i < len(m) and p[i] == m[m_i]:
+            m_i += 1
+        elif n_i < len(n) and p[i] == n[n_i]:
+            n_i += 1
+
+        if m_i == len(m) and n_i == len(n):
+            return True
+
+    return False

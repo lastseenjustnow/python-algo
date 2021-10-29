@@ -142,9 +142,7 @@ class TestDynamicProgramming(unittest.TestCase):
             [4, 2, 3, 6, 10, 1, 12],
             [4, 2, 5, 9, 7, 6, 10, 3, 1]
         ]
-        results = [
-            5,
-            7]
+        results = [5, 7]
         for i, arr in enumerate(arrs, 0):
             self.assertEqual(results[i], find_LBS_length(arr))
 
@@ -152,3 +150,16 @@ class TestDynamicProgramming(unittest.TestCase):
         self.assertEqual(1, find_min_operations('bat', 'but'))
         self.assertEqual(2, find_min_operations('abdca', 'cbda'))
         self.assertEqual(3, find_min_operations('passpot', 'ppsspqrt'))
+
+    def test_find_SI(self):
+        m, n, p = "abd", "cef", "abcdef"
+        self.assertTrue(find_SI(m, n, p))
+
+        m, n, p = "abd", "cef", "adcbef"
+        self.assertFalse(find_SI(m, n, p))
+
+        m, n, p = "abc", "def", "abdccf"
+        self.assertFalse(find_SI(m, n, p))
+
+        m, n, p = "abcdef", "mnop", "mnaobcdepf"
+        self.assertTrue(find_SI(m, n, p))
